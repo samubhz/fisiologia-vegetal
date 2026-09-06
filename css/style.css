@@ -420,6 +420,59 @@ tbody tr:hover { background: var(--panel-2); }
 .skip-link { position: absolute; left: -999px; top: 8px; background: var(--panel); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line-firm); z-index: 100; }
 .skip-link:focus { left: 12px; }
 
+/* ---------- Indicações de livros (Amazon) ---------- */
+.book-rack-wrap { background: var(--bg-alt); border-top: 1px solid var(--line); padding: clamp(40px, 6vw, 64px) 0; margin-top: 56px; }
+.module-hero + .book-rack-wrap, main > .wrap.prose + .book-rack-wrap { margin-top: 0; }
+.book-rack-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.book-rack-head h2 { margin: 0; font-size: 1.4rem; }
+.book-rack-all { font-family: var(--mono); font-size: .82rem; text-decoration: none; color: var(--green); white-space: nowrap; }
+.book-rack-all:hover { color: var(--green-bright); }
+
+.book-rack { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.book-card {
+  display: flex; flex-direction: column;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  overflow: hidden; box-shadow: var(--shadow);
+}
+.book-cover {
+  display: grid; place-items: center; position: relative;
+  aspect-ratio: 16 / 10; background: linear-gradient(150deg, var(--lime), var(--green));
+  text-decoration: none; overflow: hidden;
+}
+.book-cover img { width: 100%; height: 100%; object-fit: contain; background: #fff; position: relative; z-index: 1; }
+.book-cover-fallback {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+  padding: 18px; font-family: var(--display); font-weight: 600; font-size: 1rem; color: var(--green-deeper);
+}
+.book-meta { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.book-meta h3 { margin: 0; font-size: 1.06rem; line-height: 1.25; }
+.book-meta h3 a { color: var(--ink); text-decoration: none; }
+.book-meta h3 a:hover { color: var(--green-bright); }
+.book-by { margin: 0; font-size: .82rem; color: var(--ink-faint); }
+.book-note { margin: 6px 0 0; font-size: .88rem; color: var(--ink-soft); }
+.book-btn { margin-top: auto; align-self: flex-start; padding: 10px 20px; font-size: .9rem; }
+
+.book-disclosure { margin: 20px 0 0; font-size: .78rem; color: var(--ink-faint); }
+.catalogo-h { font-size: 1.15rem; margin: 40px 0 16px; padding-top: 20px; border-top: 1px dashed var(--line-firm); }
+.catalogo-h:first-of-type { border-top: 0; padding-top: 0; margin-top: 8px; }
+
+/* ---------- Ferramenta de cadastro (admin-livros.html) ---------- */
+.admin-form { display: grid; gap: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); }
+.admin-form label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 5px; }
+.admin-form input[type="text"], .admin-form textarea {
+  width: 100%; font: inherit; font-size: .92rem; padding: 10px 12px;
+  border: 1.5px solid var(--line-firm); border-radius: var(--radius); background: var(--bg); color: var(--ink);
+}
+.admin-form textarea { min-height: 64px; resize: vertical; }
+.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.admin-pages { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.admin-pages label { display: flex; align-items: center; gap: 6px; font-weight: 500; margin: 0; }
+.admin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.admin-list { width: 100%; margin-top: 8px; }
+.admin-list th, .admin-list td { font-size: .86rem; }
+.admin-out { width: 100%; min-height: 240px; font-family: var(--mono); font-size: .8rem; padding: 14px; border-radius: var(--radius); border: 1.5px solid var(--line-firm); background: var(--panel-2); color: var(--ink); white-space: pre; overflow: auto; }
+@media (max-width: 640px) { .admin-grid { grid-template-columns: 1fr; } }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   html { scroll-behavior: auto; }
