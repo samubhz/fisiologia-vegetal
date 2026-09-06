@@ -27,7 +27,40 @@ modulos/
 ```
 
 Cada módulo segue a mesma estrutura: ideia central → instrumento → mecanismo
-(nível *Taiz & Zeiger*) → blocos "Aprofunde" → quiz de verificação.
+(nível *Taiz & Zeiger*) → blocos "Aprofunde" → quiz de verificação → **livros recomendados**.
+
+```
+livros.html             catálogo de indicações, agrupado por módulo
+admin-livros.html        ferramenta para cadastrar as indicações (uso interno)
+js/livros-data.js        os dados dos livros (edite aqui ou pela ferramenta)
+```
+
+## Indicações de livros (monetização — Amazon Associates)
+
+Cada página exibe um bloco **"Livros sobre este tema"** antes da navegação, e há
+uma aba **Livros** com o catálogo completo. Um mesmo livro pode aparecer em várias
+páginas.
+
+**Para cadastrar / editar:**
+
+1. Coloque seu identificador de Associado em `js/livros-data.js`
+   (`amazonTag: "seu-tag-20"`) — ou informe-o na ferramenta.
+2. Abra `admin-livros.html` no navegador. Preencha o formulário (título, autores,
+   ASIN, nota, e em **quais páginas** o livro aparece) e clique em *Adicionar*.
+3. Clique em **Gerar arquivo**, copie o resultado e cole em `js/livros-data.js`.
+4. `git add js/livros-data.js && git commit -m "livros" && git push`.
+
+Detalhes dos campos:
+
+| campo     | observação |
+|-----------|------------|
+| `asin`    | 10 caracteres do produto na Amazon. Vazio → o botão vira uma *busca* na Amazon (já com seu tag). |
+| `link`    | URL completa; se preenchida, tem prioridade sobre o `asin`. |
+| `capa`    | vazio + `asin` preenchido → usa a imagem da própria Amazon. |
+| `paginas` | `"geral"` = todas as páginas; ou identificadores como `"05-fotossintese"`, `"03-nutricao"`, `"inicio"`. |
+
+O aviso de divulgação exigido pelo programa de Associados já aparece automaticamente
+em cada bloco e na página Livros. Cadastre-se em <https://associados.amazon.com.br>.
 
 ## Ver localmente
 

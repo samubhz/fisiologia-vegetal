@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Livros recomendados | Fisiologia Vegetal</title>
+<meta name="description" content="Indicações de livros de fisiologia vegetal, organizadas por tema, com links para a Amazon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="index.html#modulos">Módulos</a>
+      <a href="livros.html">Livros</a>
+      <a href="glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Referência</p>
+      <h1>Livros recomendados</h1>
+      <p class="lead">As obras que embasam cada módulo deste site, organizadas por tema. Os livros marcados como &ldquo;para toda a disciplina&rdquo; também aparecem no rodapé de cada página.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose" style="max-width:900px">
+    <div id="livros-catalogo"></div>
+    <p class="book-disclosure" id="livros-disclosure"></p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Sobre estas indicações</b>
+      Os links levam à Amazon com um identificador de Associado. Comprar por eles não muda o preço para você e ajuda a manter o site.
+    </div>
+    <div><a href="index.html">Início</a> · <a href="glossario.html">Glossário</a> · <a href="admin-livros.html">Cadastrar livros</a></div>
+  </div>
+</footer>
+
+<script src="js/livros-data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

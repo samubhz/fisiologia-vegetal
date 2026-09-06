@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadastro de livros | Fisiologia Vegetal</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="index.html#modulos">Módulos</a>
+      <a href="livros.html">Livros</a>
+      <a href="glossario.html">Glossário</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Ferramenta interna</p>
+      <h1>Cadastro de indicações de livros</h1>
+      <p class="lead">Monte a lista aqui, clique em <strong>Gerar arquivo</strong>, copie o resultado e cole em <code>js/livros-data.js</code>. Faça o commit/push e as indicações aparecem no site.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose" style="max-width:960px; padding-top:clamp(32px,6vw,56px)">
+
+    <div class="callout">
+      <span class="lbl">Como funciona</span>
+      <p style="margin:.4em 0 0">Esta página <strong>não</strong> altera o site sozinha (o site é estático, sem servidor). Ela guarda seu rascunho no navegador e gera o conteúdo do arquivo <code>js/livros-data.js</code> para você colar e versionar no GitHub.</p>
+    </div>
+
+    <h2>1. Seu identificador de Associado</h2>
+    <div class="admin-form">
+      <div>
+        <label for="tag">Amazon Associates tag</label>
+        <input type="text" id="tag" placeholder="ex.: fisiovegetal-20">
+      </div>
+      <div>
+        <label for="market">Loja da Amazon</label>
+        <input type="text" id="market" value="https://www.amazon.com.br">
+      </div>
+    </div>
+
+    <h2>2. Adicionar / editar um livro</h2>
+    <div class="admin-form">
+      <div class="admin-grid">
+        <div><label for="f-titulo">Título *</label><input type="text" id="f-titulo"></div>
+        <div><label for="f-autores">Autores</label><input type="text" id="f-autores"></div>
+        <div><label for="f-edicao">Edição / ano</label><input type="text" id="f-edicao" placeholder="ex.: 6ª edição"></div>
+        <div><label for="f-asin">ASIN (10 caracteres)</label><input type="text" id="f-asin" placeholder="deixe vazio p/ virar busca"></div>
+        <div><label for="f-link">Link completo (opcional)</label><input type="text" id="f-link" placeholder="cole a URL da Amazon"></div>
+        <div><label for="f-capa">URL da capa (opcional)</label><input type="text" id="f-capa" placeholder="vazio = usa imagem da Amazon"></div>
+      </div>
+      <div><label for="f-nota">Nota (por que recomenda)</label><textarea id="f-nota"></textarea></div>
+      <div>
+        <label>Aparece em quais páginas *</label>
+        <div class="admin-pages" id="f-paginas"></div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn" id="btn-add">Adicionar à lista</button>
+        <button class="btn btn--ghost" id="btn-clear-form">Limpar campos</button>
+      </div>
+    </div>
+
+    <h2>3. Lista atual (<span id="count">0</span>)</h2>
+    <div class="admin-actions" style="margin-bottom:12px">
+      <button class="btn btn--ghost" id="btn-load">Carregar do site (livros-data.js)</button>
+      <button class="btn btn--ghost" id="btn-wipe">Esvaziar lista</button>
+    </div>
+    <div class="tbl-wrap">
+      <table class="admin-list">
+        <thead><tr><th>Título</th><th>Páginas</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <h2>4. Gerar arquivo</h2>
+    <div class="admin-actions" style="margin-bottom:12px">
+      <button class="btn" id="btn-gen">Gerar arquivo js/livros-data.js</button>
+      <button class="btn btn--ghost" id="btn-copy">Copiar</button>
+      <button class="btn btn--ghost" id="btn-download">Baixar arquivo</button>
+    </div>
+    <textarea class="admin-out" id="out" readonly placeholder="O conteúdo do arquivo aparece aqui…"></textarea>
+    <p class="book-disclosure">Depois de colar em <code>js/livros-data.js</code>: <code>git add js/livros-data.js &amp;&amp; git commit -m "atualiza indicações de livros" &amp;&amp; git push</code></p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs"><b>Divulgação obrigatória</b> O programa de Associados da Amazon exige um aviso de que o site ganha comissão. O site já mostra esse aviso em cada bloco de livros e na página <a href="livros.html">Livros</a>.</div>
+    <div><a href="index.html">Início</a></div>
+  </div>
+</footer>
+
+<script src="js/livros-data.js"></script>
+<script>
+(function () {
+  try { var t = localStorage.getItem("fv-theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var PAGES = [
+    ["geral", "Toda a disciplina"], ["inicio", "Início"], ["glossario", "Glossário"],
+    ["01-agua", "01 Água"], ["02-estomatos", "02 Estômatos"], ["03-nutricao", "03 Nutrição"],
+    ["04-floema", "04 Floema"], ["05-fotossintese", "05 Fotossíntese"], ["06-respiracao", "06 Respiração"],
+    ["07-hormonios", "07 Hormônios"], ["08-luz", "08 Luz"], ["09-tropismos", "09 Tropismos"],
+    ["10-estresse", "10 Estresse"]
+  ];
+  var KEY = "fv-livros-admin";
+  var list = [];
+  var editId = null;
+
+  // checkboxes de páginas
+  var pagesBox = $("f-paginas");
+  PAGES.forEach(function (p) {
+    var l = document.createElement("label");
+    l.innerHTML = '<input type="checkbox" value="' + p[0] + '"> ' + p[1];
+    pagesBox.appendChild(l);
+  });
+
+  function loadDraft() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) { var o = JSON.parse(raw); list = o.list || []; if (o.tag) $("tag").value = o.tag; if (o.market) $("market").value = o.market; }
+    } catch (e) {}
+    if (!$("tag").value && window.LIVROS_CONFIG) $("tag").value = window.LIVROS_CONFIG.amazonTag || "";
+    if (window.LIVROS_CONFIG && window.LIVROS_CONFIG.marketplace) $("market").value = $("market").value || window.LIVROS_CONFIG.marketplace;
+  }
+  function saveDraft() {
+    try { localStorage.setItem(KEY, JSON.stringify({ list: list, tag: $("tag").value.trim(), market: $("market").value.trim() })); } catch (e) {}
+  }
+
+  function slugify(s) {
+    return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || ("livro-" + Date.now());
+  }
+
+  function readForm() {
+    var pgs = [].slice.call(pagesBox.querySelectorAll("input:checked")).map(function (c) { return c.value; });
+    var titulo = $("f-titulo").value.trim();
+    if (!titulo) { alert("Informe o título."); return null; }
+    if (!pgs.length) { alert("Marque ao menos uma página."); return null; }
+    return {
+      id: editId || slugify(titulo),
+      titulo: titulo,
+      autores: $("f-autores").value.trim(),
+      edicao: $("f-edicao").value.trim(),
+      asin: $("f-asin").value.trim(),
+      link: $("f-link").value.trim(),
+      capa: $("f-capa").value.trim(),
+      nota: $("f-nota").value.trim(),
+      paginas: pgs
+    };
+  }
+  function fillForm(b) {
+    editId = b.id;
+    $("f-titulo").value = b.titulo || ""; $("f-autores").value = b.autores || "";
+    $("f-edicao").value = b.edicao || ""; $("f-asin").value = b.asin || "";
+    $("f-link").value = b.link || ""; $("f-capa").value = b.capa || ""; $("f-nota").value = b.nota || "";
+    pagesBox.querySelectorAll("input").forEach(function (c) { c.checked = (b.paginas || []).indexOf(c.value) >= 0; });
+    $("btn-add").textContent = "Atualizar livro";
+    window.scrollTo({ top: pagesBox.getBoundingClientRect().top + window.scrollY - 200, behavior: "smooth" });
+  }
+  function clearForm() {
+    editId = null;
+    ["f-titulo", "f-autores", "f-edicao", "f-asin", "f-link", "f-capa", "f-nota"].forEach(function (id) { $(id).value = ""; });
+    pagesBox.querySelectorAll("input").forEach(function (c) { c.checked = false; });
+    $("btn-add").textContent = "Adicionar à lista";
+  }
+
+  function render() {
+    $("count").textContent = list.length;
+    var tb = $("rows"); tb.innerHTML = "";
+    list.forEach(function (b, i) {
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + escapeHtml(b.titulo) + "<br><small style='color:var(--ink-faint)'>" + escapeHtml(b.autores || "") + "</small></td>" +
+        "<td><small class='mono'>" + (b.paginas || []).join(", ") + "</small></td>" +
+        "<td style='white-space:nowrap'><button data-i='" + i + "' class='seg' style='padding:4px 10px'>editar</button> " +
+        "<button data-del='" + i + "' class='seg' style='padding:4px 10px'>remover</button></td>";
+      tb.appendChild(tr);
+    });
+    tb.querySelectorAll("button[data-i]").forEach(function (btn) {
+      btn.addEventListener("click", function () { fillForm(list[+btn.dataset.i]); });
+    });
+    tb.querySelectorAll("button[data-del]").forEach(function (btn) {
+      btn.addEventListener("click", function () { list.splice(+btn.dataset.del, 1); saveDraft(); render(); });
+    });
+    saveDraft();
+  }
+
+  function escapeHtml(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function q(s) { return "\"" + String(s == null ? "" : s).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + "\""; }
+
+  function genFile() {
+    var tag = $("tag").value.trim() || "SEU-TAG-20";
+    var market = $("market").value.trim() || "https://www.amazon.com.br";
+    var head =
+      "/* =========================================================================\n" +
+      "   Fisiologia Vegetal — indicações de livros (Amazon Associates)\n" +
+      "   Gerado por admin-livros.html em " + new Date().toISOString().slice(0, 10) + "\n" +
+      "   Páginas válidas em 'paginas': geral | inicio | glossario | 01-agua |\n" +
+      "   02-estomatos | 03-nutricao | 04-floema | 05-fotossintese | 06-respiracao |\n" +
+      "   07-hormonios | 08-luz | 09-tropismos | 10-estresse\n" +
+      "   ========================================================================= */\n\n" +
+      "window.LIVROS_CONFIG = {\n" +
+      "  amazonTag: " + q(tag) + ",\n" +
+      "  marketplace: " + q(market) + ",\n" +
+      "  disclosure: \"Como Associado da Amazon, este site recebe por compras qualificadas — sem custo adicional para você.\"\n" +
+      "};\n\n" +
+      "window.LIVROS = [\n";
+    var body = list.map(function (b) {
+      return "  {\n" +
+        "    id: " + q(b.id) + ",\n" +
+        "    titulo: " + q(b.titulo) + ",\n" +
+        "    autores: " + q(b.autores) + ",\n" +
+        "    edicao: " + q(b.edicao) + ",\n" +
+        "    asin: " + q(b.asin) + ",\n" +
+        "    link: " + q(b.link) + ",\n" +
+        "    capa: " + q(b.capa) + ",\n" +
+        "    nota: " + q(b.nota) + ",\n" +
+        "    paginas: [" + (b.paginas || []).map(q).join(", ") + "]\n" +
+        "  }";
+    }).join(",\n");
+    return head + body + "\n];\n";
+  }
+
+  $("btn-add").addEventListener("click", function () {
+    var b = readForm(); if (!b) return;
+    var idx = list.findIndex(function (x) { return x.id === b.id; });
+    if (idx >= 0) list[idx] = b; else list.push(b);
+    clearForm(); render();
+  });
+  $("btn-clear-form").addEventListener("click", clearForm);
+  $("btn-wipe").addEventListener("click", function () { if (confirm("Esvaziar a lista?")) { list = []; saveDraft(); render(); } });
+  $("btn-load").addEventListener("click", function () {
+    if (!window.LIVROS) { alert("livros-data.js não carregou."); return; }
+    list = JSON.parse(JSON.stringify(window.LIVROS));
+    if (window.LIVROS_CONFIG) { $("tag").value = window.LIVROS_CONFIG.amazonTag || $("tag").value; }
+    render();
+  });
+  $("btn-gen").addEventListener("click", function () { $("out").value = genFile(); });
+  $("btn-copy").addEventListener("click", function () {
+    if (!$("out").value) $("out").value = genFile();
+    $("out").select();
+    try { document.execCommand("copy"); } catch (e) {}
+    if (navigator.clipboard) navigator.clipboard.writeText($("out").value).catch(function () {});
+    $("btn-copy").textContent = "Copiado!";
+    setTimeout(function () { $("btn-copy").textContent = "Copiar"; }, 1500);
+  });
+  $("btn-download").addEventListener("click", function () {
+    var txt = $("out").value || genFile();
+    var blob = new Blob([txt], { type: "text/javascript" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "livros-data.js";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  ["tag", "market"].forEach(function (id) { $(id).addEventListener("input", saveDraft); });
+
+  loadDraft();
+  if (!list.length && window.LIVROS) list = JSON.parse(JSON.stringify(window.LIVROS));
+  render();
+})();
+</script>
+</body>
+</html>
