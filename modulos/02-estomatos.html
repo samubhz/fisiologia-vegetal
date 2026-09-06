@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 02 — Estômatos e transpiração | Fisiologia Vegetal</title>
+<meta name="description" content="Células-guarda, fluxo de K+, Cl- e malato, e o compromisso entre captar CO2 e perder água. Simulador da resposta estomática a luz, CO2 e ABA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-agua); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 02 · Funções internas</p>
+      <h1>Estômatos e transpiração</h1>
+      <p class="lead">Cada estômato aberto é uma aposta: deixar o CO<sub>2</sub> entrar para a fotossíntese custa perder água por difusão. As <span class="term" data-term="células-guarda">células-guarda</span> ajustam essa aposta minuto a minuto.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Explicar como fluxos de K<sup>+</sup>, Cl<sup>−</sup> e malato<sup>2−</sup> mudam o turgor das células-guarda e abrem o poro.</li>
+        <li>Prever a resposta estomática a luz azul, luz vermelha, CO<sub>2</sub> intercelular e <span class="term" data-term="ABA">ABA</span>.</li>
+        <li>Definir <span class="term" data-term="condutância estomática">condutância estomática</span> e usar a razão A/E como eficiência do uso da água.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>O poro estomático se abre quando as células-guarda ganham solutos, baixam seu <span class="term" data-term="potencial de soluto">potencial de soluto</span>, absorvem água e ficam túrgidas. Como a parede interna (voltada ao poro) é mais espessa e as microfibrilas de celulose estão dispostas radialmente, o aumento de volume curva as células para fora e escancara a fenda. A luz azul (via fototropina &rarr; H<sup>+</sup>-ATPase da membrana) e a baixa concentração de CO<sub>2</sub> promovem a abertura; o ABA, sinal de déficit hídrico, promove o fechamento.</p>
+
+    <h2 id="instrumento">Instrumento &mdash; resposta das células-guarda</h2>
+    <p>Ajuste a luz, o CO<sub>2</sub> e o nível de ABA. Veja a abertura do poro, a condutância, a assimilação de CO<sub>2</sub>, a transpiração e a eficiência do uso da água (A/E).</p>
+
+    <div class="lab" id="lab-est">
+      <div class="lab-head">Instrumento · abertura estomática vs. luz, CO₂ e ABA</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 320 320" role="img" aria-label="Par de células-guarda vistas de cima, delimitando o poro estomático.">
+            <rect x="0" y="0" width="320" height="320" fill="none"/>
+            <!-- células epidérmicas de fundo -->
+            <path d="M20 40 H300 V120 H20 Z M20 200 H300 V280 H20 Z" fill="var(--c-verde)" fill-opacity="0.08" stroke="var(--line-firm)" stroke-width="1"/>
+            <!-- célula-guarda superior e inferior -->
+            <path id="gcTop" d="M70 150 C70 110 110 96 160 96 C210 96 250 110 250 150 C250 140 210 128 160 128 C110 128 70 140 70 150 Z"
+                  fill="var(--c-agua)" fill-opacity="0.5" stroke="var(--c-agua)" stroke-width="2"/>
+            <path id="gcBot" d="M70 170 C70 210 110 224 160 224 C210 224 250 210 250 170 C250 180 210 192 160 192 C110 192 70 180 70 170 Z"
+                  fill="var(--c-agua)" fill-opacity="0.5" stroke="var(--c-agua)" stroke-width="2"/>
+            <!-- poro (fenda) -->
+            <ellipse id="pore" cx="160" cy="160" rx="46" ry="6" fill="var(--bg)" stroke="var(--ink-faint)" stroke-width="1"/>
+            <!-- núcleos -->
+            <circle cx="120" cy="150" r="5" fill="var(--c-agua)"/>
+            <circle cx="200" cy="150" r="5" fill="var(--c-agua)"/>
+            <circle cx="120" cy="170" r="5" fill="var(--c-agua)"/>
+            <circle cx="200" cy="170" r="5" fill="var(--c-agua)"/>
+            <!-- íons K+ -->
+            <g id="ions"></g>
+            <!-- CO2 entrando / vapor saindo -->
+            <g id="gas"></g>
+            <text x="160" y="300" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">vista superficial da epiderme</text>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label for="par">Irradiância (PAR) <span class="val" id="parV">900 µmol m⁻² s⁻¹</span></label>
+            <input type="range" id="par" min="0" max="1800" step="20" value="900">
+            <span class="hint">Luz azul + vermelha promovem a abertura</span>
+          </div>
+          <div class="control">
+            <label for="co2">CO<sub>2</sub> atmosférico (C<sub>a</sub>) <span class="val" id="co2V">400 ppm</span></label>
+            <input type="range" id="co2" min="250" max="800" step="10" value="400">
+            <span class="hint">O C<sub>i</sub> resultante é calculado do balanço g<sub>s</sub> × assimilação</span>
+          </div>
+          <div class="control">
+            <label for="aba">ABA foliar <span class="val" id="abaV">baixo</span></label>
+            <input type="range" id="aba" min="0" max="100" step="1" value="10">
+            <span class="hint">Sobe sob déficit hídrico → fechamento</span>
+          </div>
+          <div class="control">
+            <label for="vpd">Déficit de pressão de vapor <span class="val" id="vpdV">1,5 kPa</span></label>
+            <input type="range" id="vpd" min="0.3" max="4" step="0.1" value="1.5">
+            <span class="hint">Ar mais seco aumenta E e, acima de ~2 kPa, induz fechamento parcial</span>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Abertura do poro</span><span class="v" id="oAp">9,1 µm</span></div>
+            <div class="row"><span class="k">Condutância (g<sub>s</sub>)</span><span class="v" id="oGs">0,32 mol m⁻² s⁻¹</span></div>
+            <div class="row"><span class="k">C<sub>i</sub> resultante</span><span class="v" id="oCi">300 ppm</span></div>
+            <div class="row"><span class="k">Assimilação (A)</span><span class="v" id="oA">17 µmol m⁻² s⁻¹</span></div>
+            <div class="row"><span class="k">Transpiração (E)</span><span class="v" id="oE">3,4 mmol m⁻² s⁻¹</span></div>
+            <div class="row"><span class="k">Eficiência (A/E)</span><span class="v" id="oWue">5,0 mmol/mol</span></div>
+            <div class="row"><span class="k">Estado</span><span class="v" id="oSt">aberto</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">luz alta e C₀₂ baixo abrem o poro ao máximo — ótimo para A, péssimo para a economia de água se o ar estiver seco. Suba o ABA e todo o resto perde efeito: o fechamento por estresse hídrico é dominante.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · a mecânica iônica da abertura</summary>
+      <div class="deepen-body">
+        <p>Sequência clássica da abertura induzida por luz azul:</p>
+        <ol>
+          <li>A <strong>fototropina</strong> (phot1/phot2) percebe a luz azul e ativa, por fosforilação, a <strong>H<sup>+</sup>-ATPase</strong> da membrana plasmática.</li>
+          <li>O bombeamento de H<sup>+</sup> para fora hiperpolariza a membrana (até ~ −200 mV).</li>
+          <li>Canais retificadores de entrada de <strong>K<sup>+</sup></strong> (KAT1) abrem; K<sup>+</sup> entra a favor do gradiente eletroquímico.</li>
+          <li>Entram <strong>Cl<sup>−</sup></strong> e produz-se <strong>malato<sup>2−</sup></strong> (a partir do amido) como contra-íons.</li>
+          <li>O Ψ<sub>s</sub> despenca (~ −2,0 a −3,5 MPa), a água entra, o turgor sobe e as células curvam-se para fora.</li>
+        </ol>
+        <p>No <strong>fechamento por ABA</strong>: o ABA eleva o Ca<sup>2+</sup> citosólico e o pH, ativa canais de ânions do tipo <strong>SLAC1</strong> (efluxo de Cl<sup>−</sup>/malato), o que despolariza a membrana, abre canais de saída de K<sup>+</sup> (GORK) e reverte todo o processo. A perda de solutos eleva o Ψ<sub>s</sub>, a água sai e o poro fecha.</p>
+        <p><strong>Modelo do instrumento:</strong> a abertura relativa = f(luz) − k·(C<sub>i</sub> − 200)/240 − k′·ABA − k″·max(0, DPV − 2). A condutância g<sub>s</sub> é proporcional à abertura. A assimilação usa um Farquhar-lite C3 e o C<sub>i</sub> sai do balanço de difusão A = (g<sub>s</sub>/1,6)·(C<sub>a</sub> − C<sub>i</sub>), resolvido por iteração — por isso fechar o poro derruba o C<sub>i</sub> e, com ele, A. E = g<sub>s</sub> · DPV/P<sub>atm</sub>.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>Anatomia funcional</h3>
+    <p>As células-guarda diferem das demais células epidérmicas em três pontos decisivos: possuem cloroplastos, não têm plasmodesmos funcionais conectando-as às vizinhas (isolamento osmótico) e têm parede com espessamento diferencial. Em muitas espécies há ainda <strong>células subsidiárias</strong> que funcionam como reservatório de íons, acelerando a cinética &mdash; marcante nas gramíneas, cujas células-guarda em forma de halteres abrem e fecham muito rápido.</p>
+
+    <h3>Os sinais que abrem e fecham</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Sinal</th><th>Efeito</th><th>Lógica fisiológica</th></tr></thead>
+        <tbody>
+          <tr><td>Luz azul (fototropina)</td><td>abre</td><td>resposta rápida ao amanhecer, independe da fotossíntese</td></tr>
+          <tr><td>Luz vermelha</td><td>abre</td><td>via fotossíntese do mesofilo → consumo de CO<sub>2</sub> → C<sub>i</sub> cai</td></tr>
+          <tr><td>C<sub>i</sub> baixo</td><td>abre</td><td>demanda de CO<sub>2</sub> não atendida</td></tr>
+          <tr><td>C<sub>i</sub> alto</td><td>fecha</td><td>evita perda de água sem ganho de carbono</td></tr>
+          <tr><td>ABA</td><td>fecha</td><td>déficit hídrico na folha ou sinal vindo da raiz</td></tr>
+          <tr><td>DPV alto (ar seco)</td><td>fecha (parcial)</td><td>limita a transpiração pico</td></tr>
+          <tr><td>Ritmo circadiano</td><td>modula</td><td>antecipa o amanhecer e o entardecer</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>O compromisso água&ndash;carbono</h3>
+    <p>Tanto o CO<sub>2</sub> quanto o vapor d&rsquo;água atravessam o mesmo poro, mas em sentidos opostos e com gradientes muito diferentes: o gradiente de vapor folha&ndash;ar é cerca de 50&times; maior (em base molar) que o gradiente de CO<sub>2</sub> ar&ndash;folha. Por isso, ao abrir o estômato, a planta ganha carbono de forma quase linear até certo ponto, mas o custo em água cresce sem saturar. A <strong>eficiência do uso da água</strong> instantânea, A/E, é máxima com abertura parcial &mdash; e é isso que a regulação estomática busca otimizar ao longo do dia.</p>
+
+    <div class="callout warn">
+      <span class="lbl">Consequência</span>
+      <p style="margin:.4em 0 0">Plantas C4 mantêm A alta com g<sub>s</sub> menor (concentram CO<sub>2</sub> internamente), então têm A/E maior que plantas C3 no mesmo ambiente &mdash; vantagem central em climas quentes e secos. Ver <a href="05-fotossintese.html">Módulo 05</a>.</p>
+    </div>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Ao amanhecer, os estômatos começam a abrir <em>antes</em> de a fotossíntese do mesofilo consumir CO<sub>2</sub> de forma significativa. Qual sinal explica melhor essa abertura precoce?</p>
+        <div class="opts">
+          <button data-correct="false">A queda imediata do C<sub>i</sub> pela fixação de carbono.</button>
+          <button data-correct="true">A luz azul percebida pela fototropina, que ativa a H<sup>+</sup>-ATPase.</button>
+          <button data-correct="false">O aumento do ABA foliar durante a noite.</button>
+        </div>
+        <p class="fb">A resposta à luz azul é rápida e independente da fotossíntese: fototropina → fosforilação da H<sup>+</sup>-ATPase → hiperpolarização → entrada de K<sup>+</sup>.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Uma planta bem irrigada é transferida para ar muito seco (DPV alto). Depois do transiente inicial, o que se observa na condutância estomática e na transpiração?</p>
+        <div class="opts">
+          <button data-correct="false">g<sub>s</sub> aumenta e E aumenta proporcionalmente.</button>
+          <button data-correct="true">g<sub>s</sub> diminui parcialmente; E sobe menos do que subiria se g<sub>s</sub> fosse constante.</button>
+          <button data-correct="false">g<sub>s</sub> e E não mudam, pois só o ABA controla o estômato.</button>
+        </div>
+        <p class="fb">O fechamento parcial induzido por DPV é um mecanismo de segurança: limita o pico de transpiração e protege a coluna de água do xilema (ver Módulo 01).</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Por que a razão A/E costuma ser <em>maior</em> com abertura estomática parcial do que com abertura máxima?</p>
+        <div class="opts">
+          <button data-correct="true">A assimilação satura com g<sub>s</sub>, mas a transpiração continua crescendo quase linearmente.</button>
+          <button data-correct="false">A transpiração satura antes da assimilação.</button>
+          <button data-correct="false">Com o poro parcialmente aberto não há difusão de CO<sub>2</sub>.</button>
+        </div>
+        <p class="fb">Como A tende a um platô (limitada por luz e bioquímica) enquanto E cresce com o gradiente de vapor, o ganho marginal de carbono por unidade de água cai à medida que o poro abre mais.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="01-agua.html"><span>Módulo anterior</span><strong>01 · Água e relações hídricas</strong></a>
+      <a class="next" href="03-nutricao.html"><span>Próximo módulo</span><strong>03 · Nutrição mineral</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 4 e 10. · Roelfsema &amp; Hedrich (2005) <em>In the light of stomatal opening</em>, New Phytologist.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    par: $("par"), co2: $("co2"), aba: $("aba"), vpd: $("vpd"),
+    parV: $("parV"), co2V: $("co2V"), abaV: $("abaV"), vpdV: $("vpdV"),
+    oAp: $("oAp"), oGs: $("oGs"), oCi: $("oCi"), oA: $("oA"), oE: $("oE"), oWue: $("oWue"), oSt: $("oSt"),
+    note: $("note"), pore: $("pore"), gcTop: $("gcTop"), gcBot: $("gcBot"), ions: $("ions"), gas: $("gas")
+  };
+  function br(x, d) { return x.toFixed(d).replace(".", ","); }
+  var st = {};
+
+  // fotossíntese C3 simplificada (Farquhar-lite), usada só para acoplar A ↔ Cᵢ
+  function assim(par, ci) {
+    var Vcmax = 90, Km = 700, Gstar = 42, Rd = 1.2;
+    var J = (0.85 * par * 130) / (0.85 * par + 2.2 * 130);
+    var Wc = Vcmax * (ci - Gstar) / (ci + Km);
+    var Wj = J * (ci - Gstar) / (4 * ci + 8 * Gstar);
+    return Math.min(Wc, Wj) - Rd;
+  }
+
+  function compute() {
+    var par = +E.par.value, ca = +E.co2.value, aba = +E.aba.value / 100, vpd = +E.vpd.value;
+    var light = 1 - Math.exp(-par / 420);
+    var vpdterm = Math.max(0, vpd - 2) * 0.16;
+
+    // iteração de ponto fixo amortecida: a abertura depende de Cᵢ, que depende de A,
+    // que depende da abertura. Relaxação de 0,4 para convergir sem oscilar.
+    var ci = 0.72 * ca, open = 0.5, gs = 0.2, A = 10, rel = 0.4;
+    for (var k = 0; k < 24; k++) {
+      var co2term = clamp((ci - 210) / 260, -0.5, 1) * 0.42;   // Cᵢ alto → fecha
+      var openTarget = clamp(0.10 + 0.95 * light - co2term - vpdterm - 1.2 * aba, 0, 1);
+      open += (openTarget - open) * rel;
+      gs = open * 0.42 + 0.008;                                // mol m⁻² s⁻¹ (vapor)
+      A = assim(par, ci);
+      var ciTarget = clamp(ca - A * 1.6 / gs, 35, ca);         // Fick: A = gs/1.6 · (Ca − Cᵢ)
+      ci += (ciTarget - ci) * rel;
+    }
+    if (A < -1.6) A = -1.6;
+
+    var aperture = open * 12;
+    var Etr = gs * vpd * 1000 / 101.3;                         // mmol m⁻² s⁻¹
+    var wue = Etr > 0.05 ? A / Etr : 0;
+    var stt = open < 0.12 ? "fechado" : open < 0.45 ? "parcial" : "aberto";
+    return { par: par, ca: ca, ci: ci, aba: aba, vpd: vpd, open: open, aperture: aperture, gs: gs, A: A, E: Etr, wue: wue, st: stt };
+  }
+
+  function render() {
+    var s = st = compute();
+    E.parV.textContent = Math.round(s.par) + " µmol m⁻² s⁻¹";
+    E.co2V.textContent = Math.round(s.ca) + " ppm";
+    E.abaV.textContent = s.aba < 0.15 ? "baixo" : s.aba < 0.5 ? "moderado" : "alto";
+    E.vpdV.textContent = br(s.vpd, 1) + " kPa";
+
+    E.oAp.textContent = br(s.aperture, 1) + " µm";
+    E.oGs.textContent = br(s.gs, 2) + " mol m⁻² s⁻¹";
+    E.oCi.textContent = Math.round(s.ci) + " ppm";
+    E.oA.textContent = br(s.A, 0) + " µmol m⁻² s⁻¹";
+    E.oE.textContent = br(s.E, 1) + " mmol m⁻² s⁻¹";
+    E.oWue.textContent = s.A > 0.2 ? br(s.wue, 1) + " mmol/mol" : "— (A ≤ 0)";
+    E.oSt.textContent = s.st;
+    E.oSt.className = "v " + (s.st === "aberto" ? "good" : s.st === "fechado" ? "warn" : "");
+    E.oWue.className = "v " + (s.A > 0.2 && s.wue >= 4 ? "good" : s.A > 0.2 ? "" : "warn");
+
+    // desenho do poro
+    var ry = 2 + s.open * 30;
+    E.pore.setAttribute("ry", ry.toFixed(1));
+    // células-guarda curvam-se: mais túrgidas => mais "gordas" (path fixo, mudamos opacidade + leve escala)
+    var fill = (0.35 + 0.4 * s.open).toFixed(2);
+    E.gcTop.setAttribute("fill-opacity", fill);
+    E.gcBot.setAttribute("fill-opacity", fill);
+
+    var note;
+    if (s.aba > 0.5) note = "ABA alto: canais de ânions (SLAC1) abrem, K⁺ sai (GORK), o turgor cai e o poro fecha — luz e CO₂ perdem influência.";
+    else if (s.open > 0.8 && s.vpd > 2.2) note = "Poro escancarado com ar seco: A perto do máximo, mas E dispara e a eficiência A/E cai. Situação insustentável se o solo secar.";
+    else if (s.open < 0.15) note = "Poro fechado: quase não há difusão de CO₂ nem de vapor. O Cᵢ cai e A fica negativa (só respiração).";
+    else if (s.ca > 600) note = "CO₂ atmosférico alto: o Cᵢ sobe mesmo com o poro menos aberto — o estômato fecha parcialmente e a eficiência A/E melhora.";
+    else note = "Abertura parcial: costuma ser o ponto de melhor eficiência do uso da água (A/E máximo).";
+    E.note.textContent = note;
+  }
+
+  // animação: K+ entrando quando abre, gás trocando pelo poro
+  var ions = [], gas = [];
+  function tick() {
+    var s = st;
+    if (s.open > 0.2 && Math.random() < s.open * 0.25) {
+      var c = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      var side = Math.random() < 0.5 ? -1 : 1;
+      c.setAttribute("x", 160 + side * (70 + Math.random() * 30));
+      c.setAttribute("y", 160 + (Math.random() * 20 - 10));
+      c.setAttribute("font-size", "9");
+      c.setAttribute("font-family", "var(--mono)");
+      c.setAttribute("fill", "var(--c-violeta)");
+      c.textContent = "K⁺";
+      E.ions.appendChild(c);
+      ions.push({ el: c, x: +c.getAttribute("x"), tx: 160 + side * 40, y: +c.getAttribute("y") });
+    }
+    for (var i = ions.length - 1; i >= 0; i--) {
+      var d = ions[i]; d.x += (d.tx - d.x) * 0.06;
+      d.el.setAttribute("x", d.x.toFixed(1));
+      d.el.setAttribute("opacity", (1 - Math.abs(d.tx - d.x) / 60).toFixed(2));
+      if (Math.abs(d.tx - d.x) < 2) { d.el.remove(); ions.splice(i, 1); }
+    }
+    if (s.open > 0.15 && Math.random() < s.open * 0.3) {
+      var g = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      var up = Math.random() < 0.5;
+      g.setAttribute("cx", 160 + (Math.random() * 40 - 20));
+      g.setAttribute("cy", 160);
+      g.setAttribute("r", up ? 2 : 2.4);
+      g.setAttribute("fill", up ? "var(--c-agua)" : "var(--c-verde)");
+      g.setAttribute("fill-opacity", "0.7");
+      E.gas.appendChild(g);
+      gas.push({ el: g, y: 160, v: up ? -1.4 : 1.4, life: 0 });
+    }
+    for (var j = gas.length - 1; j >= 0; j--) {
+      var e = gas[j]; e.y += e.v; e.life++;
+      e.el.setAttribute("cy", e.y.toFixed(1));
+      e.el.setAttribute("fill-opacity", (0.7 - e.life / 40).toFixed(2));
+      if (e.life > 28) { e.el.remove(); gas.splice(j, 1); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  ["par", "co2", "aba", "vpd"].forEach(function (k) { E[k].addEventListener("input", render); });
+  render();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

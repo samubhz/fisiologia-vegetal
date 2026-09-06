@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 10 — Fisiologia do estresse | Fisiologia Vegetal</title>
+<meta name="description" content="Seca, salinidade, frio, calor e alagamento: percepção, dano, aclimatação e tolerância, com simulador de cenário climático.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-ambar); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 10 · Percepção e resposta</p>
+      <h1>Fisiologia do estresse</h1>
+      <p class="lead">Presa ao solo, a planta não foge do estresse &mdash; ela o percebe, sinaliza e remodela seu metabolismo. A diferença entre morrer e sobreviver muitas vezes está em <em>já ter passado por aquilo antes</em>.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Distinguir estresse, aclimatação e adaptação, e as estratégias de escape, evitação e tolerância.</li>
+        <li>Traçar a cascata percepção &rarr; sinalização &rarr; resposta para seca, salinidade, frio, calor e alagamento.</li>
+        <li>Explicar por que uma planta <strong>aclimatada</strong> sofre menos dano sob a mesma intensidade de estresse.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>Estresse é qualquer condição ambiental que reduz o crescimento ou a sobrevivência abaixo do potencial genético. A resposta tem três tempos: <strong>percepção</strong> (um sensor físico ou químico &mdash; rigidez de membrana, turgor, proteínas desdobradas, hipóxia); <strong>sinalização</strong> (Ca<sup>2+</sup>, espécies reativas de oxigênio, hormônios como <span class="term" data-term="ABA">ABA</span> e etileno, cascatas de quinases, fatores de transcrição CBF/DREB, HSF, ERF-VII); e <strong>resposta</strong> (ajuste osmótico, chaperonas, remodelamento de membranas, mudanças anatômicas).</p>
+    <p>A <strong>aclimatação</strong> é o ganho de tolerância após exposição prévia, moderada e reversível, ao estresse &mdash; envolve reprogramação da expressão gênica e acúmulo de protetores. A <strong>adaptação</strong> é a tolerância fixada geneticamente ao longo de gerações (xerófitas, halófitas).</p>
+
+    <h2 id="instrumento">Instrumento &mdash; cenário climático</h2>
+    <p>Escolha o estressor, ajuste a intensidade e compare uma planta não aclimatada com uma aclimatada. Veja o mecanismo de percepção, a resposta protetora dominante, o dano relativo e a chance de sobrevivência.</p>
+
+    <div class="lab" id="lab-estr">
+      <div class="lab-head">Instrumento · dano e tolerância por estressor</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 300 300" role="img" aria-label="Planta cujo aspecto (murcha e escurecimento) reflete o nível de dano.">
+            <rect x="70" y="252" width="160" height="16" rx="4" fill="var(--c-terra)" fill-opacity="0.55"/>
+            <path d="M108 252 h84 l-10 34 h-64 Z" fill="var(--c-terra)" fill-opacity="0.4"/>
+            <line x1="150" y1="252" x2="150" y2="118" stroke="var(--c-verde)" stroke-width="7" stroke-linecap="round" id="stem"/>
+            <g id="lf1"><path d="M150 150 C120 138 92 146 74 120 C110 104 146 116 150 150 Z" fill="var(--c-verde)"/></g>
+            <g id="lf2"><path d="M150 138 C180 126 208 134 226 108 C190 92 154 104 150 138 Z" fill="var(--c-verde)"/></g>
+            <g id="lf3"><path d="M150 120 C124 108 100 116 84 92 C114 78 146 90 150 120 Z" fill="var(--c-verde)"/></g>
+            <g id="lf4"><path d="M150 110 C176 98 200 104 214 82 C188 68 156 80 150 110 Z" fill="var(--c-verde)"/></g>
+            <!-- barra de dano -->
+            <rect x="258" y="60" width="14" height="180" rx="7" fill="var(--line)"/>
+            <rect id="dmgBar" x="258" y="200" width="14" height="40" rx="7" fill="var(--c-ambar)"/>
+            <text x="265" y="252" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--ink-faint)">dano</text>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label>Estressor</label>
+            <div class="seg" id="stz" role="group" aria-label="Estressor">
+              <button data-s="seca" aria-pressed="true">Seca</button>
+              <button data-s="sal" aria-pressed="false">Salinidade</button>
+              <button data-s="frio" aria-pressed="false">Frio</button>
+              <button data-s="calor" aria-pressed="false">Calor</button>
+              <button data-s="alag" aria-pressed="false">Alagamento</button>
+            </div>
+          </div>
+          <div class="control">
+            <label for="int">Intensidade do estresse <span class="val" id="intV">55 %</span></label>
+            <input type="range" id="int" min="0" max="100" step="1" value="55">
+          </div>
+          <div class="control">
+            <label>Estado da planta</label>
+            <div class="seg" id="acl" role="group" aria-label="Aclimatação">
+              <button data-a="0" aria-pressed="true">Não aclimatada</button>
+              <button data-a="1" aria-pressed="false">Aclimatada</button>
+            </div>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Percepção / sinal</span><span class="v" id="oPer">turgor ↓, ABA</span></div>
+            <div class="row"><span class="k">Resposta dominante</span><span class="v" id="oResp">fechamento estomático</span></div>
+            <div class="row"><span class="k">Dano relativo</span><span class="v" id="oDmg">48 %</span></div>
+            <div class="row"><span class="k">Efeito da aclimatação</span><span class="v" id="oAcl">—</span></div>
+            <div class="row"><span class="k">Prognóstico</span><span class="v" id="oPrg">recuperação</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Sob seca, o ABA fecha os estômatos e a planta acumula solutos compatíveis para segurar água. A aclimatação prévia eleva o limiar de dano — a mesma intensidade causa menos estrago.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · as cascatas de cada estresse</summary>
+      <div class="deepen-body">
+        <p><strong>Seca / déficit hídrico:</strong> a raiz percebe o solo secando e a folha perde turgor; sintetiza-se <strong>ABA</strong>, que fecha estômatos (via SLAC1) e ativa genes <em>RD/COR</em>. Ajuste osmótico com prolina, glicina-betaína e açúcares; proteínas <strong>LEA/dehidrinas</strong> protegem macromoléculas; a razão raiz:parte aérea aumenta.</p>
+        <p><strong>Salinidade:</strong> dois componentes &mdash; choque <em>osmótico</em> (como seca) e <em>toxicidade iônica</em> de Na<sup>+</sup>/Cl<sup>−</sup>. A via <strong>SOS</strong> (Ca<sup>2+</sup> &rarr; SOS3 &rarr; SOS2 &rarr; antiporte SOS1) exporta Na<sup>+</sup> da raiz; antiportes <strong>NHX</strong> compartimentalizam Na<sup>+</sup> no vacúolo; sintetizam-se osmólitos compatíveis no citosol.</p>
+        <p><strong>Frio:</strong> a membrana enrijece; um influxo de Ca<sup>2+</sup> ativa a via <strong>ICE1&ndash;CBF/DREB1</strong>, que induz o regulon <em>COR</em>. Aclimatação ao frio: dessaturação de ácidos graxos de membrana, acúmulo de açúcares e proteínas anticongelantes; abaixa o ponto de nucleação de gelo.</p>
+        <p><strong>Calor:</strong> proteínas começam a desdobrar; o fator <strong>HSF</strong> dispara a síntese de <strong>proteínas de choque térmico (HSP)</strong>, que atuam como chaperonas. Resfriamento por transpiração, emissão de isopreno que estabiliza membranas, e aumento da saturação lipídica.</p>
+        <p><strong>Alagamento / hipóxia:</strong> o O<sub>2</sub> radicular cai; o <strong>etileno</strong> fica preso e se acumula, estabilizando os fatores de transcrição do <strong>grupo VII ERF</strong> (degradados na presença de O<sub>2</sub> pela regra do N-terminal). Respostas: <strong>aerênquima</strong> (lise de células corticais), metabolismo fermentativo, raízes adventícias, e a &ldquo;síndrome de escape&rdquo; (alongamento rápido) ou a &ldquo;quiescência&rdquo; (economia de reservas), conforme a espécie.</p>
+        <p><strong>Modelo do instrumento:</strong> dano = f(intensidade acima de um limiar). A aclimatação eleva o limiar e reduz a inclinação da curva &mdash; efeito maior para frio e seca, moderado para calor e sal, variável para alagamento.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>Escape, evitação e tolerância</h3>
+    <p>Diante de um estresse previsível, plantas usam três estratégias, não excludentes. <strong>Escape</strong>: completar o ciclo antes do estresse (efêmeras do deserto que germinam, florescem e produzem sementes numa única estação chuvosa). <strong>Evitação</strong>: manter a homeostase interna apesar do ambiente (suculência, cutícula espessa, estômatos afundados, enrolamento foliar, raízes profundas). <strong>Tolerância</strong>: suportar o dano celular (ajuste osmótico, chaperonas, sistemas antioxidantes, capacidade de reparo).</p>
+
+    <h3>O papel central das espécies reativas de oxigênio</h3>
+    <p>Quase todo estresse aumenta a produção de <strong>ROS</strong> (O<sub>2</sub><sup>&bull;−</sup>, H<sub>2</sub>O<sub>2</sub>, <sup>1</sup>O<sub>2</sub>) em cloroplastos, mitocôndrias e peroxissomos. Em excesso, oxidam lipídios, proteínas e DNA. Em baixas doses controladas, porém, o H<sub>2</sub>O<sub>2</sub> é um <strong>mensageiro</strong> que dispara respostas de defesa. O sistema antioxidante &mdash; superóxido dismutase, catalase, o ciclo ascorbato&ndash;glutationa, tocoferóis, carotenoides &mdash; mantém o equilíbrio.</p>
+
+    <h3>Memória de estresse</h3>
+    <p>Plantas aclimatadas retêm parte da tolerância por dias a semanas após o estímulo cessar &mdash; &ldquo;priming&rdquo;. A base inclui marcas epigenéticas (metilação de DNA, modificações de histonas), fatores de transcrição e metabólitos persistentes. É o que torna o endurecimento (&ldquo;hardening&rdquo;) de mudas uma prática eficaz antes do transplante a campo.</p>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Duas mudas idênticas são expostas a −4 °C. Uma passou duas semanas a 4 °C antes; a outra vinha de 22 °C. A aclimatada sofre menos dano principalmente porque:</p>
+        <div class="opts">
+          <button data-correct="true">acumulou açúcares e proteínas crioprotetoras e dessaturou lipídios de membrana via CBF/COR.</button>
+          <button data-correct="false">tem estômatos menores.</button>
+          <button data-correct="false">produz mais etileno.</button>
+        </div>
+        <p class="fb">A exposição prévia ao frio moderado ativa a via ICE1–CBF, induzindo o regulon COR: membranas mais fluidas, crioprotetores acumulados e menor formação de gelo intracelular.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Uma planta salina exclui Na<sup>+</sup> da raiz e guarda o excedente no vacúolo das células foliares. Qual a vantagem de compartimentalizar em vez de manter o Na<sup>+</sup> no citosol?</p>
+        <div class="opts">
+          <button data-correct="false">O Na<sup>+</sup> no vacúolo é usado como nutriente.</button>
+          <button data-correct="true">Protege enzimas citosólicas da toxicidade iônica e ainda contribui para o ajuste osmótico do vacúolo.</button>
+          <button data-correct="false">Impede totalmente a entrada de água na célula.</button>
+        </div>
+        <p class="fb">Enzimas do citosol são inibidas por Na<sup>+</sup> alto. Sequestrá-lo no vacúolo (antiportes NHX) remove a toxicidade e usa o íon como osmótico barato; o citosol equilibra com osmólitos compatíveis.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Em solo alagado, os fatores de transcrição do grupo VII ERF acumulam-se e disparam respostas à hipóxia. Por que eles são estáveis justamente quando falta O<sub>2</sub>?</p>
+        <div class="opts">
+          <button data-correct="true">Na presença de O<sub>2</sub> eles são marcados para degradação pela via do N-terminal; sem O<sub>2</sub>, escapam e se acumulam.</button>
+          <button data-correct="false">São sintetizados apenas no escuro.</button>
+          <button data-correct="false">O etileno os degrada quando há O<sub>2</sub>.</button>
+        </div>
+        <p class="fb">A oxidação de uma cisteína N-terminal (dependente de O<sub>2</sub>) marca esses ERF para destruição. A hipóxia bloqueia essa marcação — os ERF-VII persistem e ativam genes de fermentação e formação de aerênquima.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="09-tropismos.html"><span>Módulo anterior</span><strong>09 · Movimentos e tropismos</strong></a>
+      <a class="next" href="../index.html#modulos"><span>Concluído</span><strong>Voltar aos módulos</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 24. · Buchanan, Gruissem &amp; Jones, <em>Biochemistry &amp; Molecular Biology of Plants</em>, 2ª ed., cap. 22–23.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    int: $("int"), intV: $("intV"),
+    oPer: $("oPer"), oResp: $("oResp"), oDmg: $("oDmg"), oAcl: $("oAcl"), oPrg: $("oPrg"), note: $("note"),
+    stem: $("stem"), dmgBar: $("dmgBar")
+  };
+  var leaves = [$("lf1"), $("lf2"), $("lf3"), $("lf4")];
+  var pivots = [[150, 150], [150, 138], [150, 120], [150, 110]];
+  var szBtns = document.querySelectorAll("#stz button");
+  var aclBtns = document.querySelectorAll("#acl button");
+  var STZ = "seca", ACL = 0;
+
+  var DATA = {
+    seca:  { per: "turgor ↓ · ABA (raiz→folha)", resp: "fechamento estomático + ajuste osmótico (prolina, açúcares) + LEA", thr: 22, slope: 1.0, aclThr: 22, aclSlope: 0.45, aclTxt: "forte (limiar +22, dano −55%)" },
+    sal:   { per: "choque osmótico + Na⁺/Cl⁻ tóxico · via SOS (Ca²⁺)", resp: "exclusão de Na⁺ (SOS1) + compartimentalização no vacúolo (NHX) + osmólitos", thr: 18, slope: 1.05, aclThr: 14, aclSlope: 0.7, aclTxt: "moderada (limiar +14, dano −33%)" },
+    frio:  { per: "rigidez de membrana · Ca²⁺ · via ICE1–CBF/DREB1", resp: "dessaturação de lipídios + açúcares crioprotetores + proteínas COR/anticongelantes", thr: 25, slope: 1.1, aclThr: 26, aclSlope: 0.4, aclTxt: "forte (endurecimento ao frio, dano −60%)" },
+    calor: { per: "proteínas desdobrando · fator HSF", resp: "proteínas de choque térmico (HSP/chaperonas) + resfriamento por transpiração + isopreno", thr: 20, slope: 1.15, aclThr: 12, aclSlope: 0.72, aclTxt: "moderada (limiar +12, dano −30%)" },
+    alag:  { per: "hipóxia radicular · etileno acumula · ERF-VII estáveis", resp: "aerênquima + metabolismo fermentativo + raízes adventícias + escape/quiescência", thr: 15, slope: 1.1, aclThr: 10, aclSlope: 0.8, aclTxt: "variável (limiar +10, dano −25%)" }
+  };
+
+  function lerpColor(t) {
+    // verde (60,154,60) -> âmbar (200,138,46) -> marrom (110,70,40)
+    var a, b, u;
+    if (t < 0.5) { a = [60, 154, 60]; b = [200, 138, 46]; u = t / 0.5; }
+    else { a = [200, 138, 46]; b = [110, 70, 40]; u = (t - 0.5) / 0.5; }
+    return "rgb(" + a.map(function (v, i) { return Math.round(v + (b[i] - v) * u); }).join(",") + ")";
+  }
+
+  function render() {
+    var d = DATA[STZ];
+    var I = +E.int.value;
+    E.intV.textContent = I + " %";
+    var thr = ACL ? d.thr + d.aclThr : d.thr;
+    var slope = ACL ? d.aclSlope : d.slope;
+    var dmg = clamp((I - thr) / (100 - thr), 0, 1) * 100 * slope;
+    dmg = clamp(dmg, 0, 100);
+
+    E.oPer.textContent = d.per;
+    E.oResp.textContent = d.resp;
+    E.oDmg.textContent = Math.round(dmg) + " %";
+    E.oAcl.textContent = ACL ? d.aclTxt : "— (planta não aclimatada)";
+    E.oDmg.className = "v " + (dmg < 40 ? "good" : "warn");
+
+    var prg = dmg < 40 ? "recuperação provável" : dmg < 75 ? "dano severo · recuperação parcial" : "letal";
+    E.oPrg.textContent = prg;
+    E.oPrg.className = "v " + (dmg < 40 ? "good" : "warn");
+
+    // visual
+    var t = dmg / 100;
+    var col = lerpColor(t);
+    leaves.forEach(function (g, i) {
+      g.querySelector("path").setAttribute("fill", col);
+      var droop = t * (STZ === "alag" ? 10 : 34) * (i % 2 ? 1 : -1);
+      g.setAttribute("transform", "rotate(" + droop.toFixed(1) + " " + pivots[i][0] + " " + pivots[i][1] + ")");
+    });
+    E.stem.setAttribute("stroke", lerpColor(t * 0.7));
+    var h = clamp(t * 180, 6, 180);
+    E.dmgBar.setAttribute("y", (240 - h).toFixed(1));
+    E.dmgBar.setAttribute("height", h.toFixed(1));
+    E.dmgBar.setAttribute("fill", dmg < 40 ? "var(--c-verde)" : dmg < 75 ? "var(--c-ambar)" : "#8a3b25");
+
+    var note;
+    if (dmg < 5) note = "Intensidade abaixo do limiar de dano: as respostas de aclimatação dão conta e o crescimento segue quase normal.";
+    else if (ACL) note = "Planta aclimatada: a exposição prévia elevou o limiar e amorteceu a curva de dano — a mesma intensidade (" + I + "%) causa bem menos estrago que na planta não aclimatada.";
+    else if (STZ === "seca") note = "Seca: o ABA fecha os estômatos e a planta acumula solutos compatíveis. Sem aclimatação prévia, o dano por perda de turgor e oxidação sobe rápido.";
+    else if (STZ === "sal") note = "Salinidade: além do efeito osmótico, o Na⁺ é diretamente tóxico. Se a exclusão e o sequestro vacuolar não acompanham, enzimas do citosol falham.";
+    else if (STZ === "frio") note = "Frio: membranas enrijecem e pode haver gelo intracelular. Sem endurecimento prévio, a via CBF/COR não teve tempo de montar a proteção.";
+    else if (STZ === "calor") note = "Calor: proteínas desdobram mais rápido do que as HSP conseguem renaturar; a transpiração de resfriamento esbarra na disponibilidade de água.";
+    else note = "Alagamento: a raiz fica hipóxica, o etileno se acumula e dispara aerênquima e fermentação — mas o rendimento de ATP despenca e as reservas se esgotam.";
+    E.note.textContent = note;
+  }
+
+  szBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      szBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); STZ = b.dataset.s; render();
+    });
+  });
+  aclBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      aclBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); ACL = +b.dataset.a; render();
+    });
+  });
+  E.int.addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>

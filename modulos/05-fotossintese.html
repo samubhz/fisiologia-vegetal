@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 05 — Fotossíntese | Fisiologia Vegetal</title>
+<meta name="description" content="Reações luminosas, ciclo de Calvin, fotorrespiração e as vias C3, C4 e CAM. Simulador da curva de assimilação de CO2 (A/Ci).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-verde); }
+  .chart-grid line { stroke: var(--line); stroke-width: 1; }
+  .chart-axis { stroke: var(--line-firm); stroke-width: 1.5; }
+  .chart-lbl { font-family: var(--mono); font-size: 9px; fill: var(--ink-faint); }
+  .curve { fill: none; stroke: var(--c-verde); stroke-width: 2.5; }
+  .curve.dim { stroke: var(--ink-faint); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .prpatch { fill: var(--c-ambar); fill-opacity: .14; }
+  .nowdot { fill: var(--c-verde); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 05 · Funções internas</p>
+      <h1>Fotossíntese</h1>
+      <p class="lead">A luz vira NADPH e ATP nos tilacoides; o carbono vira açúcar no estroma. Entre esses dois passos está a <span class="term" data-term="rubisco">rubisco</span> &mdash; a enzima mais abundante da biosfera e também sua maior ineficiência.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Separar as reações dependentes de luz (fluxo de elétrons, quimiosmose) das reações do <span class="term" data-term="ciclo de Calvin">ciclo de Calvin</span>.</li>
+        <li>Explicar a <span class="term" data-term="fotorrespiração">fotorrespiração</span> e por que ela piora sob calor, seca e alta luz.</li>
+        <li>Comparar <span class="term" data-term="C4">C4</span> e <span class="term" data-term="CAM">CAM</span> com C3 quanto a ponto de compensação de CO<sub>2</sub>, eficiência hídrica e nichos ambientais.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>A fotossíntese tem duas metades acopladas por transportadores de energia. Nas <strong>reações luminosas</strong>, os fotossistemas II e I usam fótons para arrancar elétrons da água (liberando O<sub>2</sub>), bombear H<sup>+</sup> para o lúmen do tilacoide e, com esse gradiente, produzir ATP (ATP-sintase) e NADPH. Nas <strong>reações de fixação</strong>, o ciclo de Calvin gasta esse ATP e NADPH para incorporar CO<sub>2</sub> em açúcar, em três fases: carboxilação da RuBP pela rubisco, redução do 3-fosfoglicerato a triose-fosfato e regeneração da RuBP.</p>
+
+    <h2 id="instrumento">Instrumento &mdash; curva de assimilação de CO<sub>2</sub></h2>
+    <p>Escolha a via fotossintética e ajuste luz e temperatura. A curva mostra a assimilação líquida <em>A</em> em função do CO<sub>2</sub> intercelular <em>C<sub>i</sub></em>. A área âmbar é a perda por fotorrespiração; o ponto onde a curva cruza o zero é o <span class="term" data-term="ponto de compensação de CO₂">ponto de compensação de CO<sub>2</sub></span>.</p>
+
+    <div class="lab" id="lab-ps">
+      <div class="lab-head">Instrumento · curva A/Cᵢ para C3, C4 e CAM</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 360 300" role="img" aria-label="Gráfico da assimilação líquida de CO2 em função do CO2 intercelular.">
+            <g class="chart-grid" id="grid"></g>
+            <line class="chart-axis" x1="44" y1="20" x2="44" y2="250"/>
+            <line class="chart-axis" x1="44" y1="210" x2="340" y2="210"/>
+            <path class="prpatch" id="prpatch" d=""/>
+            <path class="curve dim" id="curveRef" d=""/>
+            <path class="curve" id="curve" d=""/>
+            <circle class="nowdot" id="now" r="4" cx="0" cy="0"/>
+            <text class="chart-lbl" x="192" y="284" text-anchor="middle">CO₂ intercelular  Cᵢ  (ppm)</text>
+            <text class="chart-lbl" x="14" y="135" transform="rotate(-90 14 135)" text-anchor="middle">A  (µmol CO₂ m⁻² s⁻¹)</text>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label>Via fotossintética</label>
+            <div class="seg" id="path" role="group" aria-label="Via fotossintética">
+              <button data-p="C3" aria-pressed="true">C3</button>
+              <button data-p="C4" aria-pressed="false">C4</button>
+              <button data-p="CAM" aria-pressed="false">CAM</button>
+            </div>
+            <span class="hint" id="pathHint">C3: trigo, arroz, soja, a maioria das árvores.</span>
+          </div>
+          <div class="control">
+            <label for="par">Irradiância (PAR) <span class="val" id="parV">1200 µmol m⁻² s⁻¹</span></label>
+            <input type="range" id="par" min="0" max="2000" step="20" value="1200">
+          </div>
+          <div class="control">
+            <label for="temp">Temperatura da folha <span class="val" id="tempV">28 °C</span></label>
+            <input type="range" id="temp" min="8" max="45" step="1" value="28">
+            <span class="hint">Aumenta a oxigenação da RuBP em C3 (mais fotorrespiração)</span>
+          </div>
+          <div class="control">
+            <label for="ci">C<sub>i</sub> de operação <span class="val" id="ciV">260 ppm</span></label>
+            <input type="range" id="ci" min="20" max="800" step="10" value="260">
+            <span class="hint">Definido pela abertura estomática (ver Módulo 02)</span>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">A líquida no C<sub>i</sub> atual</span><span class="v" id="oA">18 µmol m⁻² s⁻¹</span></div>
+            <div class="row"><span class="k">Ponto de compensação de CO<sub>2</sub></span><span class="v" id="oGamma">52 ppm</span></div>
+            <div class="row"><span class="k">Perda por fotorrespiração</span><span class="v" id="oPr">22 %</span></div>
+            <div class="row"><span class="k">Fase limitante</span><span class="v" id="oLim">Rubisco / CO₂</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Em C3, suba a temperatura para 40 °C: a curva achata, o ponto de compensação sobe e a área âmbar cresce — é a fotorrespiração drenando carbono. Troque para C4 e o efeito quase desaparece.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · o modelo bioquímico (Farquhar, von Caemmerer &amp; Berry, 1980)</summary>
+      <div class="deepen-body">
+        <p>A assimilação líquida é o mínimo entre a taxa limitada pela carboxilação (rubisco) e a limitada pela regeneração da RuBP (transporte de elétrons), menos a respiração mitocondrial no claro (R<sub>d</sub>):</p>
+        <span class="eq">A = min(W<sub>c</sub>, W<sub>j</sub>) − R<sub>d</sub></span>
+        <span class="eq">W<sub>c</sub> = V<sub>cmax</sub> · (C<sub>i</sub> − Γ*) / [ C<sub>i</sub> + K<sub>c</sub>(1 + O/K<sub>o</sub>) ]</span>
+        <span class="eq">W<sub>j</sub> = J · (C<sub>i</sub> − Γ*) / (4C<sub>i</sub> + 8Γ*)</span>
+        <p>Γ* é o ponto de compensação de CO<sub>2</sub> na ausência de R<sub>d</sub>; cresce com a temperatura porque a solubilidade do CO<sub>2</sub> cai mais que a do O<sub>2</sub> e a especificidade da rubisco (S<sub>c/o</sub>) diminui. <em>J</em> satura com a irradiância segundo uma hipérbole não retangular. V<sub>cmax</sub>, J<sub>max</sub> e R<sub>d</sub> têm respostas de Arrhenius à temperatura, com ótimo entre 25&ndash;35&nbsp;°C em C3.</p>
+        <p><strong>C4:</strong> a bomba de carbono da bainha vascular eleva o CO<sub>2</sub> local a 3&ndash;8&times; o ambiente, saturando a rubisco e levando Γ* a ~3&nbsp;ppm. O custo é 2 ATP extras por CO<sub>2</sub> fixado &mdash; pago com folga sob luz forte e calor. <strong>CAM:</strong> mesma bioquímica de C4, mas separada no <em>tempo</em>: carboxilação noturna pela PEP-carboxilase (estômatos abertos) e descarboxilação diurna (estômatos fechados), maximizando A/E em ambientes áridos.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>Reações luminosas: um fio de elétrons da água ao NADP<sup>+</sup></h3>
+    <p>No fotossistema II, o par especial P680 excitado cede um elétron à cadeia; o &ldquo;buraco&rdquo; é preenchido pela oxidação da água no complexo de evolução de oxigênio (2&nbsp;H<sub>2</sub>O &rarr; O<sub>2</sub> + 4&nbsp;H<sup>+</sup> + 4&nbsp;e<sup>−</sup>). Os elétrons descem pela plastoquinona, pelo citocromo b<sub>6</sub>f (que bombeia H<sup>+</sup>) e pela plastocianina até o fotossistema I, onde são re-energizados e entregues à ferredoxina e à NADP<sup>+</sup>-redutase. O gradiente de H<sup>+</sup> resultante move a ATP-sintase. Sob excesso de luz, o <strong>fluxo cíclico</strong> ao redor do PSI e a dissipação térmica (NPQ, via ciclo das xantofilas) ajustam a razão ATP/NADPH e protegem o aparato.</p>
+
+    <h3>Ciclo de Calvin e o balanço energético</h3>
+    <p>Para cada CO<sub>2</sub> fixado: 3&nbsp;ATP e 2&nbsp;NADPH. Três voltas produzem uma triose-fosfato líquida (3&nbsp;carbonos); seis voltas, uma hexose. A triose-fosfato exportada do cloroplasto vira sacarose no citosol (transporte a longa distância, ver <a href="04-floema.html">Módulo 04</a>) ou fica retida como amido no próprio cloroplasto.</p>
+
+    <h3>Por que a fotorrespiração existe</h3>
+    <p>A rubisco surgiu quando a atmosfera quase não tinha O<sub>2</sub>; seu sítio ativo não distingue bem CO<sub>2</sub> de O<sub>2</sub>. Quando ela oxigena a RuBP, gera 2-fosfoglicolato, um composto que precisa ser recuperado por uma via cara que percorre cloroplasto, peroxissomo e mitocôndria, consome ATP e libera CO<sub>2</sub> e NH<sub>3</sub> já fixados. A oxigenação piora quando: a temperatura sobe (Γ* aumenta), o CO<sub>2</sub> interno cai (estômatos fechados por seca) ou a luz é intensa e o carbono não acompanha. C4 e CAM são soluções evolutivas independentes para o mesmo problema.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Característica</th><th>C3</th><th>C4</th><th>CAM</th></tr></thead>
+        <tbody>
+          <tr><td>Primeira enzima de fixação</td><td>rubisco</td><td>PEP-carboxilase</td><td>PEP-carboxilase (noite)</td></tr>
+          <tr><td>Ponto de compensação de CO<sub>2</sub></td><td>40&ndash;70 ppm</td><td>&lt; 10 ppm</td><td>baixo (dia)</td></tr>
+          <tr><td>Fotorrespiração aparente</td><td>alta sob calor</td><td>muito baixa</td><td>baixa</td></tr>
+          <tr><td>Eficiência do uso da água</td><td>menor</td><td>intermediária&ndash;alta</td><td>muito alta</td></tr>
+          <tr><td>Ótimo térmico</td><td>20&ndash;30 °C</td><td>30&ndash;40 °C</td><td>tecidos suculentos, desértico</td></tr>
+          <tr><td>Exemplos</td><td>arroz, trigo, soja</td><td>milho, cana, sorgo</td><td>abacaxi, cactos, orquídeas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Numa planta C3, aumentar a temperatura da folha de 25 °C para 38 °C, mantendo luz e C<sub>i</sub> constantes, tende a:</p>
+        <div class="opts">
+          <button data-correct="true">reduzir A líquida, porque a oxigenação da RuBP aumenta e Γ* sobe.</button>
+          <button data-correct="false">aumentar A líquida, porque a rubisco fica mais rápida sem custo.</button>
+          <button data-correct="false">não alterar A, porque a temperatura só afeta as reações luminosas.</button>
+        </div>
+        <p class="fb">Com o calor, a especificidade da rubisco pelo CO<sub>2</sub> cai e a solubilidade relativa do CO<sub>2</sub> diminui: mais fotorrespiração, ponto de compensação mais alto, A líquida menor.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Por que plantas C4 mantêm assimilação alta mesmo com estômatos relativamente fechados (C<sub>i</sub> baixo)?</p>
+        <div class="opts">
+          <button data-correct="false">Porque não possuem rubisco.</button>
+          <button data-correct="true">Porque a PEP-carboxilase fixa carbono com afinidade alta e concentra CO<sub>2</sub> na bainha vascular, saturando a rubisco.</button>
+          <button data-correct="false">Porque fazem fotossíntese à noite.</button>
+        </div>
+        <p class="fb">A bomba bioquímica de carbono eleva o CO<sub>2</sub> ao redor da rubisco a valores que suprimem a oxigenação, permitindo A alta com g<sub>s</sub> menor — daí a melhor eficiência do uso da água.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Em baixa irradiância, qual processo determina o formato inicial (quase linear) da curva de luz da fotossíntese?</p>
+        <div class="opts">
+          <button data-correct="true">O suprimento de ATP e NADPH pelas reações luminosas (limitação por transporte de elétrons).</button>
+          <button data-correct="false">A capacidade máxima de carboxilação da rubisco (V<sub>cmax</sub>).</button>
+          <button data-correct="false">A condutância do mesofilo ao CO<sub>2</sub>.</button>
+        </div>
+        <p class="fb">Sob pouca luz, cada fóton extra rende quase um incremento proporcional de A: a fase é limitada por <em>J</em> (regeneração da RuBP). Só em luz alta a limitação passa a ser a rubisco/CO<sub>2</sub>.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="04-floema.html"><span>Módulo anterior</span><strong>04 · Transporte no floema</strong></a>
+      <a class="next" href="06-respiracao.html"><span>Próximo módulo</span><strong>06 · Respiração e metabolismo</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 7–8. · Farquhar, von Caemmerer &amp; Berry (1980) <em>A biochemical model of photosynthetic CO₂ assimilation</em>, Planta.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    par: $("par"), temp: $("temp"), ci: $("ci"),
+    parV: $("parV"), tempV: $("tempV"), ciV: $("ciV"),
+    oA: $("oA"), oGamma: $("oGamma"), oPr: $("oPr"), oLim: $("oLim"), note: $("note"), pathHint: $("pathHint"),
+    grid: $("grid"), curve: $("curve"), curveRef: $("curveRef"), prpatch: $("prpatch"), now: $("now")
+  };
+  var pathBtns = document.querySelectorAll("#path button");
+  var PATH = "C3";
+  var br = function (x, d) { return x.toFixed(d).replace(".", ","); };
+
+  // ---- geometria do gráfico ----
+  var X0 = 44, X1 = 340, Y0 = 250, YZERO = 210, YTOP = 24;
+  var CI_MAX = 800, A_MIN = -8, A_MAX = 45;
+  function px(ci) { return X0 + (ci / CI_MAX) * (X1 - X0); }
+  function py(a) { return YZERO - (a / A_MAX) * (YZERO - YTOP) * (a >= 0 ? 1 : (YZERO - Y0) / ((0 - A_MIN) / A_MAX * (YZERO - YTOP)) ); }
+  // simplificar py: linear de A_MIN..A_MAX -> Y0..YTOP
+  function pyLin(a) { return Y0 - ((a - A_MIN) / (A_MAX - A_MIN)) * (Y0 - YTOP); }
+
+  (function buildGrid() {
+    var g = "";
+    for (var c = 0; c <= CI_MAX; c += 200) {
+      var x = px(c);
+      g += '<line x1="' + x + '" y1="' + YTOP + '" x2="' + x + '" y2="' + Y0 + '"/>';
+      g += '<text class="chart-lbl" x="' + x + '" y="' + (Y0 + 14) + '" text-anchor="middle">' + c + '</text>';
+    }
+    for (var a = 0; a <= A_MAX; a += 15) {
+      var y = pyLin(a);
+      g += '<line x1="' + X0 + '" y1="' + y + '" x2="' + X1 + '" y2="' + y + '"/>';
+      g += '<text class="chart-lbl" x="' + (X0 - 6) + '" y="' + (y + 3) + '" text-anchor="end">' + a + '</text>';
+    }
+    // linha do zero
+    g += '<line x1="' + X0 + '" y1="' + pyLin(0) + '" x2="' + X1 + '" y2="' + pyLin(0) + '" stroke="var(--line-firm)" stroke-width="1.5"/>';
+    E.grid.innerHTML = g;
+  })();
+
+  // ---- modelo A(Ci) — Farquhar, von Caemmerer & Berry (1980) com respostas
+  //      de temperatura de pico (Medlyn et al. 2002 / Bernacchi et al. 2001) ----
+  var R = 8.314;
+  function riseArrh(k25, Ea, T) { return k25 * Math.exp(Ea * (T - 298.15) / (298.15 * R * T)); }
+  function peakArrh(k25, Ea, T) {           // com desativação em alta temperatura
+    var Hd = 200000, dS = 650;
+    var rise = Math.exp(Ea * (T - 298.15) / (298.15 * R * T));
+    var deact = (1 + Math.exp((298.15 * dS - Hd) / (298.15 * R))) /
+                (1 + Math.exp((T * dS - Hd) / (T * R)));
+    return k25 * rise * deact;
+  }
+
+  function model(path, par, tC) {
+    var T = tC + 273.15;
+    var Rd = riseArrh(1.1, 46390, T);
+
+    if (path === "C3") {
+      var Vcmax = peakArrh(85, 65330, T);
+      var Jmax = peakArrh(140, 43540, T);
+      var J = (0.85 * par * Jmax) / (0.85 * par + 2.2 * Jmax);
+      var Kc = riseArrh(404.9, 79430, T);              // µmol/mol
+      var Ko = riseArrh(278.4, 36380, T);              // mmol/mol
+      var O = 210;                                     // mmol/mol
+      var gstar = riseArrh(42.75, 37830, T);           // µmol/mol (~ppm)
+      var Km = Kc * (1 + O / Ko);
+      return function (ci) {
+        var Wc = Vcmax * (ci - gstar) / (ci + Km);
+        var Wj = J * (ci - gstar) / (4 * ci + 8 * gstar);
+        var lim = Wc < Wj ? "Rubisco / CO₂" : "Luz / transporte de e⁻";
+        return { A: Math.min(Wc, Wj) - Rd, gstar: gstar, lim: lim,
+                 noPr: Vcmax * ci / (ci + Km) - Rd };   // referência sem fotorrespiração
+      };
+    }
+
+    if (path === "C4") {
+      var Jmax4 = peakArrh(200, 40000, T);
+      var J4 = (0.85 * par * Jmax4) / (0.85 * par + 2.2 * Jmax4);
+      var Amax = Math.min(peakArrh(34, 67000, T), J4 / 5.2);  // C4: 2 ATP extras por CO₂
+      var Rd4 = Rd * 0.55;
+      return function (ci) {
+        var A = Amax * (1 - Math.exp(-(ci + 8) / 45)) - Rd4;
+        return { A: A, gstar: 5, lim: ci < 90 ? "PEP-carboxilase / CO₂" : "Luz / bioquímica C4",
+                 noPr: A + 0.03 * Amax };
+      };
+    }
+
+    // CAM (fase diurna): estômatos fechados, CO₂ vem do malato; teto baixo, pouco sensível ao Ci externo
+    var Acam = Math.min(13, peakArrh(13, 55000, T) * (par > 20 ? 1 : 0.12));
+    var Rdc = Rd * 0.4;
+    return function (ci) {
+      var A = Acam * (0.6 + 0.4 * (1 - Math.exp(-ci / 90))) - Rdc;
+      return { A: A, gstar: 12, lim: "Descarboxilação do malato estocado", noPr: A + 0.03 * Acam };
+    };
+  }
+
+  function render() {
+    var par = +E.par.value, tC = +E.temp.value, ciOp = +E.ci.value;
+    E.parV.textContent = Math.round(par) + " µmol m⁻² s⁻¹";
+    E.tempV.textContent = Math.round(tC) + " °C";
+    E.ciV.textContent = Math.round(ciOp) + " ppm";
+
+    var f = model(PATH, par, tC);
+    var fRefC3 = model("C3", par, 25);
+
+    var d = "", dRef = "", topPts = [], botPts = [];
+    var gamma = null, prevA = null, prevX = null;
+    for (var ci = 0; ci <= CI_MAX; ci += 8) {
+      var r = f(ci), x = px(ci), y = pyLin(clamp(r.A, A_MIN, A_MAX));
+      d += (ci === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1) + " ";
+      if (PATH !== "C3") {
+        var rr = fRefC3(ci);
+        dRef += (ci === 0 ? "M" : "L") + x.toFixed(1) + " " + pyLin(clamp(rr.A, A_MIN, A_MAX)).toFixed(1) + " ";
+      } else {
+        // banda de fotorrespiração: entre A real e A sem oxigenação
+        topPts.push([x, pyLin(clamp(r.noPr, A_MIN, A_MAX))]);
+        botPts.push([x, pyLin(clamp(r.A, A_MIN, A_MAX))]);
+      }
+      if (gamma === null && prevA !== null && prevA < 0 && r.A >= 0)
+        gamma = prevX + (0 - prevA) / (r.A - prevA) * 8;
+      prevA = r.A; prevX = ci;
+    }
+    E.curve.setAttribute("d", d);
+    E.curveRef.setAttribute("d", PATH === "C3" ? "" : dRef);
+
+    if (PATH === "C3") {
+      var band = "M" + topPts.map(function (p) { return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" L ");
+      for (var i = botPts.length - 1; i >= 0; i--) band += " L " + botPts[i][0].toFixed(1) + " " + botPts[i][1].toFixed(1);
+      band += " Z";
+      E.prpatch.setAttribute("d", band);
+    } else {
+      E.prpatch.setAttribute("d", "");
+    }
+
+    var op = f(ciOp);
+    E.now.setAttribute("cx", px(ciOp).toFixed(1));
+    E.now.setAttribute("cy", pyLin(clamp(op.A, A_MIN, A_MAX)).toFixed(1));
+
+    var prFrac = PATH === "C3"
+      ? clamp((op.noPr - op.A) / Math.max(op.noPr, 1), 0, 0.75)
+      : (PATH === "CAM" ? 0.05 : 0.03);
+
+    E.oA.textContent = br(op.A, 1) + " µmol m⁻² s⁻¹";
+    E.oGamma.textContent = (gamma ? Math.round(gamma) : Math.round(op.gstar)) + " ppm";
+    E.oPr.textContent = Math.round(prFrac * 100) + " %";
+    E.oLim.textContent = op.lim;
+    E.oA.className = "v " + (op.A > 0 ? "good" : "warn");
+    E.oPr.className = "v " + (prFrac > 0.25 ? "warn" : "good");
+
+    var note;
+    if (PATH === "C3" && tC >= 37) note = "C3 a " + Math.round(tC) + " °C: a curva achata, o ponto de compensação sobe e a banda âmbar (fotorrespiração) engorda — carbono fixado sendo re-liberado.";
+    else if (PATH === "C3" && ciOp < 120) note = "Cᵢ baixo em C3 (estômatos fechados): perto do ponto de compensação, o ganho líquido de carbono é pequeno e a fração fotorrespiratória domina.";
+    else if (PATH === "C3") note = "Banda âmbar = diferença entre a assimilação sem oxigenação da RuBP e a real. Suba a temperatura e veja-a crescer.";
+    else if (PATH === "C4") note = "C4: a curva sobe íngreme e satura cedo — A alta já com Cᵢ baixo e ponto de compensação perto de zero. A tracejada cinza é a C3 de referência (25 °C).";
+    else note = "CAM (dia): resposta quase plana ao Cᵢ externo — os estômatos estão fechados e o CO₂ vem do malato estocado à noite. Teto de A menor, eficiência hídrica altíssima.";
+    E.note.textContent = note;
+  }
+
+  pathBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      pathBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      PATH = b.dataset.p;
+      E.pathHint.textContent = PATH === "C3" ? "C3: trigo, arroz, soja, a maioria das árvores."
+        : PATH === "C4" ? "C4: milho, cana, sorgo, muitas gramíneas tropicais."
+        : "CAM: abacaxi, cactáceas, agaves, muitas orquídeas e bromélias.";
+      render();
+    });
+  });
+  ["par", "temp", "ci"].forEach(function (k) { E[k].addEventListener("input", render); });
+  render();
+})();
+</script>
+</body>
+</html>

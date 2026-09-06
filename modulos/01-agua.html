@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 01 — Água e relações hídricas | Fisiologia Vegetal</title>
+<meta name="description" content="Potencial hídrico, osmose, apoplasto e simplasto, e a teoria da coesão-tensão do transporte no xilema, com simulador do contínuo solo–planta–atmosfera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-agua); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 01 · Funções internas</p>
+      <h1>Água e relações hídricas</h1>
+      <p class="lead">Mais de 90% da água absorvida por uma planta é perdida por transpiração. Entender para onde a água vai &mdash; e por quê &mdash; começa com uma única grandeza: o <span class="term" data-term="potencial hídrico">potencial hídrico</span>.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Definir potencial hídrico e seus componentes (Ψ<sub>s</sub>, Ψ<sub>p</sub>, Ψ<sub>g</sub>) e calcular a direção do fluxo.</li>
+        <li>Distinguir os caminhos <span class="term" data-term="apoplasto">apoplasto</span>, <span class="term" data-term="simplasto">simplasto</span> e transmembrana na raiz.</li>
+        <li>Explicar a ascensão da seiva pela teoria da <span class="term" data-term="coesão-tensão">coesão-tensão</span> e prever quando há risco de <span class="term" data-def="Ruptura da coluna de água no xilema por formação de bolha de vapor sob tensão elevada; interrompe a condução naquele vaso.">embolia</span>.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>A água se move espontaneamente do ponto de <strong>maior</strong> para o de <strong>menor</strong> potencial hídrico. Por convenção, a água pura livre à pressão atmosférica e à altura de referência tem Ψ<sub>w</sub>&nbsp;=&nbsp;0. Solutos e tensões tornam Ψ<sub>w</sub> negativo; pressão positiva o aumenta:</p>
+    <span class="eq">Ψ<sub>w</sub> = Ψ<sub>s</sub> + Ψ<sub>p</sub> + Ψ<sub>g</sub>   &nbsp;&nbsp;[MPa]</span>
+    <p>No contínuo solo&ndash;planta&ndash;atmosfera, cada compartimento tem um Ψ<sub>w</sub> progressivamente menor: o solo úmido fica perto de &minus;0,03&nbsp;MPa, a folha entre &minus;0,5 e &minus;1,5&nbsp;MPa, e o ar &mdash; mesmo a 80% de umidade relativa &mdash; perto de &minus;30&nbsp;MPa. Esse gradiente enorme na interface folha&ndash;ar é o que puxa toda a coluna de água para cima.</p>
+
+    <h2 id="instrumento">Instrumento &mdash; o contínuo solo&ndash;planta&ndash;atmosfera</h2>
+    <p>Ajuste o solo, o ar e a abertura estomática. Observe o potencial da folha, a taxa de transpiração e a tensão no xilema. Quando a tensão passa do limite de cavitação da espécie, aparece o risco de embolia; quando o potencial da folha cai abaixo do ponto de perda de turgor, a folha murcha.</p>
+
+    <div class="lab" id="lab-spac">
+      <div class="lab-head">Instrumento · fluxo no contínuo solo–planta–atmosfera</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 320 400" role="img" aria-label="Diagrama de uma planta com raízes no solo, caule com xilema e folha, mostrando o fluxo de água.">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--c-agua)" stop-opacity="0.10"/>
+                <stop offset="1" stop-color="var(--c-agua)" stop-opacity="0.02"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="320" height="270" fill="url(#sky)"/>
+            <!-- solo -->
+            <rect id="soil" x="0" y="270" width="320" height="130" fill="var(--c-terra)" fill-opacity="0.28"/>
+            <rect x="0" y="270" width="320" height="130" fill="url(#soilTint)"/>
+            <text x="12" y="292" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">SOLO</text>
+            <text x="270" y="24" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">AR</text>
+            <!-- caule / xilema -->
+            <rect id="xylem" x="150" y="120" width="20" height="160" rx="3" fill="var(--c-agua)" fill-opacity="0.35"/>
+            <!-- raízes -->
+            <path d="M160 280 C140 320 120 330 108 372 M160 280 C180 315 200 335 214 375 M160 285 C160 330 158 350 156 378"
+                  fill="none" stroke="var(--c-terra)" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+            <!-- folha -->
+            <g id="leaf" transform="rotate(0 150 120)">
+              <path d="M150 120 C110 110 78 120 60 96 C92 78 132 84 150 120 Z" fill="var(--c-verde)" fill-opacity="0.8"/>
+              <path d="M150 120 C130 112 100 104 68 92" stroke="var(--c-verde)" stroke-width="1.5" fill="none" stroke-opacity="0.6"/>
+              <path d="M150 120 C190 110 222 120 240 96 C208 78 168 84 150 120 Z" fill="var(--c-verde)" fill-opacity="0.65"/>
+            </g>
+            <!-- gotas de transpiração -->
+            <g id="vapor"></g>
+            <!-- gotas subindo -->
+            <g id="stream"></g>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label for="psiSoil">Potencial hídrico do solo <span class="val" id="psiSoilV">−0,05 MPa</span></label>
+            <input type="range" id="psiSoil" min="-2.0" max="-0.03" step="0.01" value="-0.05">
+            <span class="hint">Capacidade de campo ≈ −0,03 · ponto de murcha permanente ≈ −1,5</span>
+          </div>
+          <div class="control">
+            <label for="rh">Umidade relativa do ar <span class="val" id="rhV">60 %</span></label>
+            <input type="range" id="rh" min="30" max="99" step="1" value="60">
+            <span class="hint">Define o Ψ do ar pela equação Ψ<sub>ar</sub> = (RT/V̄<sub>w</sub>)·ln(UR)</span>
+          </div>
+          <div class="control">
+            <label for="gs">Abertura estomática <span class="val" id="gsV">70 %</span></label>
+            <input type="range" id="gs" min="0" max="100" step="1" value="70">
+            <span class="hint">0% = estômatos fechados (sem transpiração)</span>
+          </div>
+          <div class="control">
+            <label for="hgt">Altura da coluna <span class="val" id="hgtV">10 m</span></label>
+            <input type="range" id="hgt" min="0.5" max="40" step="0.5" value="10">
+            <span class="hint">Componente gravitacional: −0,01 MPa por metro</span>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Ψ do ar</span><span class="v" id="oPsiAir">−63 MPa</span></div>
+            <div class="row"><span class="k">Ψ da folha</span><span class="v" id="oPsiLeaf">−0,9 MPa</span></div>
+            <div class="row"><span class="k">Transpiração (E)</span><span class="v" id="oE">3,1 mmol m⁻² s⁻¹</span></div>
+            <div class="row"><span class="k">Tensão no xilema</span><span class="v" id="oTens">0,9 MPa</span></div>
+            <div class="row"><span class="k">Estado da folha</span><span class="v" id="oState">túrgida</span></div>
+            <div class="row"><span class="k">Risco de embolia</span><span class="v" id="oCav">baixo</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note">
+        <b>Leitura:</b> <span id="labNote">o gradiente folha→ar domina o sistema. Feche os estômatos e veja a transpiração cair a zero — mas o Ψ da folha então se aproxima do Ψ do solo.</span>
+      </div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · o modelo por trás do instrumento</summary>
+      <div class="deepen-body">
+        <p>O fluxo em regime estacionário obedece a uma analogia de Ohm (van&nbsp;den&nbsp;Honert, 1948): o mesmo fluxo <em>J</em> atravessa segmentos em série, cada um com sua resistência hidráulica.</p>
+        <span class="eq">J = (Ψ<sub>solo</sub> − Ψ<sub>folha</sub>) / R<sub>planta</sub> = g<sub>s</sub> · DPV   (aprox.)</span>
+        <p>O potencial do ar vem da termodinâmica do vapor:</p>
+        <span class="eq">Ψ<sub>ar</sub> = (R·T / V̄<sub>w</sub>) · ln(UR/100)</span>
+        <p>Com R = 8,314&nbsp;J&nbsp;mol⁻¹&nbsp;K⁻¹, T = 293&nbsp;K e V̄<sub>w</sub> = 18&times;10⁻⁶&nbsp;m³&nbsp;mol⁻¹, o fator (R·T/V̄<sub>w</sub>) ≈ 135&nbsp;MPa. A 60% de UR: Ψ<sub>ar</sub> ≈ 135 · ln(0,6) ≈ −69&nbsp;MPa. Por isso a etapa em fase vapor concentra quase toda a queda de potencial do sistema, embora ofereça a maior resistência (a transpiração é lenta comparada ao gradiente).</p>
+        <p>A <strong>tensão no xilema</strong> exibida é −Ψ<sub>p</sub> do xilema ≈ −(Ψ<sub>folha</sub> − Ψ<sub>s,xilema</sub>). O limite de cavitação usado (2,0&nbsp;MPa) é típico de muitas angiospermas mesofíticas; coníferas e xerófitas toleram tensões bem maiores por terem pontuações areoladas mais seguras.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>Componentes do potencial hídrico</h3>
+    <p>O <span class="term" data-term="potencial de soluto">potencial de soluto</span> (Ψ<sub>s</sub>, ou potencial osmótico) é sempre negativo e, para soluções diluídas, segue a relação de van&rsquo;t&nbsp;Hoff: Ψ<sub>s</sub> = &minus;R·T·c<sub>s</sub>, onde c<sub>s</sub> é a concentração de solutos. O <span class="term" data-term="potencial de pressão">potencial de pressão</span> (Ψ<sub>p</sub>) é positivo dentro de células túrgidas &mdash; a parede empurra de volta &mdash; e negativo no xilema sob transpiração, onde chamamos seu módulo de <em>tensão</em>. O potencial gravitacional (Ψ<sub>g</sub>) soma cerca de &minus;0,01&nbsp;MPa por metro de altura e só é relevante em árvores.</p>
+
+    <div class="callout">
+      <span class="lbl">Numérico</span>
+      <p style="margin:.4em 0 0">Uma célula com Ψ<sub>s</sub> = &minus;1,2&nbsp;MPa e Ψ<sub>p</sub> = +0,4&nbsp;MPa tem Ψ<sub>w</sub> = &minus;0,8&nbsp;MPa. Colocada em água pura (Ψ<sub>w</sub> = 0), ela <strong>absorve</strong> água até o turgor subir e igualar os potenciais.</p>
+    </div>
+
+    <h3>Movimento radial na raiz: três caminhos</h3>
+    <p>Da epiderme ao cilindro vascular, a água segue três rotas em paralelo: o <strong>apoplasto</strong> (paredes e espaços intercelulares, sem cruzar membranas), o <strong>simplasto</strong> (citoplasma a citoplasma via plasmodesmos) e a rota <strong>transmembrana</strong> (entrando e saindo de vacúolos, facilitada por aquaporinas). Na endoderme, a <span class="term" data-term="estria de Caspary">estria de Caspary</span> bloqueia o apoplasto e força toda a água por uma membrana &mdash; é o ponto de controle seletivo da absorção iônica e a origem da pressão de raiz.</p>
+
+    <h3>Pressão de raiz e gutação</h3>
+    <p>À noite, com estômatos fechados e transpiração mínima, as células da raiz continuam bombeando íons para o xilema. Isso baixa o Ψ<sub>s</sub> do xilema, a água entra por osmose e gera pressão positiva (até ~0,1&ndash;0,2&nbsp;MPa). Em plantas herbáceas baixas, essa pressão empurra água até as folhas e força gotas pelos hidatódios &mdash; a <strong>gutação</strong>. A pressão de raiz não explica a ascensão em árvores altas.</p>
+
+    <h3>Coesão-tensão: a ascensão da seiva</h3>
+    <p>A evaporação nas paredes das células do mesofilo cria menisco e tensão; essa tensão se propaga pelas colunas contínuas de água no xilema, que resistem à ruptura graças às pontes de hidrogênio (coesão) e à adesão às paredes dos vasos. A água é literalmente <em>puxada</em>, sob pressão negativa, sem gasto direto de energia metabólica na coluna. O custo é o risco de <strong>cavitação</strong>: sob tensão excessiva ou congelamento, forma-se uma bolha que embola o vaso. Plantas reparam ou contornam vasos embolizados e limitam o dano com o fechamento estomático.</p>
+
+    <div class="figure">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Compartimento</th><th>Ψ<sub>w</sub> típico (MPa)</th><th>Componente dominante</th></tr></thead>
+          <tbody>
+            <tr><td>Solo à capacidade de campo</td><td>−0,03</td><td>Ψ<sub>p</sub> ligeiramente negativo (matricial)</td></tr>
+            <tr><td>Xilema da raiz</td><td>−0,2 a −0,6</td><td>Ψ<sub>p</sub> (tensão) leve</td></tr>
+            <tr><td>Xilema da folha</td><td>−0,8 a −1,5</td><td>Ψ<sub>p</sub> (tensão)</td></tr>
+            <tr><td>Parênquima foliar</td><td>−0,8 a −1,5</td><td>Ψ<sub>s</sub> compensado por turgor</td></tr>
+            <tr><td>Ar a 95% UR</td><td>≈ −7</td><td>—</td></tr>
+            <tr><td>Ar a 60% UR</td><td>≈ −69</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption>O maior salto de potencial ocorre na interface folha&ndash;ar, não dentro da planta.</figcaption>
+    </div>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Uma célula com Ψ<sub>s</sub> = −0,9 MPa e Ψ<sub>p</sub> = +0,3 MPa é colocada numa solução com Ψ<sub>w</sub> = −0,4 MPa. O que acontece?</p>
+        <div class="opts">
+          <button data-correct="false">A célula absorve água e fica mais túrgida.</button>
+          <button data-correct="true">A célula perde água para a solução.</button>
+          <button data-correct="false">Não há fluxo líquido de água.</button>
+        </div>
+        <p class="fb">Ψ<sub>w</sub> da célula = −0,9 + 0,3 = −0,6 MPa. Como −0,6 &lt; −0,4, a água sai da célula (do maior para o menor potencial) até os potenciais se igualarem.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Ao meio-dia, num dia quente e seco, a transpiração é intensa. O que se espera do potencial hídrico da folha e da tensão no xilema em relação ao início da manhã?</p>
+        <div class="opts">
+          <button data-correct="true">Ψ da folha mais negativo e tensão maior no xilema.</button>
+          <button data-correct="false">Ψ da folha mais positivo e tensão menor.</button>
+          <button data-correct="false">Ambos inalterados, pois o solo tampona o sistema.</button>
+        </div>
+        <p class="fb">Maior demanda evaporativa aumenta o fluxo, exigindo gradiente maior: Ψ<sub>folha</sub> cai e a pressão negativa (tensão) no xilema aumenta, aproximando-se do limite de cavitação.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Qual estrutura obriga a água a cruzar uma membrana antes de entrar no cilindro vascular da raiz?</p>
+        <div class="opts">
+          <button data-correct="false">A parede primária das células da epiderme.</button>
+          <button data-correct="false">Os plasmodesmos do córtex.</button>
+          <button data-correct="true">A estria de Caspary na endoderme.</button>
+        </div>
+        <p class="fb">A suberina da estria de Caspary veda o apoplasto nas paredes radiais da endoderme, forçando a rota simplástica/transmembrana e permitindo o controle seletivo de íons.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="../index.html#modulos"><span>Voltar</span><strong>Todos os módulos</strong></a>
+      <a class="next" href="02-estomatos.html"><span>Próximo módulo</span><strong>02 · Estômatos e transpiração</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 3–4. · van den Honert, T.H. (1948) <em>Water transport in plants as a catenary process</em>.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+
+  var els = {
+    psiSoil: $("psiSoil"), rh: $("rh"), gs: $("gs"), hgt: $("hgt"),
+    psiSoilV: $("psiSoilV"), rhV: $("rhV"), gsV: $("gsV"), hgtV: $("hgtV"),
+    oPsiAir: $("oPsiAir"), oPsiLeaf: $("oPsiLeaf"), oE: $("oE"),
+    oTens: $("oTens"), oState: $("oState"), oCav: $("oCav"), note: $("labNote"),
+    leaf: $("leaf"), xylem: $("xylem"), stream: $("stream"), vapor: $("vapor")
+  };
+
+  var CAV_LIMIT = 2.0;      // MPa
+  var TLP = 1.5;            // ponto de perda de turgor (MPa, módulo)
+  var R_PLANT = 0.18;       // MPa por (mmol m-2 s-1) — resistência hidráulica
+  var E_MAX = 8.0;          // mmol m-2 s-1
+
+  function br(x, d) { return x.toFixed(d).replace(".", ","); }
+
+  var state = {};
+
+  function compute() {
+    var psiSoil = parseFloat(els.psiSoil.value);
+    var rh = parseFloat(els.rh.value);
+    var gs = parseFloat(els.gs.value) / 100;
+    var h = parseFloat(els.hgt.value);
+
+    var psiAir = 135 * Math.log(rh / 100);          // MPa
+    var vpdFactor = 1 - rh / 100;                    // proxy do déficit de pressão de vapor
+    var E = E_MAX * gs * (0.15 + 0.85 * vpdFactor);  // mmol m-2 s-1
+    // solo muito seco também limita o fluxo (condutância do solo cai)
+    var soilLimit = clamp(1 - (Math.abs(psiSoil) - 0.5) / 1.5, 0.15, 1);
+    E *= soilLimit;
+
+    var psiGrav = -0.01 * h;
+    var psiLeaf = psiSoil + psiGrav - E * R_PLANT;
+    var tension = -(psiLeaf);                        // aprox. tensão no xilema
+    if (tension < 0) tension = 0;
+
+    var state_leaf = tension < (TLP - 0.35) ? "túrgida"
+      : tension < TLP ? "murcha incipiente" : "murcha (Ψ < ponto de perda de turgor)";
+    var cavRatio = tension / CAV_LIMIT;
+    var cav = cavRatio < 0.6 ? "baixo" : cavRatio < 0.9 ? "moderado" : cavRatio < 1 ? "alto" : "EMBOLIA provável";
+
+    return { psiSoil: psiSoil, rh: rh, gs: gs, h: h, psiAir: psiAir, E: E,
+             psiLeaf: psiLeaf, tension: tension, state: state_leaf, cav: cav, cavRatio: cavRatio };
+  }
+
+  function render() {
+    var s = state = compute();
+    els.psiSoilV.textContent = "−" + br(Math.abs(s.psiSoil), 2) + " MPa";
+    els.rhV.textContent = Math.round(s.rh) + " %";
+    els.gsV.textContent = Math.round(s.gs * 100) + " %";
+    els.hgtV.textContent = br(s.h, 1).replace(",0", "") + " m";
+
+    els.oPsiAir.textContent = "−" + br(Math.abs(s.psiAir), 0) + " MPa";
+    els.oPsiLeaf.textContent = (s.psiLeaf < 0 ? "−" : "") + br(Math.abs(s.psiLeaf), 2) + " MPa";
+    els.oE.textContent = br(s.E, 1) + " mmol m⁻² s⁻¹";
+    els.oTens.textContent = br(s.tension, 2) + " MPa";
+
+    els.oState.textContent = s.state;
+    els.oState.className = "v " + (s.state === "túrgida" ? "good" : "warn");
+    els.oCav.textContent = s.cav;
+    els.oCav.className = "v " + (s.cavRatio < 0.6 ? "good" : "warn");
+
+    // folha murcha: rotaciona
+    var droop = clamp((s.tension - (TLP - 0.5)) / 1.2, 0, 1) * 42;
+    els.leaf.setAttribute("transform", "rotate(" + droop.toFixed(1) + " 150 120)");
+    // xilema fica mais "tenso" (opacidade menor / cor)
+    els.xylem.setAttribute("fill-opacity", (0.5 - 0.3 * clamp(s.cavRatio, 0, 1)).toFixed(2));
+
+    // nota contextual
+    var note;
+    if (s.gs < 0.05) note = "Estômatos fechados: E ≈ 0 e o Ψ da folha relaxa até perto do Ψ do solo (mais o termo gravitacional).";
+    else if (s.cavRatio >= 1) note = "Tensão acima do limite de cavitação: vasos embolizam, a condutância despenca e a folha murcha mesmo com solo úmido.";
+    else if (Math.abs(s.psiSoil) > 1.4) note = "Solo perto do ponto de murcha permanente: por mais que os estômatos abram, o gradiente solo→folha quase não sustenta fluxo.";
+    else if (s.rh < 40) note = "Ar muito seco: o Ψ do ar fica extremamente negativo e a demanda evaporativa puxa forte — tensão alta no xilema.";
+    else note = "O gradiente folha→ar domina o sistema. Feche os estômatos e veja E cair a zero — mas o Ψ da folha então se aproxima do Ψ do solo.";
+    els.note.textContent = note;
+  }
+
+  // animação das gotas
+  var stream = [], vapor = [], t0 = performance.now();
+  function spawn() {
+    var s = state;
+    var eNorm = s ? clamp(s.E / E_MAX, 0, 1) : 0.4;
+    if (Math.random() < 0.03 + eNorm * 0.22) {
+      var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("cx", 160 + (Math.random() * 8 - 4));
+      c.setAttribute("cy", 278);
+      c.setAttribute("r", 2.2);
+      c.setAttribute("fill", "var(--c-agua)");
+      c.setAttribute("fill-opacity", "0.85");
+      els.stream.appendChild(c);
+      stream.push({ el: c, y: 278, v: 0.4 + eNorm * 1.6 });
+    }
+    if (s && s.gs > 0.05 && Math.random() < 0.02 + eNorm * 0.18) {
+      var v = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      var vx = 60 + Math.random() * 180;
+      v.setAttribute("cx", vx);
+      v.setAttribute("cy", 108);
+      v.setAttribute("r", 1.8);
+      v.setAttribute("fill", "var(--c-agua)");
+      v.setAttribute("fill-opacity", "0.5");
+      els.vapor.appendChild(v);
+      vapor.push({ el: v, y: 108, x: vx, v: 0.5 + eNorm * 1.2, drift: Math.random() * 0.6 - 0.3 });
+    }
+  }
+  function tick() {
+    spawn();
+    for (var i = stream.length - 1; i >= 0; i--) {
+      var d = stream[i]; d.y -= d.v; d.el.setAttribute("cy", d.y);
+      if (d.y < 118) { d.el.remove(); stream.splice(i, 1); }
+    }
+    for (var j = vapor.length - 1; j >= 0; j--) {
+      var e = vapor[j]; e.y -= e.v; e.x += e.drift;
+      e.el.setAttribute("cy", e.y); e.el.setAttribute("cx", e.x);
+      e.el.setAttribute("fill-opacity", (0.5 * (e.y / 108)).toFixed(2));
+      if (e.y < 20) { e.el.remove(); vapor.splice(j, 1); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  ["psiSoil", "rh", "gs", "hgt"].forEach(function (k) {
+    els[k].addEventListener("input", render);
+  });
+  render();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

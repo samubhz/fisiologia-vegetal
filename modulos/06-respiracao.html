@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 06 — Respiração e metabolismo | Fisiologia Vegetal</title>
+<meta name="description" content="Glicólise, ciclo do ácido cítrico, cadeia transportadora de elétrons e o balanço de ATP, com simulador do rendimento energético.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-verde); }
+  .barlbl { font-family: var(--mono); font-size: 9px; fill: var(--ink-faint); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 06 · Funções internas</p>
+      <h1>Respiração e metabolismo</h1>
+      <p class="lead">A fotossíntese constrói a glicose; a respiração a desmonta de volta, capturando a energia em ATP. Uma planta respira 24&nbsp;h por dia e gasta assim 30&ndash;60% do carbono que fixa.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Localizar glicólise, oxidação do piruvato, ciclo do ácido cítrico e cadeia transportadora de elétrons na célula.</li>
+        <li>Fazer o <strong>balanço de ATP</strong> da oxidação completa da glicose e comparar com a fermentação.</li>
+        <li>Interpretar o <strong>quociente respiratório</strong> (QR) e o que ele revela sobre o substrato oxidado.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>A respiração aeróbia oxida a glicose até CO<sub>2</sub> e água, liberando &Delta;G°&rsquo; &asymp; &minus;2872&nbsp;kJ&nbsp;mol<sup>&minus;1</sup>. Essa energia não sai de uma vez: é extraída aos poucos, na forma de elétrons carregados por NADH e FADH<sub>2</sub>, que a cadeia transportadora usa para bombear H<sup>+</sup> e alimentar a ATP-sintase. Em quatro etapas: <strong>glicólise</strong> (citosol) &rarr; <strong>oxidação do piruvato</strong> (matriz mitocondrial) &rarr; <strong>ciclo do ácido cítrico</strong> (matriz) &rarr; <strong>fosforilação oxidativa</strong> (membrana interna).</p>
+
+    <h2 id="instrumento">Instrumento &mdash; rendimento energético</h2>
+    <p>Escolha o substrato, ligue ou desligue o O<sub>2</sub> e ajuste a temperatura. A barra mostra de onde vem cada ATP; os indicadores dão o rendimento por molécula, o CO<sub>2</sub> liberado, o O<sub>2</sub> consumido e o quociente respiratório.</p>
+
+    <div class="lab" id="lab-resp">
+      <div class="lab-head">Instrumento · balanço de ATP da oxidação de substratos</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 300 300" role="img" aria-label="Barra empilhada mostrando a contribuição de ATP de cada etapa da respiração.">
+            <line x1="60" y1="20" x2="60" y2="260" stroke="var(--line-firm)" stroke-width="1.5"/>
+            <line x1="60" y1="260" x2="280" y2="260" stroke="var(--line-firm)" stroke-width="1.5"/>
+            <g id="bars"></g>
+            <g id="scale"></g>
+            <text x="170" y="288" text-anchor="middle" class="barlbl">contribuição de ATP por etapa</text>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label>Substrato</label>
+            <div class="seg" id="sub" role="group" aria-label="Substrato respiratório">
+              <button data-s="glic" aria-pressed="true">Glicose</button>
+              <button data-s="lip" aria-pressed="false">Lipídio</button>
+              <button data-s="prot" aria-pressed="false">Proteína</button>
+            </div>
+            <span class="hint" id="subHint">Glicose — C₆H₁₂O₆, substrato de referência (QR = 1,0).</span>
+          </div>
+          <div class="control">
+            <label>Oxigênio disponível</label>
+            <div class="seg" id="ox" role="group" aria-label="Oxigênio">
+              <button data-o="1" aria-pressed="true">Com O₂</button>
+              <button data-o="0" aria-pressed="false">Sem O₂ (fermentação)</button>
+            </div>
+            <span class="hint">Sem O₂, só a glicólise rende ATP; NADH é reoxidado por fermentação</span>
+          </div>
+          <div class="control">
+            <label for="temp">Temperatura <span class="val" id="tempV">25 °C</span></label>
+            <input type="range" id="temp" min="0" max="45" step="1" value="25">
+            <span class="hint">Afeta a <em>taxa</em> (Q₁₀ ≈ 2), não o rendimento por molécula</span>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">ATP líquido</span><span class="v" id="oAtp">~30 / glicose</span></div>
+            <div class="row"><span class="k">CO<sub>2</sub> liberado</span><span class="v" id="oCO2">6 / glicose</span></div>
+            <div class="row"><span class="k">O<sub>2</sub> consumido</span><span class="v" id="oO2">6 / glicose</span></div>
+            <div class="row"><span class="k">Quociente respiratório (QR)</span><span class="v" id="oRQ">1,0</span></div>
+            <div class="row"><span class="k">Taxa relativa (temperatura)</span><span class="v" id="oRate">100 %</span></div>
+            <div class="row"><span class="k">Via</span><span class="v" id="oVia">respiração aeróbia</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Com O₂, a fosforilação oxidativa responde por ~90% do ATP. Desligue o O₂: sobra a glicólise (2 ATP) — 15 vezes menos — e a planta acumula etanol ou lactato.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · o balanço detalhado da glicose e as vias alternativas das plantas</summary>
+      <div class="deepen-body">
+        <p><strong>Rendimento por glicose (aeróbio):</strong></p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Etapa</th><th>ATP direto</th><th>NADH</th><th>FADH<sub>2</sub></th></tr></thead>
+          <tbody>
+            <tr><td>Glicólise</td><td>+2 (líquido)</td><td>2</td><td>—</td></tr>
+            <tr><td>Oxidação do piruvato (×2)</td><td>—</td><td>2</td><td>—</td></tr>
+            <tr><td>Ciclo do ácido cítrico (×2)</td><td>+2 (GTP)</td><td>6</td><td>2</td></tr>
+            <tr><td>Fosforilação oxidativa</td><td>+10 NADH×2,5 e +2 FADH₂×1,5</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+        <p>Total teórico &asymp; 4 (substrato) + 25 (NADH) + 3 (FADH<sub>2</sub>) = <strong>32 ATP</strong>; descontando o custo de importar o NADH citosólico e o vazamento de prótons, a estimativa realista é <strong>~30 ATP</strong>.</p>
+        <p><strong>Particularidades vegetais:</strong> a <strong>oxidase alternativa</strong> (AOX) desvia elétrons da ubiquinona direto para o O<sub>2</sub>, <em>sem</em> bombear H<sup>+</sup> &mdash; dissipa energia como calor (termogênese em inflorescências de aráceas) e alivia o estresse oxidativo. Há também NAD(P)H desidrogenases &ldquo;rotenona-insensíveis&rdquo; nas duas faces da membrana interna. A <strong>via das pentoses-fosfato</strong> oxida glicose-6-P para gerar NADPH e precursores (ribose-5-P, eritrose-4-P) para biossíntese.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>As quatro etapas</h3>
+    <p>A <strong>glicólise</strong> cliva a glicose (6C) em dois piruvatos (3C), com saldo líquido de 2 ATP (fosforilação em nível de substrato) e 2 NADH. A <strong>oxidação do piruvato</strong> pelo complexo piruvato-desidrogenase libera 1 CO<sub>2</sub> por piruvato e forma acetil-CoA + NADH. O <strong>ciclo do ácido cítrico</strong> oxida o acetil-CoA a 2 CO<sub>2</sub>, gerando 3 NADH, 1 FADH<sub>2</sub> e 1 GTP por volta. A <strong>fosforilação oxidativa</strong> transfere os elétrons de NADH e FADH<sub>2</sub> pelos complexos I&ndash;IV até o O<sub>2</sub> (aceptor final), bombeando H<sup>+</sup> para o espaço intermembrana; o retorno pela ATP-sintase produz a maior parte do ATP.</p>
+
+    <h3>Sem oxigênio: fermentação</h3>
+    <p>Se o O<sub>2</sub> falta (solo alagado, tecidos densos, sementes), a cadeia transportadora para e o NADH não é reoxidado. A célula recorre à <strong>fermentação</strong>: o piruvato é reduzido a lactato (lactato-desidrogenase) ou descarboxilado a acetaldeído e reduzido a etanol (via PDC + ADH). Isso regenera NAD<sup>+</sup> e mantém a glicólise &mdash; a única fonte de ATP &mdash; funcionando, mas o rendimento cai para 2 ATP por glicose e acumulam-se produtos tóxicos.</p>
+
+    <h3>Controle e temperatura</h3>
+    <p>A respiração é regulada por retroalimentação: ATP e NADH altos inibem enzimas-chave (fosfofrutoquinase, piruvato-desidrogenase, citrato-sintase); ADP alto as estimula. A <strong>taxa</strong> aproximadamente dobra a cada 10&nbsp;°C (Q<sub>10</sub> &asymp; 2) até cerca de 35&ndash;40&nbsp;°C; acima disso, enzimas e membranas se desestruturam e a taxa despenca. O <strong>rendimento por molécula</strong>, porém, não muda com a temperatura.</p>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Uma raiz em solo alagado passa a fermentar. O que acontece com o consumo de glicose para manter a mesma produção de ATP?</p>
+        <div class="opts">
+          <button data-correct="true">Aumenta muito, porque a fermentação rende ~15× menos ATP por glicose.</button>
+          <button data-correct="false">Diminui, porque a fermentação é mais eficiente.</button>
+          <button data-correct="false">Não muda, porque o ATP vem sempre da glicólise.</button>
+        </div>
+        <p class="fb">Aeróbio ≈ 30 ATP/glicose; fermentação = 2 ATP/glicose. Para o mesmo ATP, o consumo de substrato dispara — o efeito Pasteur ao contrário — e as reservas se esgotam rápido.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Uma semente oleaginosa em germinação apresenta QR ≈ 0,7. O que isso indica?</p>
+        <div class="opts">
+          <button data-correct="false">Está fermentando por falta de O<sub>2</sub>.</button>
+          <button data-correct="true">Está oxidando lipídios, que exigem mais O<sub>2</sub> por CO<sub>2</sub> produzido do que os carboidratos.</button>
+          <button data-correct="false">Está fixando CO<sub>2</sub> pela fotossíntese.</button>
+        </div>
+        <p class="fb">Ácidos graxos são muito reduzidos: sua oxidação completa consome relativamente mais O<sub>2</sub>, então QR = CO<sub>2</sub>/O<sub>2</sub> ≈ 0,7. Carboidratos dão QR ≈ 1,0; ácidos orgânicos, &gt; 1.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. A oxidase alternativa (AOX) das plantas transfere elétrons ao O<sub>2</sub> sem bombear prótons. A consequência direta é:</p>
+        <div class="opts">
+          <button data-correct="true">menos ATP por NADH oxidado e liberação de energia como calor.</button>
+          <button data-correct="false">mais ATP, porque encurta o caminho dos elétrons.</button>
+          <button data-correct="false">produção de O<sub>2</sub> em vez de consumo.</button>
+        </div>
+        <p class="fb">Sem contribuição ao gradiente de H<sup>+</sup>, a energia dos elétrons vira calor. Serve à termogênese floral e a uma válvula de escape que evita o excesso de redução da cadeia (menos ROS).</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="05-fotossintese.html"><span>Módulo anterior</span><strong>05 · Fotossíntese</strong></a>
+      <a class="next" href="07-hormonios.html"><span>Próximo módulo</span><strong>07 · Hormônios vegetais</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 12. · Buchanan, Gruissem &amp; Jones, <em>Biochemistry &amp; Molecular Biology of Plants</em>, 2ª ed., cap. 14.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    temp: $("temp"), tempV: $("tempV"),
+    oAtp: $("oAtp"), oCO2: $("oCO2"), oO2: $("oO2"), oRQ: $("oRQ"), oRate: $("oRate"), oVia: $("oVia"),
+    note: $("note"), bars: $("bars"), scale: $("scale"), subHint: $("subHint")
+  };
+  var subBtns = document.querySelectorAll("#sub button");
+  var oxBtns = document.querySelectorAll("#ox button");
+  var SUB = "glic", OX = 1;
+
+  // etapas: [glicólise substrato, glicólise NADH, oxid. piruvato NADH, Krebs substrato+, ETC restante]
+  var MODELS = {
+    glic: { aer: { stages: [2, 5, 5, 2, 16], atp: 30, co2: 6, o2: 6, rq: 1.0, unit: "glicose" },
+            anaer: { stages: [2, 0, 0, 0, 0], atp: 2, co2: "2 (etanol)", o2: 0, rq: "—", unit: "glicose" },
+            hint: "Glicose — C₆H₁₂O₆, substrato de referência (QR = 1,0)." },
+    lip:  { aer: { stages: [0, 8, 0, 14, 78], atp: 100, co2: 16, o2: 23, rq: 0.70, unit: "ác. palmítico" },
+            anaer: { stages: [0, 0, 0, 0, 0], atp: 0, co2: 0, o2: 0, rq: "—", unit: "ác. palmítico" },
+            hint: "Lipídio — ác. graxo via β-oxidação; muito ATP por carbono, QR ≈ 0,7 (mais O₂)." },
+    prot: { aer: { stages: [1, 3, 2, 6, 14], atp: 22, co2: "4,1", o2: "4,8", rq: 0.85, unit: "aminoácido méd." },
+            anaer: { stages: [0, 0, 0, 0, 0], atp: 0, co2: 0, o2: 0, rq: "—", unit: "aminoácido méd." },
+            hint: "Proteína — esqueletos carbônicos ao ciclo de Krebs; QR ≈ 0,8–0,9; libera NH₃." }
+  };
+  var LABELS = ["Glicólise\n(substrato)", "Glicólise\n(NADH)", "Oxid. piruvato\n(NADH)", "Krebs\n(GTP)", "Fosforilação\noxidativa"];
+  var COLS = ["#7FB23A", "#58A63A", "#3C9A3C", "#2E7D32", "#1E5730"];
+
+  function q10Rate(t) {
+    var r = Math.pow(2, (t - 25) / 10);
+    if (t > 38) r *= Math.max(0.06, 1 - (t - 38) * 0.30);   // desnaturação acima do ótimo
+    return r;
+  }
+
+  function render() {
+    var m = MODELS[SUB];
+    E.subHint.textContent = m.hint;
+    var d = OX ? m.aer : m.anaer;
+    var maxTotal = 32;
+
+    // barras empilhadas
+    var g = "", y0 = 260, x = 110, w = 90, acc = 0;
+    d.stages.forEach(function (v, i) {
+      if (v <= 0) return;
+      var h = v / maxTotal * 230;
+      acc += h;
+      g += '<rect x="' + x + '" y="' + (y0 - acc).toFixed(1) + '" width="' + w + '" height="' + h.toFixed(1) + '" fill="' + COLS[i] + '"/>';
+    });
+    // rótulo total
+    g += '<text x="' + (x + w / 2) + '" y="' + (y0 - acc - 8) + '" text-anchor="middle" class="barlbl" fill="var(--ink)" font-size="12">' +
+         (typeof d.atp === "number" ? "≈ " + d.atp + " ATP" : d.atp) + '</text>';
+    E.bars.innerHTML = g;
+
+    // escala
+    var sc = "";
+    for (var a = 0; a <= 30; a += 10) {
+      var yy = y0 - a / maxTotal * 230;
+      sc += '<line x1="56" y1="' + yy + '" x2="60" y2="' + yy + '" stroke="var(--line-firm)"/>';
+      sc += '<text x="52" y="' + (yy + 3) + '" text-anchor="end" class="barlbl">' + a + '</text>';
+    }
+    E.scale.innerHTML = sc;
+
+    var t = +E.temp.value;
+    E.tempV.textContent = t + " °C";
+    var rate = OX ? q10Rate(t) : q10Rate(t) * 0.6;
+
+    E.oAtp.textContent = (typeof d.atp === "number" ? "≈ " + d.atp : d.atp) + " / " + d.unit;
+    E.oCO2.textContent = d.co2 + " / " + d.unit;
+    E.oO2.textContent = d.o2 + " / " + d.unit;
+    E.oRQ.textContent = typeof d.rq === "number" ? d.rq.toFixed(2).replace(".", ",") : d.rq;
+    E.oRate.textContent = Math.round(rate * 100) + " %";
+    E.oVia.textContent = OX ? "respiração aeróbia" : "fermentação";
+    E.oAtp.className = "v " + (OX ? "good" : "warn");
+    E.oVia.className = "v " + (OX ? "good" : "warn");
+    E.oRate.className = "v " + (t > 38 ? "warn" : "");
+
+    var note;
+    if (!OX) note = "Sem O₂: só a glicólise rende ATP (2 por glicose). O NADH é reoxidado formando etanol + CO₂ ou lactato — 15× menos energia e produtos tóxicos acumulando.";
+    else if (SUB === "lip") note = "Lipídio: muito reduzido, rende muito ATP por molécula, mas consome relativamente mais O₂ — daí QR ≈ 0,7. É o combustível de sementes oleaginosas.";
+    else if (SUB === "prot") note = "Proteína: os esqueletos carbônicos entram no ciclo de Krebs em pontos variados; QR intermediário e liberação de NH₃, que precisa ser reassimilado.";
+    else if (t > 38) note = "Glicose com O₂, mas a " + t + " °C enzimas e membranas se desestruturam: a taxa cai mesmo com substrato disponível.";
+    else note = "Glicose com O₂: a fosforilação oxidativa responde por ~90% do ATP. Rendimento ≈ 30 por glicose; QR = 1,0.";
+    E.note.textContent = note;
+  }
+
+  subBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      subBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); SUB = b.dataset.s; render();
+    });
+  });
+  oxBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      oxBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); OX = +b.dataset.o; render();
+    });
+  });
+  E.temp.addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>

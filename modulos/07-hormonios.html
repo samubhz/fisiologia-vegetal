@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 07 — Hormônios vegetais | Fisiologia Vegetal</title>
+<meta name="description" content="Auxina, giberelina, citocinina, ABA e etileno: síntese, transporte e ação integrada, com simulador da razão auxina/citocinina na organogênese.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-rosa); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 07 · Percepção e resposta</p>
+      <h1>Hormônios vegetais</h1>
+      <p class="lead">Nenhum hormônio vegetal tem &ldquo;um efeito&rdquo;. O resultado depende da concentração, do tecido-alvo, da sensibilidade das células e, principalmente, das <em>razões</em> entre hormônios que agem juntos.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Associar cada classe hormonal (auxina, giberelina, citocinina, <span class="term" data-term="ABA">ABA</span>, etileno) à sua síntese, transporte e efeitos principais.</li>
+        <li>Explicar o transporte polar da <span class="term" data-term="auxina">auxina</span> pelas proteínas PIN e sua relação com a dominância apical.</li>
+        <li>Prever o destino de um explante em cultura a partir da <strong>razão auxina/citocinina</strong>.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>Hormônios vegetais são moléculas sinalizadoras ativas em concentrações muito baixas (nM&ndash;µM), sintetizadas em um local e frequentemente atuando em outro. A resposta a um hormônio é modulada por: sua <strong>concentração</strong>, a <strong>sensibilidade</strong> do tecido (número de receptores, componentes de transdução), a <strong>fase do desenvolvimento</strong> e a <strong>interação</strong> com outros hormônios &mdash; que pode ser sinérgica ou antagônica. O exemplo clássico é a organogênese em cultura de tecidos, controlada pela razão entre auxina e citocinina (Skoog &amp; Miller, 1957).</p>
+
+    <h2 id="instrumento">Instrumento &mdash; razão auxina/citocinina na organogênese</h2>
+    <p>Ajuste as concentrações de auxina e citocinina no meio. O explante responde à <em>razão</em>: auxina dominante induz raízes; citocinina dominante induz gemas/parte aérea; concentrações próximas mantêm calo indiferenciado.</p>
+
+    <div class="lab" id="lab-horm">
+      <div class="lab-head">Instrumento · destino do explante vs. razão auxina/citocinina</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 300 300" role="img" aria-label="Explante em placa de cultura formando raízes, calo ou parte aérea conforme a razão de hormônios.">
+            <ellipse cx="150" cy="250" rx="120" ry="20" fill="var(--c-verde)" fill-opacity="0.10"/>
+            <path d="M40 235 Q150 275 260 235 L255 250 Q150 288 45 250 Z" fill="var(--c-agua)" fill-opacity="0.12" stroke="var(--line-firm)"/>
+            <rect id="explant" x="128" y="150" width="44" height="40" rx="8" fill="#C9E29B" stroke="var(--c-verde)" stroke-width="1.5"/>
+            <g id="shoots"></g>
+            <g id="roots"></g>
+            <g id="callus"></g>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label for="aux">Auxina no meio <span class="val" id="auxV">1,0 µM</span></label>
+            <input type="range" id="aux" min="0" max="100" step="1" value="55">
+            <span class="hint">AIA / ANA / 2,4-D — promove alongamento e rizogênese</span>
+          </div>
+          <div class="control">
+            <label for="ck">Citocinina no meio <span class="val" id="ckV">1,0 µM</span></label>
+            <input type="range" id="ck" min="0" max="100" step="1" value="55">
+            <span class="hint">BAP / cinetina / zeatina — promove divisão celular e caulogênese</span>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Razão auxina : citocinina</span><span class="v" id="oRatio">1,0</span></div>
+            <div class="row"><span class="k">Resposta morfogenética</span><span class="v" id="oResp">calo indiferenciado</span></div>
+            <div class="row"><span class="k">Divisão celular</span><span class="v" id="oDiv">moderada</span></div>
+            <div class="row"><span class="k">Aplicação típica</span><span class="v" id="oApp">manutenção de calo</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Com auxina e citocinina equilibradas, o tecido só prolifera como calo. Aumente a auxina e ele forma raízes; aumente a citocinina e forma gemas — a mesma célula, destinos opostos, decididos pela razão.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · transporte polar da auxina e dominância apical</summary>
+      <div class="deepen-body">
+        <p>A auxina (AIA) é o único hormônio vegetal com <strong>transporte polar</strong> direcionado, no sentido basípeto (do ápice para a base) no caule. O mecanismo quimiosmótico: no apoplasto ácido (pH ~5), parte do AIA está protonada (AIA-H) e entra por difusão ou pelo influxo AUX1/LAX; no citosol neutro, dissocia-se (AIA<sup>−</sup>) e só sai por transportadores de efluxo <strong>PIN</strong>, localizados assimetricamente na face basal da célula. A posição das proteínas PIN define a direção do fluxo.</p>
+        <p><strong>Dominância apical:</strong> a auxina produzida na gema apical, transportada para baixo, inibe o brotamento das gemas laterais &mdash; em parte suprimindo a síntese local de citocinina e sustentando a exportação de auxina das próprias gemas laterais (hipótese do escoamento de auxina), com participação das estrigolactonas. Decapitar o ápice remove a fonte de auxina: as gemas laterais brotam. Reaplicar auxina no corte restaura a inibição.</p>
+        <p><strong>Modelo do instrumento:</strong> razão R = [auxina]/[citocinina]. R &gt; ~2 &rarr; rizogênese; 0,5 &lesssim; R &lesssim; 2 &rarr; calo; R &lt; ~0,5 &rarr; caulogênese. A taxa de divisão celular escala com o produto [auxina]&times;[citocinina] (ambos necessários para o ciclo celular).</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>As cinco classes clássicas</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Hormônio</th><th>Síntese</th><th>Efeitos principais</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Auxina</strong> (AIA)</td><td>meristemas apicais, folhas jovens (via triptofano)</td><td>alongamento celular, transporte polar, dominância apical, tropismos, iniciação de raízes, diferenciação vascular</td></tr>
+          <tr><td><strong>Giberelina</strong> (GA)</td><td>tecidos jovens, sementes, raízes</td><td>alongamento de entrenós, germinação (mobiliza reservas via α-amilase), transição para floração, partenocarpia</td></tr>
+          <tr><td><strong>Citocinina</strong></td><td>ápices radiculares (transporte no xilema)</td><td>divisão celular, formação de parte aérea, retardo da senescência, quebra de dominância apical</td></tr>
+          <tr><td><strong>ABA</strong></td><td>folhas e raízes sob déficit hídrico; sementes</td><td>fechamento estomático, dormência de sementes e gemas, tolerância a estresse, inibe germinação</td></tr>
+          <tr><td><strong>Etileno</strong> (gás)</td><td>quase todos os tecidos, sobretudo sob estresse e senescência</td><td>amadurecimento de frutos, senescência e abscisão, resposta tríplice, epinastia, resposta a alagamento</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Classes adicionais reconhecidas: <strong>brassinosteroides</strong> (alongamento, fotomorfogênese), <strong>ácido jasmônico</strong> (defesa contra herbívoros, desenvolvimento reprodutivo), <strong>ácido salicílico</strong> (resistência sistêmica adquirida) e <strong>estrigolactonas</strong> (inibição de ramificação, sinalização com micorrizas).</p>
+
+    <h3>Antagonismos que definem transições</h3>
+    <p>Vários processos-chave são disputas entre pares: <strong>GA &times; ABA</strong> controla germinação versus dormência; <strong>auxina &times; citocinina</strong> controla raiz versus parte aérea e a dominância apical; <strong>auxina &times; etileno</strong> participa da abscisão (auxina retém a folha; a queda de auxina sensibiliza a zona de abscisão ao etileno); <strong>citocinina &times; etileno/ABA</strong> regula a senescência foliar.</p>
+
+    <h3>Da percepção à resposta</h3>
+    <p>Cada hormônio tem receptores e vias próprias, mas o padrão se repete: percepção (receptores de membrana ou nucleares) &rarr; transdução (frequentemente por degradação regulada de repressores via ubiquitina&ndash;proteassomo &mdash; auxina/AUX-IAA, GA/DELLA, JA/JAZ) &rarr; mudança na transcrição &rarr; resposta fisiológica. A auxina, por exemplo, promove a degradação das proteínas AUX/IAA, liberando fatores de transcrição ARF que ativam genes de resposta em minutos.</p>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Um explante de calo é transferido para um meio com <em>alta auxina e baixa citocinina</em>. O resultado mais provável é:</p>
+        <div class="opts">
+          <button data-correct="true">formação de raízes (rizogênese).</button>
+          <button data-correct="false">formação de gemas e parte aérea.</button>
+          <button data-correct="false">morte do tecido por toxicidade hormonal.</button>
+        </div>
+        <p class="fb">Razão auxina/citocinina alta favorece a organogênese radicular. A relação inversa (citocinina alta) induziria parte aérea; razões próximas mantêm o calo.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Após a decapitação do ápice caulinar, as gemas laterais brotam. Aplicar uma pasta de auxina no corte:</p>
+        <div class="opts">
+          <button data-correct="false">acelera ainda mais o brotamento lateral.</button>
+          <button data-correct="true">restaura a inibição das gemas laterais, imitando o ápice removido.</button>
+          <button data-correct="false">não tem efeito, pois a auxina não é transportada.</button>
+        </div>
+        <p class="fb">A auxina exógena substitui a fonte apical: transportada basipetamente, reprime o brotamento lateral — evidência clássica de que a dominância apical é mediada por auxina.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Sementes de muitas espécies não germinam enquanto o teor de ABA está alto e o de GA baixo. A germinação começa quando:</p>
+        <div class="opts">
+          <button data-correct="false">ABA e GA sobem juntos.</button>
+          <button data-correct="true">a razão GA/ABA aumenta (queda de ABA e/ou síntese de GA).</button>
+          <button data-correct="false">o etileno substitui a GA na quebra de dormência de todas as espécies.</button>
+        </div>
+        <p class="fb">Dormência e germinação são um balanço GA × ABA. Estratificação, luz ou embebição reduzem o ABA e/ou induzem GA; quando a razão GA/ABA cruza um limiar, a germinação prossegue.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="06-respiracao.html"><span>Módulo anterior</span><strong>06 · Respiração e metabolismo</strong></a>
+      <a class="next" href="08-luz.html"><span>Próximo módulo</span><strong>08 · Luz e fotomorfogênese</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 15–19. · Skoog &amp; Miller (1957) <em>Chemical regulation of growth and organ formation in plant tissues cultured in vitro</em>.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    aux: $("aux"), ck: $("ck"), auxV: $("auxV"), ckV: $("ckV"),
+    oRatio: $("oRatio"), oResp: $("oResp"), oDiv: $("oDiv"), oApp: $("oApp"), note: $("note"),
+    explant: $("explant"), shoots: $("shoots"), roots: $("roots"), callus: $("callus")
+  };
+  // escala log: slider 0..100 -> 0.01 .. 30 µM
+  function conc(v) { return +(0.01 * Math.pow(3000, v / 100)).toFixed(2); }
+  function br(x, d) { return x.toFixed(d).replace(".", ","); }
+
+  function render() {
+    var a = conc(+E.aux.value), c = conc(+E.ck.value);
+    E.auxV.textContent = br(a, 2) + " µM";
+    E.ckV.textContent = br(c, 2) + " µM";
+    var R = a / Math.max(c, 0.01);
+    var div = clamp(Math.sqrt((+E.aux.value / 100) * (+E.ck.value / 100)), 0, 1);
+
+    var resp, app, cls;
+    if (a < 0.05 && c < 0.05) { resp = "quiescente (sem crescimento)"; app = "meio sem reguladores"; cls = "none"; }
+    else if (R > 2.2) { resp = "rizogênese (raízes)"; app = "enraizamento de microestacas"; cls = "roots"; }
+    else if (R < 0.45) { resp = "caulogênese (gemas / parte aérea)"; app = "multiplicação de brotos"; cls = "shoots"; }
+    else { resp = "calo indiferenciado"; app = "manutenção / proliferação de calo"; cls = "callus"; }
+
+    E.oRatio.textContent = R >= 10 ? "≈ " + Math.round(R) : br(R, 2);
+    E.oResp.textContent = resp;
+    E.oDiv.textContent = div < 0.25 ? "baixa" : div < 0.6 ? "moderada" : "intensa";
+    E.oApp.textContent = app;
+    E.oResp.className = "v " + (cls === "callus" || cls === "none" ? "warn" : "good");
+
+    // desenho
+    E.shoots.innerHTML = ""; E.roots.innerHTML = ""; E.callus.innerHTML = "";
+    var n, i;
+    if (cls === "roots") {
+      n = 3 + Math.round(clamp((R - 2) / 4, 0, 4));
+      for (i = 0; i < n; i++) {
+        var rx = 138 + i * (60 / n);
+        E.roots.innerHTML += '<path d="M' + rx + ' 190 q ' + (Math.random() * 16 - 8) + ' 30 ' + (Math.random() * 10 - 5) + ' 55" stroke="var(--c-terra)" stroke-width="3" fill="none" stroke-linecap="round"/>';
+      }
+    } else if (cls === "shoots") {
+      n = 3 + Math.round(clamp((0.45 - R) / 0.1, 0, 4));
+      for (i = 0; i < n; i++) {
+        var sx = 138 + i * (60 / n);
+        E.shoots.innerHTML += '<path d="M' + sx + ' 150 q ' + (Math.random() * 10 - 5) + ' -26 ' + (Math.random() * 8 - 4) + ' -46" stroke="var(--c-verde)" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+          '<circle cx="' + (sx + (Math.random() * 8 - 4)) + '" cy="' + (100 + Math.random() * 6) + '" r="5" fill="var(--c-verde)"/>';
+      }
+    } else if (cls === "callus") {
+      for (i = 0; i < 7; i++) {
+        E.callus.innerHTML += '<circle cx="' + (150 + (Math.random() * 44 - 22)) + '" cy="' + (170 + (Math.random() * 30 - 15)) + '" r="' + (7 + Math.random() * 5) + '" fill="#C9E29B" stroke="var(--c-verde)" stroke-opacity="0.5"/>';
+      }
+    }
+
+    var note;
+    if (cls === "none") note = "Sem reguladores no meio, o explante não retoma divisão: fica quiescente.";
+    else if (cls === "roots") note = "Auxina dominante (razão " + (R >= 10 ? "≈ " + Math.round(R) : br(R, 1)) + "): o explante forma raízes. É o passo de enraizamento na micropropagação.";
+    else if (cls === "shoots") note = "Citocinina dominante (razão " + br(R, 2) + "): formam-se gemas e parte aérea — a fase de multiplicação de brotos.";
+    else note = "Auxina e citocinina próximas: o tecido prolifera como calo sem se organizar. A taxa de divisão depende do produto das duas concentrações.";
+    E.note.textContent = note;
+  }
+
+  ["aux", "ck"].forEach(function (k) { E[k].addEventListener("input", render); });
+  render();
+})();
+</script>
+</body>
+</html>

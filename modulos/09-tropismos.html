@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 09 — Movimentos e tropismos | Fisiologia Vegetal</title>
+<meta name="description" content="Fototropismo, gravitropismo, tigmotropismo e movimentos násticos, com simulador de curvatura por redistribuição de auxina.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-rosa); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 09 · Percepção e resposta</p>
+      <h1>Movimentos e tropismos</h1>
+      <p class="lead">Plantas não têm músculos, mas se movem: crescendo de forma desigual dos dois lados de um órgão, ou mudando o turgor de células-motoras. O sinal quase sempre passa por um gradiente de auxina.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Definir tropismo, nastismo e a diferença entre crescimento diferencial e movimento por turgor.</li>
+        <li>Aplicar a hipótese de Cholodny&ndash;Went: percepção &rarr; redistribuição lateral de <span class="term" data-term="auxina">auxina</span> &rarr; alongamento diferencial &rarr; curvatura.</li>
+        <li>Prever o sentido da curvatura sabendo que a auxina <em>promove</em> o alongamento no caule e o <em>inibe</em> na raiz.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>Um <strong>tropismo</strong> é um crescimento com direção definida por um estímulo vetorial (luz, gravidade, contato). Um <strong>nastismo</strong> é um movimento cuja direção independe da direção do estímulo (abertura de flores pela temperatura, fechamento da <em>Mimosa</em> ao toque). Tropismos resultam de <strong>crescimento diferencial</strong>: um lado do órgão alonga mais que o outro, e o órgão curva-se para o lado que cresce menos.</p>
+    <p>No modelo de Cholodny&ndash;Went, o estímulo provoca o transporte lateral da auxina para um dos flancos do órgão. Como a auxina <strong>promove</strong> o alongamento em concentrações fisiológicas no <strong>caule/coleóptilo</strong>, o lado com mais auxina cresce mais. Na <strong>raiz</strong>, a mesma faixa de concentração já é <strong>inibitória</strong>, então o lado com mais auxina cresce menos. Daí os sentidos opostos de curvatura.</p>
+
+    <h2 id="instrumento">Instrumento &mdash; curvatura por redistribuição de auxina</h2>
+    <p>Escolha o órgão e o estímulo. Para luz lateral, defina de que lado ela vem; para gravidade, incline o vaso. Acompanhe para qual lado a auxina se acumula, qual lado alonga mais e o sentido da curvatura.</p>
+
+    <div class="lab" id="lab-trop">
+      <div class="lab-head">Instrumento · fototropismo e gravitropismo por gradiente de auxina</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 300 320" role="img" aria-label="Plântula que se curva em resposta à luz lateral ou à inclinação do vaso.">
+            <g id="sun" opacity="0">
+              <circle cx="36" cy="70" r="15" fill="var(--yellow)"/>
+              <g stroke="var(--yellow)" stroke-width="2.5" stroke-linecap="round"><path d="M36 46v-9M36 103v-9M11 70H2M70 70h-9M19 53l-6-6M53 87l6 6M53 53l6-6M19 87l-6 6"/></g>
+            </g>
+            <!-- solo -->
+            <rect x="0" y="236" width="300" height="84" fill="var(--c-terra)" fill-opacity="0.22"/>
+            <line x1="0" y1="236" x2="300" y2="236" stroke="var(--c-terra)" stroke-opacity="0.5" stroke-width="2"/>
+            <!-- eixo de crescimento original (só na gravidade) -->
+            <line id="axis0" x1="150" y1="236" x2="150" y2="120" stroke="var(--ink-faint)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0"/>
+            <g id="scene">
+              <!-- semente / junção -->
+              <circle cx="150" cy="236" r="6" fill="var(--c-terra)"/>
+              <!-- indicador de auxina (atrás do órgão) -->
+              <path id="auxSide" d="" fill="none" stroke="var(--c-rosa)" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+              <!-- órgão -->
+              <path id="organ" d="M150 236 Q150 150 150 64" fill="none" stroke="var(--c-verde)" stroke-width="11" stroke-linecap="round"/>
+            </g>
+            <g id="gArrow" opacity="0">
+              <line x1="274" y1="34" x2="274" y2="82" stroke="var(--ink-faint)" stroke-width="2.5"/>
+              <path d="M274 88 l-6 -10 h12 Z" fill="var(--ink-faint)"/>
+              <text x="252" y="28" font-family="var(--mono)" font-size="10" fill="var(--ink-faint)">g</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label>Órgão</label>
+            <div class="seg" id="organSel" role="group" aria-label="Órgão">
+              <button data-o="caule" aria-pressed="true">Caule / coleóptilo</button>
+              <button data-o="raiz" aria-pressed="false">Raiz</button>
+            </div>
+            <span class="hint" id="orgHint">No caule, a auxina promove o alongamento.</span>
+          </div>
+          <div class="control">
+            <label>Estímulo</label>
+            <div class="seg" id="stimSel" role="group" aria-label="Estímulo">
+              <button data-s="luz" aria-pressed="true">Luz lateral</button>
+              <button data-s="grav" aria-pressed="false">Gravidade</button>
+            </div>
+          </div>
+          <div class="control" id="lightCtl">
+            <label>Direção da luz</label>
+            <div class="seg" id="lightSide" role="group" aria-label="Lado da luz">
+              <button data-l="-1" aria-pressed="true">Da esquerda</button>
+              <button data-l="1" aria-pressed="false">Da direita</button>
+            </div>
+          </div>
+          <div class="control" id="gravCtl" hidden>
+            <label for="tilt">Inclinação do vaso <span class="val" id="tiltV">0°</span></label>
+            <input type="range" id="tilt" min="-60" max="60" step="1" value="35">
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Auxina acumula no lado</span><span class="v" id="oAux">esquerdo (sombreado)</span></div>
+            <div class="row"><span class="k">Efeito da auxina</span><span class="v" id="oEff">promove alongamento</span></div>
+            <div class="row"><span class="k">Lado que mais alonga</span><span class="v" id="oElong">esquerdo</span></div>
+            <div class="row"><span class="k">Curvatura</span><span class="v" id="oCurv">em direção à luz</span></div>
+            <div class="row"><span class="k">Tropismo</span><span class="v" id="oTrop">fototropismo positivo</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Luz pela esquerda: a auxina migra para o lado sombreado (direito). No caule esse lado alonga mais e o ápice curva-se para a luz — fototropismo positivo.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · como o órgão percebe luz e gravidade</summary>
+      <div class="deepen-body">
+        <p><strong>Fototropismo:</strong> as <strong>fototropinas</strong> (phot1, phot2), quinases ativadas por luz azul, geram um gradiente de sinal transversal ao órgão. Isso relocaliza os transportadores de efluxo <strong>PIN</strong> (e ativa/inibe outros carreadores), desviando o fluxo de auxina para o lado sombreado. A curvatura ocorre na zona de alongamento, logo abaixo do ápice.</p>
+        <p><strong>Gravitropismo:</strong> a percepção está nos <strong>estatócitos</strong> &mdash; células da coifa (raiz) e da bainha amilífera (caule) &mdash; onde amiloplastos densos (<strong>estatólitos</strong>) sedimentam no fundo da célula conforme a orientação. Sua deposição reposiciona proteínas PIN (sobretudo PIN3), concentrando auxina no <strong>lado inferior</strong>. Sinalização por Ca<sup>2+</sup>, pH e as proteínas LAZY/RCC transmitem a informação.</p>
+        <p><strong>Curva dose&ndash;resposta da auxina:</strong> concentrações que estimulam o alongamento do caule (~10<sup>−6</sup>&nbsp;M) já são supraótimas &mdash; inibitórias &mdash; para a raiz (ótimo ~10<sup>−10</sup>&nbsp;M). O mesmo gradiente lateral produz, portanto, curvaturas opostas: o caule cresce em direção à luz e contra a gravidade (tropismos negativo à gravidade, positivo à luz); a raiz, o inverso.</p>
+        <p><strong>Modelo do instrumento:</strong> define-se o lado de acúmulo de auxina (sombreado, na luz; inferior, na gravidade). O lado que mais alonga é o lado da auxina no caule e o lado oposto na raiz. A curvatura aponta para o lado que alonga menos.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>Os principais tropismos</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Tropismo</th><th>Estímulo</th><th>Caule</th><th>Raiz</th></tr></thead>
+        <tbody>
+          <tr><td>Fototropismo</td><td>luz azul direcional</td><td>positivo (cresce para a luz)</td><td>neutro ou negativo</td></tr>
+          <tr><td>Gravitropismo</td><td>vetor gravitacional</td><td>negativo (cresce para cima)</td><td>positivo (cresce para baixo)</td></tr>
+          <tr><td>Tigmotropismo</td><td>contato / toque</td><td>gavinhas enrolam no suporte</td><td>raízes desviam de obstáculos</td></tr>
+          <tr><td>Hidrotropismo</td><td>gradiente de umidade</td><td>&mdash;</td><td>positivo (cresce para a água)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Movimentos násticos e por turgor</h3>
+    <p>Nem todo movimento é crescimento. Os movimentos <strong>násticos</strong> reversíveis dependem de mudanças rápidas de turgor em células-motoras do <strong>pulvino</strong> (base do pecíolo). Na <em>Mimosa pudica</em>, o toque dispara um potencial de ação que abre canais aniônicos; a saída de K<sup>+</sup>, Cl<sup>−</sup> e água colapsa o turgor do lado extensor do pulvino e a folha se dobra em 1&ndash;2&nbsp;s. Os <strong>movimentos násticos</strong> incluem ainda a nictinastia (movimentos de sono das folhas), a termonastia (tulipas abrindo com o calor) e a sismonastia (resposta a vibração).</p>
+
+    <h3>Tempo de resposta</h3>
+    <p>A curvatura fototrópica de um coleóptilo leva de 30&nbsp;min a poucas horas. O gravitropismo de uma raiz reorientada é perceptível em 15&ndash;30&nbsp;min. Já os movimentos násticos por turgor ocorrem em segundos a minutos e são totalmente reversíveis, sem crescimento permanente.</p>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Um coleóptilo é iluminado lateralmente pela direita. Onde a auxina se concentra e para onde ele se curva?</p>
+        <div class="opts">
+          <button data-correct="true">Concentra-se à esquerda (lado sombreado); curva-se para a direita, em direção à luz.</button>
+          <button data-correct="false">Concentra-se à direita (lado iluminado); curva-se para a esquerda.</button>
+          <button data-correct="false">Distribui-se igualmente; não há curvatura.</button>
+        </div>
+        <p class="fb">A luz azul desvia a auxina para o lado sombreado (esquerdo). No coleóptilo a auxina promove o alongamento, então o lado esquerdo cresce mais e o ápice curva-se para a direita — para a luz.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Uma raiz é colocada na horizontal. A auxina acumula-se no seu lado inferior. Por que a raiz curva-se <em>para baixo</em>?</p>
+        <div class="opts">
+          <button data-correct="false">Porque a auxina promove o alongamento do lado inferior.</button>
+          <button data-correct="true">Porque na raiz a auxina inibe o alongamento; o lado inferior cresce menos e a raiz curva-se para baixo.</button>
+          <button data-correct="false">Porque a gravidade puxa fisicamente a ponta da raiz.</button>
+        </div>
+        <p class="fb">O acúmulo de auxina no lado inferior é o mesmo do caule; a diferença é a sensibilidade: na raiz essa concentração é inibitória, o lado inferior alonga menos e o órgão curva-se no sentido da gravidade.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. O fechamento das folhas da <em>Mimosa pudica</em> ao toque difere de um tropismo porque:</p>
+        <div class="opts">
+          <button data-correct="true">a direção do movimento não depende da direção do estímulo e resulta de perda de turgor, não de crescimento.</button>
+          <button data-correct="false">é irreversível e resulta de crescimento diferencial.</button>
+          <button data-correct="false">é mediado por auxina transportada lateralmente.</button>
+        </div>
+        <p class="fb">É um movimento nástico (sismonastia): rápido, reversível, sem crescimento, e a folha sempre se dobra do mesmo jeito, seja qual for a direção do toque.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="08-luz.html"><span>Módulo anterior</span><strong>08 · Luz e fotomorfogênese</strong></a>
+      <a class="next" href="10-estresse.html"><span>Próximo módulo</span><strong>10 · Fisiologia do estresse</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 18 e 20. · Went &amp; Thimann (1937), <em>Phytohormones</em>.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    tilt: $("tilt"), tiltV: $("tiltV"),
+    oAux: $("oAux"), oEff: $("oEff"), oElong: $("oElong"), oCurv: $("oCurv"), oTrop: $("oTrop"), note: $("note"),
+    organ: $("organ"), auxSide: $("auxSide"), sun: $("sun"), gArrow: $("gArrow"), scene: $("scene"),
+    axis0: $("axis0"), lightCtl: $("lightCtl"), gravCtl: $("gravCtl")
+  };
+  var organBtns = document.querySelectorAll("#organSel button");
+  var stimBtns = document.querySelectorAll("#stimSel button");
+  var lightBtns = document.querySelectorAll("#lightSide button");
+  var ORGAN = "caule", STIM = "luz", LIGHT = -1;
+
+  var cur = 0;         // curvatura atual (deslocamento horizontal da ponta, px)
+  var targetDx = 0;
+  var sceneTilt = 0, targetTilt = 0;
+
+  function labelSide(sgn) { return sgn < 0 ? "esquerdo" : "direito"; }
+
+  function compute() {
+    var isShoot = ORGAN === "caule";
+    var auxSideSign, elongSideSign, curvatureDx, trop, curvTxt, auxTxt;
+
+    if (STIM === "luz") {
+      targetTilt = 0;
+      // auxina vai para o lado sombreado = oposto à luz
+      auxSideSign = -LIGHT;
+      auxTxt = labelSide(auxSideSign) + " (sombreado)";
+      // caule: lado da auxina alonga mais; raiz: lado oposto alonga mais
+      elongSideSign = isShoot ? auxSideSign : -auxSideSign;
+      // curva-se para o lado que alonga MENOS
+      curvatureDx = -elongSideSign * (isShoot ? 52 : 38);
+      if (isShoot) { trop = "fototropismo positivo"; curvTxt = "em direção à luz"; }
+      else { trop = "fototropismo negativo"; curvTxt = "para longe da luz"; }
+    } else {
+      var tilt = +E.tilt.value;
+      targetTilt = tilt;
+      // lado inferior após inclinar: se tilt > 0 (horário), o lado inferior é o direito
+      var lowerSign = tilt >= 0 ? 1 : -1;
+      auxSideSign = lowerSign;
+      auxTxt = "inferior";
+      elongSideSign = isShoot ? lowerSign : -lowerSign;
+      // correção: a ponta volta ao alinhamento vertical, cancelando o deslocamento
+      // horizontal do segmento basal já crescido na direção da inclinação
+      var Lc = isShoot ? 172 : 64;
+      var tr = tilt * Math.PI / 180;
+      curvatureDx = -Math.sin(tr) * 0.42 * Lc * 1.18;
+      if (isShoot) { trop = "gravitropismo negativo"; curvTxt = "para cima (retorna à vertical)"; }
+      else { trop = "gravitropismo positivo"; curvTxt = "para baixo (retorna à vertical)"; }
+      if (tilt === 0) { curvatureDx = 0; curvTxt = "sem curvatura (já vertical)"; }
+    }
+
+    return {
+      isShoot: isShoot, auxTxt: auxTxt, auxSideSign: auxSideSign,
+      elongTxt: labelSide(elongSideSign), curvatureDx: curvatureDx,
+      trop: trop, curvTxt: curvTxt
+    };
+  }
+
+  function render() {
+    var s = compute();
+    E.tiltV.textContent = (+E.tilt.value) + "°";
+    E.oAux.textContent = s.auxTxt;
+    E.oEff.textContent = s.isShoot ? "promove alongamento" : "inibe alongamento";
+    E.oElong.textContent = s.elongTxt;
+    E.oCurv.textContent = s.curvTxt;
+    E.oTrop.textContent = s.trop;
+    E.oTrop.className = "v good";
+    E.oEff.className = "v " + (s.isShoot ? "good" : "warn");
+
+    E.sun.setAttribute("opacity", STIM === "luz" ? "1" : "0");
+    if (STIM === "luz") {
+      var cx = LIGHT < 0 ? 34 : 266;
+      E.sun.setAttribute("transform", "translate(" + (cx - 34) + ",0)");
+    }
+    E.gArrow.setAttribute("opacity", STIM === "grav" ? "1" : "0");
+
+    targetDx = s.curvatureDx;
+
+    var note;
+    if (STIM === "luz") {
+      note = "Luz pela " + (LIGHT < 0 ? "esquerda" : "direita") + ": a auxina migra para o lado sombreado (" + labelSide(s.auxSideSign) + "). " +
+        (s.isShoot ? "No caule esse lado alonga mais e o ápice curva-se para a luz — fototropismo positivo."
+                   : "Na raiz esse lado alonga menos, então a curvatura é para longe da luz — fototropismo negativo.");
+    } else {
+      var tl = +E.tilt.value;
+      if (tl === 0) note = "Vaso na vertical: sem gradiente gravitacional lateral, o órgão cresce reto.";
+      else note = "Vaso inclinado " + Math.abs(tl) + "°: estatólitos sedimentam no lado inferior e a auxina se concentra ali. " +
+        (s.isShoot ? "No caule o lado inferior alonga mais e a ponta sobe de volta à vertical."
+                   : "Na raiz o lado inferior alonga menos e a ponta desce, no sentido da gravidade.");
+    }
+    E.note.textContent = note;
+  }
+
+  function anim() {
+    cur += (targetDx - cur) * 0.08;
+    sceneTilt += (targetTilt - sceneTilt) * 0.1;
+    var isShoot = ORGAN === "caule";
+    var dir = isShoot ? -1 : 1;             // -1 cresce para cima, +1 para baixo
+    var bx = 150, by = 236, L = isShoot ? 172 : 62;
+    var d, da, ax0 = "0";
+
+    if (STIM === "luz") {
+      var tipY = by + dir * L, midY = (by + tipY) / 2, ctrl = cur * 1.15;
+      d  = "M" + bx + " " + by + " Q" + (bx + ctrl).toFixed(1) + " " + midY + " " + (bx + cur).toFixed(1) + " " + tipY;
+      var off = compute().auxSideSign * 8;
+      da = "M" + (bx + off) + " " + (by - 4 * dir) + " Q" + (bx + ctrl + off) + " " + midY + " " + (bx + cur + off) + " " + (tipY - 6 * dir);
+    } else {
+      // segmento basal reto na direção da inclinação + curva de correção até a vertical
+      var tr = sceneTilt * Math.PI / 180;
+      var d1 = L * 0.42;
+      var p1x = bx + Math.sin(tr) * d1, p1y = by + dir * Math.cos(tr) * d1;
+      var tipX = p1x + cur, tipY2 = p1y + dir * (L - d1);
+      var mx = (p1x + tipX) / 2, my = (p1y + tipY2) / 2;
+      d  = "M" + bx + " " + by + " L" + p1x.toFixed(1) + " " + p1y.toFixed(1) +
+           " Q" + (mx + cur * 0.4).toFixed(1) + " " + my.toFixed(1) + " " + tipX.toFixed(1) + " " + tipY2.toFixed(1);
+      var offg = compute().auxSideSign * 8;
+      da = "M" + (bx + offg) + " " + (by - 4 * dir) + " L" + (p1x + offg).toFixed(1) + " " + p1y.toFixed(1) +
+           " Q" + (mx + cur * 0.4 + offg).toFixed(1) + " " + my.toFixed(1) + " " + (tipX + offg).toFixed(1) + " " + (tipY2 - 6 * dir).toFixed(1);
+      // eixo original tracejado
+      var ex = bx + Math.sin(tr) * L, ey = by + dir * Math.cos(tr) * L;
+      E.axis0.setAttribute("x2", ex.toFixed(1)); E.axis0.setAttribute("y2", ey.toFixed(1));
+      ax0 = Math.abs(sceneTilt) > 1 ? "0.7" : "0";
+    }
+    E.organ.setAttribute("d", d);
+    E.organ.setAttribute("stroke", isShoot ? "var(--c-verde)" : "var(--c-terra)");
+    E.auxSide.setAttribute("d", da);
+    E.axis0.setAttribute("opacity", STIM === "grav" ? ax0 : "0");
+    requestAnimationFrame(anim);
+  }
+
+  organBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      organBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); ORGAN = b.dataset.o;
+      $("orgHint").textContent = ORGAN === "caule" ? "No caule, a auxina promove o alongamento." : "Na raiz, a mesma concentração de auxina inibe o alongamento.";
+      render();
+    });
+  });
+  stimBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      stimBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); STIM = b.dataset.s;
+      E.lightCtl.hidden = STIM !== "luz";
+      E.gravCtl.hidden = STIM !== "grav";
+      render();
+    });
+  });
+  lightBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      lightBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); LIGHT = +b.dataset.l; render();
+    });
+  });
+  E.tilt.addEventListener("input", render);
+  render();
+  requestAnimationFrame(anim);
+})();
+</script>
+</body>
+</html>

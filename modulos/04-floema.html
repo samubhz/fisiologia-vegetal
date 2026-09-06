@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 04 — Transporte no floema | Fisiologia Vegetal</title>
+<meta name="description" content="Relação fonte–dreno, carregamento do floema e a hipótese do fluxo de pressão, com simulador de partição de fotoassimilados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-ambar); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 04 · Funções internas</p>
+      <h1>Transporte no floema</h1>
+      <p class="lead">O xilema é uma via de mão única, para cima. O floema é bidirecional e negociável: leva açúcar de onde sobra para onde falta &mdash; e quem manda na direção é a diferença de pressão entre fonte e dreno.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Distinguir <strong>fonte</strong> de <strong>dreno</strong> e explicar por que um mesmo órgão pode trocar de papel ao longo do desenvolvimento.</li>
+        <li>Descrever o carregamento apoplástico e simplástico do floema e o custo energético envolvido.</li>
+        <li>Explicar a <strong>hipótese do fluxo de pressão</strong> de Münch e prever como a partição muda com a força dos drenos.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>Uma <strong>fonte</strong> exporta carbono: folhas maduras fotossinteticamente ativas, órgãos de reserva sendo mobilizados. Um <strong>dreno</strong> importa carbono: raízes, frutos, sementes, folhas jovens ainda em expansão, meristemas. O sentido do transporte no floema é sempre <strong>fonte &rarr; dreno</strong>, e pode ser para cima ou para baixo no mesmo instante, em feixes vasculares diferentes.</p>
+    <p>No modelo de Münch, o carregamento de sacarose nos elementos crivados da fonte baixa o <span class="term" data-term="potencial de soluto">potencial de soluto</span> ali; a água entra do xilema por osmose e eleva o <span class="term" data-term="potencial de pressão">potencial de pressão</span>. No dreno, a descarga de sacarose faz o oposto: a pressão cai. O gradiente de pressão resultante empurra a solução por fluxo de massa ao longo dos tubos crivados.</p>
+
+    <h2 id="instrumento">Instrumento &mdash; partição fonte&ndash;dreno</h2>
+    <p>Ajuste a fotossíntese na folha-fonte e a força de cada dreno. Veja o gradiente de pressão, a taxa de translocação e como o açúcar se reparte entre o fruto e a raiz. Se a fotossíntese cair muito, a folha jovem deixa de ser fonte e vira dreno.</p>
+
+    <div class="lab" id="lab-flo">
+      <div class="lab-head">Instrumento · fluxo de pressão e partição de fotoassimilados</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 300 340" role="img" aria-label="Folha-fonte no topo, tubo crivado central, fruto no meio e raiz na base, com açúcar fluindo da fonte para os drenos.">
+            <!-- tubo crivado -->
+            <rect x="141" y="52" width="18" height="250" rx="9" fill="var(--c-ambar)" fill-opacity="0.16" stroke="var(--c-ambar)" stroke-opacity="0.4"/>
+            <line x1="141" y1="110" x2="159" y2="110" stroke="var(--c-ambar)" stroke-opacity="0.5"/>
+            <line x1="141" y1="170" x2="159" y2="170" stroke="var(--c-ambar)" stroke-opacity="0.5"/>
+            <line x1="141" y1="230" x2="159" y2="230" stroke="var(--c-ambar)" stroke-opacity="0.5"/>
+            <!-- folha fonte -->
+            <g id="srcG">
+              <path d="M150 60 C112 46 78 56 58 24 C100 8 142 20 150 60 Z" fill="var(--c-verde)" fill-opacity="0.9"/>
+              <text x="70" y="12" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">fonte</text>
+            </g>
+            <!-- fruto (dreno) -->
+            <g id="fruitG">
+              <line x1="159" y1="175" x2="196" y2="175" stroke="var(--c-ambar)" stroke-opacity="0.4" stroke-width="5"/>
+              <circle id="fruit" cx="216" cy="175" r="20" fill="var(--c-rosa)" fill-opacity="0.85"/>
+              <text x="200" y="140" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">fruto</text>
+            </g>
+            <!-- raiz (dreno) -->
+            <path id="root" d="M150 300 C132 322 118 326 110 338 M150 300 C168 320 182 326 192 338 M150 302 C150 322 149 330 148 340"
+                  fill="none" stroke="var(--c-terra)" stroke-width="5" stroke-linecap="round" stroke-opacity="0.8"/>
+            <text x="196" y="326" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">raiz</text>
+            <!-- açúcar -->
+            <g id="sug"></g>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label for="ps">Fotossíntese na folha-fonte <span class="val" id="psV">70 %</span></label>
+            <input type="range" id="ps" min="0" max="100" step="1" value="70">
+            <span class="hint">Abaixo de ~20 % a folha jovem passa a importar carbono</span>
+          </div>
+          <div class="control">
+            <label for="sf">Força do dreno — fruto <span class="val" id="sfV">60 %</span></label>
+            <input type="range" id="sf" min="0" max="100" step="1" value="60">
+            <span class="hint">Taxa de descarga + metabolização/estocagem de sacarose</span>
+          </div>
+          <div class="control">
+            <label for="sr">Força do dreno — raiz <span class="val" id="srV">45 %</span></label>
+            <input type="range" id="sr" min="0" max="100" step="1" value="45">
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Pressão na fonte</span><span class="v" id="oPsrc">0,95 MPa</span></div>
+            <div class="row"><span class="k">Pressão média nos drenos</span><span class="v" id="oPsnk">0,40 MPa</span></div>
+            <div class="row"><span class="k">Translocação total</span><span class="v" id="oFlux">6,1 (rel.)</span></div>
+            <div class="row"><span class="k">Partição fruto : raiz</span><span class="v" id="oPart">57 : 43</span></div>
+            <div class="row"><span class="k">Papel da folha</span><span class="v" id="oRole">fonte</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Aumente a força do fruto e ele &ldquo;puxa&rdquo; uma fração maior do fluxo — a partição pende para o fruto sem que a raiz mude de tamanho. É assim que o raleio de frutos redireciona açúcar para os que restam.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · carregamento do floema e o modelo de Münch</summary>
+      <div class="deepen-body">
+        <p><strong>Carregamento apoplástico</strong> (muitas herbáceas de clima temperado): a sacarose sai das células do mesofilo para o apoplasto e é bombeada para o complexo elemento crivado&ndash;célula companheira contra gradiente, por simportes <strong>SUC/H<sup>+</sup></strong> energizados pela H<sup>+</sup>-ATPase. Concentra sacarose a 2&ndash;5&times; a do mesofilo e permite Ψ<sub>p</sub> alto nos tubos.</p>
+        <p><strong>Carregamento simplástico</strong> (muitas árvores): a sacarose difunde por plasmodesmos até células intermediárias, onde é convertida em oligossacarídeos maiores (rafinose, estaquiose) grandes demais para voltar &mdash; a &ldquo;armadilha de polímeros&rdquo;.</p>
+        <p>No dreno, a <strong>descarga</strong> pode ser simplástica (raízes, folhas jovens) ou apoplástica (sementes, sem continuidade simplástica com o embrião). A manutenção do gradiente exige que o dreno continue consumindo ou estocando sacarose &mdash; a <strong>força do dreno</strong> = tamanho &times; atividade.</p>
+        <p><strong>Modelo do instrumento:</strong> Ψ<sub>p,fonte</sub> cresce com o carregamento (∝ fotossíntese); Ψ<sub>p,dreno,i</sub> cai com a força do dreno <em>i</em>. Fluxo para o dreno <em>i</em> ∝ (Ψ<sub>p,fonte</sub> − Ψ<sub>p,dreno,i</sub>) · força<sub>i</sub>. Se a fotossíntese &lt; limiar, o sinal do balanço de carbono inverte e a folha vira dreno.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>Anatomia do tubo condutor</h3>
+    <p>O floema conduz pelos <strong>elementos de tubo crivado</strong>: células vivas, mas anucleadas na maturidade, com o citoplasma reduzido a uma camada parietal e placas crivadas perfuradas nas extremidades. Cada elemento é mantido vivo pela <strong>célula companheira</strong> adjacente, que fornece proteínas, ATP e faz o carregamento. Danos disparam a oclusão das placas por proteínas P e calose, limitando a perda de seiva.</p>
+
+    <h3>Fonte e dreno não são fixos</h3>
+    <p>Uma folha nasce como dreno: importa carbono enquanto se expande. Ao atingir cerca de 30&ndash;60% do tamanho final, faz a <strong>transição dreno&ndash;fonte</strong> &mdash; a partir da ponta, que amadurece primeiro &mdash; e passa a exportar. Um tubérculo é dreno no enchimento e fonte na brotação. A direção do fluxo em cada feixe segue o balanço local de pressão, não uma polaridade anatômica.</p>
+
+    <h3>Competição entre drenos</h3>
+    <p>Quando vários drenos disputam a mesma fonte, cada um recebe uma fração proporcional à sua força relativa e à sua proximidade/conexão vascular. Práticas agrícolas exploram isso: o raleio de frutos aumenta o tamanho dos remanescentes; a poda de ramos redireciona assimilados; a remoção de brotos laterais concentra o crescimento no eixo principal.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th></th><th>Xilema</th><th>Floema</th></tr></thead>
+        <tbody>
+          <tr><td>Conteúdo</td><td>água + íons (seiva diluída)</td><td>água + sacarose 10&ndash;30% + aminoácidos, hormônios, RNA</td></tr>
+          <tr><td>Células condutoras</td><td>mortas (traqueídes, elementos de vaso)</td><td>vivas (elementos de tubo crivado)</td></tr>
+          <tr><td>Força motriz</td><td>tensão (Ψ<sub>p</sub> negativo) gerada pela transpiração</td><td>gradiente de Ψ<sub>p</sub> positivo entre fonte e dreno</td></tr>
+          <tr><td>Direção</td><td>raiz &rarr; parte aérea</td><td>fonte &rarr; dreno (qualquer sentido)</td></tr>
+          <tr><td>Gasto de energia</td><td>indireto (só nos estômatos)</td><td>direto (carregamento ativo)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Num experimento, anelam-se (remove-se um anel de casca com floema) o caule logo abaixo de um ramo com folhas. Depois de semanas, o que se espera <em>acima</em> do anel?</p>
+        <div class="opts">
+          <button data-correct="true">Acúmulo de fotoassimilados e intumescimento acima do anel; morte das raízes a longo prazo.</button>
+          <button data-correct="false">Murcha imediata das folhas por falta de água.</button>
+          <button data-correct="false">Nenhuma alteração, pois o xilema compensa o transporte de açúcar.</button>
+        </div>
+        <p class="fb">O anelamento interrompe o floema, não o xilema: a água continua subindo, mas o açúcar não desce. Ele se acumula acima do anel e as raízes, privadas de carbono, definham.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Uma folha jovem sombreada, com fotossíntese líquida próxima de zero, em relação ao floema comporta-se como:</p>
+        <div class="opts">
+          <button data-correct="false">fonte, porque toda folha exporta açúcar.</button>
+          <button data-correct="true">dreno, porque importa carbono para sustentar sua expansão e respiração.</button>
+          <button data-correct="false">nem fonte nem dreno, porque está isolada do sistema vascular.</button>
+        </div>
+        <p class="fb">Sem produção fotossintética suficiente, o balanço de carbono da folha é negativo: ela importa pelo floema. O papel fonte/dreno depende do balanço, não da identidade do órgão.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Na hipótese do fluxo de pressão, o que mantém o gradiente de pressão entre fonte e dreno?</p>
+        <div class="opts">
+          <button data-correct="false">A contração ativa das placas crivadas, bombeando a seiva.</button>
+          <button data-correct="true">O carregamento contínuo de sacarose na fonte e a descarga/consumo contínuo no dreno.</button>
+          <button data-correct="false">A gravidade, que só permite transporte de cima para baixo.</button>
+        </div>
+        <p class="fb">O fluxo é passivo (de massa), mas depende de dois processos ativos nas pontas: carregar açúcar na fonte (baixa Ψ<sub>s</sub>, sobe Ψ<sub>p</sub>) e descarregá-lo no dreno (sobe Ψ<sub>s</sub>, cai Ψ<sub>p</sub>).</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="03-nutricao.html"><span>Módulo anterior</span><strong>03 · Nutrição mineral</strong></a>
+      <a class="next" href="05-fotossintese.html"><span>Próximo módulo</span><strong>05 · Fotossíntese</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 11. · Münch, E. (1930) <em>Die Stoffbewegungen in der Pflanze</em>.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    ps: $("ps"), sf: $("sf"), sr: $("sr"), psV: $("psV"), sfV: $("sfV"), srV: $("srV"),
+    oPsrc: $("oPsrc"), oPsnk: $("oPsnk"), oFlux: $("oFlux"), oPart: $("oPart"), oRole: $("oRole"),
+    note: $("note"), sug: $("sug"), srcG: $("srcG"), fruit: $("fruit"), root: $("root")
+  };
+  function br(x, d) { return x.toFixed(d).replace(".", ","); }
+  var st = {};
+
+  function compute() {
+    var ps = +E.ps.value, sf = +E.sf.value, sr = +E.sr.value;
+    var isSource = ps >= 20;
+    // pressão na fonte cresce com carregamento (fotossíntese)
+    var Psrc = isSource ? 0.35 + ps / 100 * 0.85 : 0.30;
+    // pressão em cada dreno cai com a força do dreno
+    var Pf = clamp(Psrc - sf / 100 * 0.8, 0.05, Psrc);
+    var Pr = clamp(Psrc - sr / 100 * 0.8, 0.05, Psrc);
+    // fluxo para cada dreno ∝ (ΔP) · força
+    var Ff = Math.max(0, (Psrc - Pf)) * (sf / 100) * 12;
+    var Fr = Math.max(0, (Psrc - Pr)) * (sr / 100) * 12;
+    var tot = Ff + Fr;
+    var partF = tot > 0.01 ? Ff / tot * 100 : 50;
+    var Psnk = (Pf + Pr) / 2;
+    return { ps: ps, sf: sf, sr: sr, isSource: isSource, Psrc: Psrc, Psnk: Psnk,
+             Ff: Ff, Fr: Fr, tot: tot, partF: partF };
+  }
+
+  function render() {
+    var s = st = compute();
+    E.psV.textContent = s.ps + " %";
+    E.sfV.textContent = s.sf + " %";
+    E.srV.textContent = s.sr + " %";
+    E.oPsrc.textContent = br(s.Psrc, 2) + " MPa";
+    E.oPsnk.textContent = br(s.Psnk, 2) + " MPa";
+    E.oFlux.textContent = br(s.tot, 1) + " (rel.)";
+    E.oPart.textContent = Math.round(s.partF) + " : " + Math.round(100 - s.partF);
+    E.oRole.textContent = s.isSource ? "fonte" : "dreno (importa carbono)";
+    E.oRole.className = "v " + (s.isSource ? "good" : "warn");
+    E.oFlux.className = "v " + (s.tot > 4 ? "good" : "warn");
+
+    E.srcG.setAttribute("opacity", s.isSource ? "1" : "0.4");
+    var fr = 12 + clamp(s.Ff, 0, 12) * 1.6;
+    E.fruit.setAttribute("r", fr.toFixed(1));
+    E.root.setAttribute("stroke-width", (4 + clamp(s.Fr, 0, 12) * 0.5).toFixed(1));
+
+    var note;
+    if (!s.isSource) note = "Fotossíntese muito baixa: o balanço de carbono da folha fica negativo e ela passa a importar açúcar — deixou de ser fonte.";
+    else if (s.sf > s.sr + 25) note = "Fruto com força bem maior: puxa a maior fração do fluxo. Raleio de frutos redistribui açúcar para os remanescentes.";
+    else if (s.sr > s.sf + 25) note = "Raiz dominante: partição pende para baixo — típico de plantas jovens investindo em sistema radicular antes de frutificar.";
+    else if (s.tot < 2) note = "Gradiente de pressão pequeno: pouca fotossíntese ou drenos fracos — translocação baixa.";
+    else note = "Fonte carregando e dois drenos ativos: o fluxo se reparte na proporção da força de cada dreno.";
+    E.note.textContent = note;
+  }
+
+  // animação: açúcar da fonte descendo e se repartindo
+  var sug = [];
+  function tick() {
+    var s = st;
+    var rate = clamp(s.tot / 12, 0, 1);
+    if (s.isSource && Math.random() < 0.04 + rate * 0.28) {
+      var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("cx", 150 + (Math.random() * 8 - 4));
+      c.setAttribute("cy", 56);
+      c.setAttribute("r", 2.4);
+      c.setAttribute("fill", "var(--c-ambar)");
+      E.sug.appendChild(c);
+      sug.push({ el: c, x: 150, y: 56, phase: "down", toFruit: Math.random() < s.partF / 100, v: 0.7 + rate * 1.8 });
+    }
+    for (var i = sug.length - 1; i >= 0; i--) {
+      var d = sug[i];
+      if (d.phase === "down") {
+        d.y += d.v;
+        if (d.toFruit && d.y >= 175) { d.phase = "toFruit"; }
+        else if (d.y >= 300) { d.el.remove(); sug.splice(i, 1); continue; }
+      } else {
+        d.x += d.v * 1.4;
+        d.el.setAttribute("cx", d.x.toFixed(1));
+        if (d.x >= 212) { d.el.remove(); sug.splice(i, 1); continue; }
+      }
+      d.el.setAttribute("cy", d.y.toFixed(1));
+    }
+    requestAnimationFrame(tick);
+  }
+
+  ["ps", "sf", "sr"].forEach(function (k) { E[k].addEventListener("input", render); });
+  render();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

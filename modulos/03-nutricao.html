@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 03 — Nutrição mineral | Fisiologia Vegetal</title>
+<meta name="description" content="Elementos essenciais, absorção pela raiz, mobilidade no floema e diagnóstico de deficiências, com simulador de sintomas foliares.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-terra); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 03 · Funções internas</p>
+      <h1>Nutrição mineral</h1>
+      <p class="lead">Dezessete elementos são essenciais para completar o ciclo de vida de uma planta. Onde um sintoma de deficiência aparece &mdash; folha velha ou folha nova &mdash; entrega quase de imediato qual elemento está faltando.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Aplicar os critérios de essencialidade e classificar os elementos em macro e micronutrientes.</li>
+        <li>Relacionar a <strong>mobilidade no floema</strong> de cada nutriente ao local em que o sintoma de deficiência se manifesta.</li>
+        <li>Diagnosticar deficiências de N, P, K, Mg, Ca, Fe e S a partir do padrão de clorose e necrose.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>Um elemento é <strong>essencial</strong> quando a planta não completa seu ciclo sem ele, quando sua função não pode ser substituída por outro elemento e quando participa diretamente do metabolismo (critérios de Arnon &amp; Stout). Os essenciais dividem-se por quantidade exigida: <strong>macronutrientes</strong> (N, P, K, Ca, Mg, S) e <strong>micronutrientes</strong> (Fe, Mn, Zn, Cu, B, Mo, Cl, Ni).</p>
+    <p>Quando falta um nutriente, a planta o <em>redistribui</em> internamente na medida em que ele é móvel no floema. Nutrientes <strong>móveis</strong> (N, P, K, Mg) são retirados das folhas velhas e enviados aos tecidos jovens em crescimento &mdash; por isso o sintoma aparece primeiro nas <strong>folhas maduras</strong>. Nutrientes <strong>imóveis</strong> (Ca, Fe, B, e em parte S) ficam presos onde foram depositados; o sintoma surge nas <strong>folhas novas</strong> e nos meristemas.</p>
+
+    <h2 id="instrumento">Instrumento &mdash; diagnóstico foliar</h2>
+    <p>Escolha um elemento e ajuste sua disponibilidade no solo. Observe onde o sintoma aparece (folha nova ou velha), o padrão de clorose e o índice de crescimento &mdash; da deficiência, passando pela faixa adequada, até a toxicidade.</p>
+
+    <div class="lab" id="lab-nut">
+      <div class="lab-head">Instrumento · sintoma foliar por elemento e disponibilidade</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 300 320" role="img" aria-label="Planta com folha nova no topo e folha velha na base; os sintomas aparecem conforme o elemento e a disponibilidade.">
+            <line x1="150" y1="40" x2="150" y2="292" stroke="var(--c-verde)" stroke-width="6" stroke-linecap="round"/>
+            <!-- folha nova (topo) -->
+            <g id="gNew">
+              <path id="lNew" d="M150 78 C112 66 84 74 66 44 C104 30 142 40 150 78 Z" fill="var(--c-verde)" stroke="var(--c-verde)" stroke-width="1.5"/>
+              <path id="vNew" d="M150 78 C130 70 104 60 70 44" stroke="var(--c-verde)" stroke-width="2" fill="none" opacity="0"/>
+              <circle id="ringNew" cx="105" cy="55" r="46" fill="none" stroke="var(--yellow)" stroke-width="3" stroke-dasharray="5 5" opacity="0"/>
+            </g>
+            <text x="182" y="52" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">folha nova</text>
+            <!-- folha velha (base) -->
+            <g id="gOld">
+              <path id="lOld" d="M150 250 C104 234 70 244 46 208 C94 190 142 202 150 250 Z" fill="var(--c-verde)" stroke="var(--c-verde)" stroke-width="1.5"/>
+              <path id="vOld" d="M150 250 C124 240 92 226 50 208" stroke="var(--c-verde)" stroke-width="2" fill="none" opacity="0"/>
+              <circle id="ringOld" cx="96" cy="224" r="52" fill="none" stroke="var(--yellow)" stroke-width="3" stroke-dasharray="5 5" opacity="0"/>
+            </g>
+            <text x="182" y="236" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">folha velha</text>
+            <!-- barra de crescimento -->
+            <rect x="250" y="60" width="16" height="220" rx="8" fill="var(--line)"/>
+            <rect id="grow" x="250" y="160" width="16" height="120" rx="8" fill="var(--c-verde)"/>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label>Elemento</label>
+            <div class="seg" id="elem" role="group" aria-label="Elemento mineral">
+              <button data-e="N" aria-pressed="true">N</button>
+              <button data-e="P" aria-pressed="false">P</button>
+              <button data-e="K" aria-pressed="false">K</button>
+              <button data-e="Mg" aria-pressed="false">Mg</button>
+              <button data-e="Ca" aria-pressed="false">Ca</button>
+              <button data-e="Fe" aria-pressed="false">Fe</button>
+              <button data-e="S" aria-pressed="false">S</button>
+            </div>
+            <span class="hint" id="eRole">Nitrogênio — aminoácidos, clorofila, ácidos nucleicos.</span>
+          </div>
+          <div class="control">
+            <label for="avail">Disponibilidade no solo <span class="val" id="availV">20 %</span></label>
+            <input type="range" id="avail" min="0" max="100" step="1" value="20">
+            <span class="hint">Deficiente &lt; 35 % · adequado 35&ndash;85 % · excesso &gt; 90 %</span>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Mobilidade no floema</span><span class="v" id="oMob">móvel</span></div>
+            <div class="row"><span class="k">Sintoma aparece em</span><span class="v" id="oLoc">folhas velhas</span></div>
+            <div class="row"><span class="k">Padrão</span><span class="v" id="oPat">clorose uniforme</span></div>
+            <div class="row"><span class="k">Índice de crescimento</span><span class="v" id="oGrow">42 %</span></div>
+            <div class="row"><span class="k">Diagnóstico</span><span class="v" id="oDx">deficiência</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Com N baixo, a clorose é uniforme e começa pelas folhas velhas — o N móvel é exportado para os tecidos jovens. Suba a disponibilidade e o crescimento se recupera até o platô adequado.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · absorção radicular e o papel da endoderme</summary>
+      <div class="deepen-body">
+        <p>Os íons chegam à superfície da raiz por três processos: <strong>interceptação radicular</strong> (a raiz cresce e encontra o íon), <strong>fluxo de massa</strong> (o íon é arrastado pela água da transpiração — dominante para NO<sub>3</sub><sup>−</sup>, Ca<sup>2+</sup>, Mg<sup>2+</sup>) e <strong>difusão</strong> (o íon migra pelo gradiente criado pela absorção — dominante para P e K).</p>
+        <p>A absorção pela membrana é ativa e seletiva. A H<sup>+</sup>-ATPase da membrana plasmática bombeia H<sup>+</sup> para fora, gerando um gradiente eletroquímico que energiza <strong>simportes</strong> (H<sup>+</sup>/NO<sub>3</sub><sup>−</sup>, H<sup>+</sup>/H<sub>2</sub>PO<sub>4</sub><sup>−</sup>) e permite a entrada de cátions por canais. Cinética dupla: transportadores de <strong>alta afinidade</strong> (HATS) operam em baixa concentração externa; os de <strong>baixa afinidade</strong> (LATS), em concentração alta.</p>
+        <p>A <span class="term" data-term="estria de Caspary">estria de Caspary</span> na endoderme veda o apoplasto e obriga todo íon a cruzar uma membrana antes de alcançar o xilema &mdash; é o ponto de controle que impede a entrada passiva e descontrolada de solutos no cilindro vascular.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>Funções por categoria bioquímica</h3>
+    <p>Os nutrientes atuam em quatro grandes papéis: <strong>constituintes de biomoléculas</strong> (N e S em aminoácidos; P em ácidos nucleicos e fosfolipídios; Mg no anel da clorofila); <strong>armazenamento e transferência de energia</strong> (P em ATP, NADPH); <strong>ativação enzimática e osmorregulação</strong> (K<sup>+</sup> ativa &gt; 50 enzimas e regula o turgor; Ca<sup>2+</sup> como segundo mensageiro); e <strong>reações redox</strong> (Fe, Cu, Mn, Mo em centros catalíticos).</p>
+
+    <h3>Deficiência, faixa adequada e toxicidade</h3>
+    <p>A curva de resposta ao suprimento tem quatro zonas: <strong>deficiência aguda</strong> (crescimento fortemente limitado, sintomas visíveis), <strong>deficiência marginal</strong> (crescimento reduzido sem sintoma claro — &ldquo;fome oculta&rdquo;), <strong>faixa adequada</strong> (platô; aumentar o suprimento não aumenta o crescimento — o excesso absorvido é &ldquo;consumo de luxo&rdquo;) e <strong>toxicidade</strong> (queda do crescimento por excesso, comum com micronutrientes como B, Mn e Cu).</p>
+
+    <h3>Diagnóstico pelo padrão do sintoma</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Elemento</th><th>Mobilidade</th><th>Local</th><th>Sintoma típico</th></tr></thead>
+        <tbody>
+          <tr><td>N</td><td>móvel</td><td>folhas velhas</td><td>clorose uniforme; planta pálida e pequena</td></tr>
+          <tr><td>P</td><td>móvel</td><td>folhas velhas</td><td>verde-escuro a arroxeado; crescimento lento</td></tr>
+          <tr><td>K</td><td>móvel</td><td>folhas velhas</td><td>clorose e necrose nas margens e pontas</td></tr>
+          <tr><td>Mg</td><td>móvel</td><td>folhas velhas</td><td>clorose internerval (nervuras permanecem verdes)</td></tr>
+          <tr><td>Ca</td><td>imóvel</td><td>folhas novas / gemas</td><td>deformação e morte de pontos de crescimento; podridão apical</td></tr>
+          <tr><td>Fe</td><td>imóvel</td><td>folhas novas</td><td>clorose internerval intensa nas folhas jovens</td></tr>
+          <tr><td>S</td><td>pouco móvel</td><td>folhas novas</td><td>clorose uniforme começando pelas folhas jovens</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <span class="lbl">Regra prática</span>
+      <p style="margin:.4em 0 0"><strong>Sintoma nas folhas velhas</strong> → nutriente móvel (N, P, K, Mg). <strong>Sintoma nas folhas novas</strong> → nutriente imóvel (Ca, Fe, B, S). O padrão (uniforme × internerval × marginal) refina o diagnóstico.</p>
+    </div>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Uma planta apresenta clorose internerval intensa <em>apenas nas folhas jovens do ápice</em>, com as folhas velhas ainda verdes. Qual deficiência é mais provável?</p>
+        <div class="opts">
+          <button data-correct="false">Nitrogênio</button>
+          <button data-correct="false">Magnésio</button>
+          <button data-correct="true">Ferro</button>
+        </div>
+        <p class="fb">Fe é imóvel no floema: o sintoma aparece primeiro nas folhas novas. A clorose internerval de Mg seria nas folhas velhas; a de N seria uniforme e também nas velhas.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. Por que o sintoma de deficiência de nitrogênio começa pelas folhas mais velhas?</p>
+        <div class="opts">
+          <button data-correct="true">O N é móvel: a planta o remobiliza das folhas maduras para os tecidos jovens em crescimento.</button>
+          <button data-correct="false">As folhas velhas transpiram mais e perdem N pelo xilema.</button>
+          <button data-correct="false">As folhas novas têm reservas próprias de N que as folhas velhas não têm.</button>
+        </div>
+        <p class="fb">Sob deficiência, compostos nitrogenados (proteínas, clorofila) das folhas velhas são degradados e o N é exportado pelo floema para os drenos prioritários — as folhas jovens.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Aumentar o suprimento de um nutriente muito além da faixa adequada geralmente:</p>
+        <div class="opts">
+          <button data-correct="false">continua aumentando o crescimento de forma proporcional.</button>
+          <button data-correct="true">não aumenta o crescimento (consumo de luxo) e, em excesso, pode reduzi-lo por toxicidade.</button>
+          <button data-correct="false">converte o macronutriente em micronutriente.</button>
+        </div>
+        <p class="fb">Acima do platô, o nutriente extra é absorvido sem ganho de biomassa; concentrações muito altas — sobretudo de micronutrientes — causam toxicidade e queda do crescimento.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="02-estomatos.html"><span>Módulo anterior</span><strong>02 · Estômatos e transpiração</strong></a>
+      <a class="next" href="04-floema.html"><span>Próximo módulo</span><strong>04 · Transporte no floema</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 5–6. · Marschner, <em>Mineral Nutrition of Higher Plants</em>, 3ª ed.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var DATA = {
+    N:  { name: "Nitrogênio", mob: "móvel",       loc: "folhas velhas",      pat: "clorose uniforme",      role: "aminoácidos, clorofila, ácidos nucleicos" },
+    P:  { name: "Fósforo",    mob: "móvel",       loc: "folhas velhas",      pat: "verde-escuro / arroxeado", role: "ATP, ácidos nucleicos, fosfolipídios" },
+    K:  { name: "Potássio",   mob: "móvel",       loc: "folhas velhas",      pat: "necrose marginal",      role: "osmorregulação, ativação enzimática, estômatos" },
+    Mg: { name: "Magnésio",   mob: "móvel",       loc: "folhas velhas",      pat: "clorose internerval",   role: "átomo central da clorofila, cofator enzimático" },
+    Ca: { name: "Cálcio",     mob: "imóvel",      loc: "folhas novas / gemas", pat: "deformação e morte apical", role: "parede celular, sinalização, membranas" },
+    Fe: { name: "Ferro",      mob: "imóvel",      loc: "folhas novas",       pat: "clorose internerval",   role: "grupos heme, centros Fe-S, síntese de clorofila" },
+    S:  { name: "Enxofre",    mob: "pouco móvel", loc: "folhas novas",       pat: "clorose uniforme",      role: "aminoácidos sulfurados (Cys, Met), coenzimas" }
+  };
+  var E = {
+    avail: $("avail"), availV: $("availV"), eRole: $("eRole"),
+    oMob: $("oMob"), oLoc: $("oLoc"), oPat: $("oPat"), oGrow: $("oGrow"), oDx: $("oDx"), note: $("note"),
+    lNew: $("lNew"), vNew: $("vNew"), ringNew: $("ringNew"), lOld: $("lOld"), vOld: $("vOld"), ringOld: $("ringOld"),
+    grow: $("grow")
+  };
+  var btns = document.querySelectorAll("#elem button");
+  var CUR = "N";
+
+  function growthIndex(a) {
+    // deficiência (0-35) sobe rápido; platô (35-85); toxicidade decai (>90)
+    if (a < 35) return 20 + a * (78 - 20) / 35;
+    if (a <= 85) return 78 + (a - 35) * (100 - 78) / 50;
+    if (a <= 92) return 100;
+    return clamp(100 - (a - 92) * 3.2, 45, 100);
+  }
+
+  function paintLeaf(g, affected, def, pat) {
+    var lamina = g.lamina, vein = g.vein, ring = g.ring;
+    if (!affected || !def) {
+      lamina.setAttribute("fill", "var(--c-verde)");
+      vein.setAttribute("opacity", "0");
+      lamina.setAttribute("stroke", "var(--c-verde)");
+      ring.setAttribute("opacity", "0");
+      return;
+    }
+    ring.setAttribute("opacity", "1");
+    if (pat === "clorose internerval") {
+      lamina.setAttribute("fill", "#E8D24B");
+      vein.setAttribute("opacity", "1");
+      lamina.setAttribute("stroke", "var(--c-verde)");
+    } else if (pat === "necrose marginal") {
+      lamina.setAttribute("fill", "#9DBE72");
+      vein.setAttribute("opacity", "0");
+      lamina.setAttribute("stroke", "#6B3B1E");
+    } else if (pat === "verde-escuro / arroxeado") {
+      lamina.setAttribute("fill", "#5B6E86");
+      vein.setAttribute("opacity", "0");
+      lamina.setAttribute("stroke", "#3A2A55");
+    } else if (pat === "deformação e morte apical") {
+      lamina.setAttribute("fill", "#B9A66B");
+      vein.setAttribute("opacity", "0");
+      lamina.setAttribute("stroke", "#5B4B1E");
+    } else { // clorose uniforme
+      lamina.setAttribute("fill", "#E7DE7C");
+      vein.setAttribute("opacity", "0");
+      lamina.setAttribute("stroke", "#C9B94A");
+    }
+  }
+
+  var gNew = { lamina: E.lNew, vein: E.vNew, ring: E.ringNew };
+  var gOld = { lamina: E.lOld, vein: E.vOld, ring: E.ringOld };
+
+  function render() {
+    var d = DATA[CUR];
+    var a = +E.avail.value;
+    E.availV.textContent = a + " %";
+    E.eRole.textContent = d.name + " — " + d.role + ".";
+
+    var gi = growthIndex(a);
+    var def = a < 35;
+    var tox = a > 92;
+    var dx = def ? "deficiência" : tox ? "toxicidade / excesso" : "adequado";
+
+    E.oMob.textContent = d.mob;
+    E.oLoc.textContent = def ? d.loc : "—";
+    E.oPat.textContent = def ? d.pat : "—";
+    E.oGrow.textContent = Math.round(gi) + " %";
+    E.oDx.textContent = dx;
+    E.oGrow.className = "v " + (gi >= 90 ? "good" : "warn");
+    E.oDx.className = "v " + (dx === "adequado" ? "good" : "warn");
+
+    var affectsOld = def && (d.mob === "móvel");
+    var affectsNew = def && (d.mob !== "móvel");
+    paintLeaf(gNew, affectsNew, def, d.pat);
+    paintLeaf(gOld, affectsOld, def, d.pat);
+
+    var h = clamp(gi / 100 * 220, 8, 220);
+    E.grow.setAttribute("y", (60 + (220 - h)).toFixed(1));
+    E.grow.setAttribute("height", h.toFixed(1));
+    E.grow.setAttribute("fill", gi >= 90 ? "var(--c-verde)" : "var(--c-ambar)");
+
+    var note;
+    if (tox) note = d.name + " em excesso: consumo de luxo e, acima de ~92 %, queda do crescimento por toxicidade.";
+    else if (!def) note = d.name + " na faixa adequada: crescimento no platô, sem sintomas foliares.";
+    else if (d.mob === "móvel") note = d.name + " baixo: sintoma (" + d.pat + ") nas folhas velhas — o elemento móvel é remobilizado para os tecidos jovens.";
+    else note = d.name + " baixo: sintoma (" + d.pat + ") nas folhas novas — o elemento imóvel não é redistribuído a partir das folhas maduras.";
+    E.note.textContent = note;
+  }
+
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      btns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      CUR = b.dataset.e;
+      render();
+    });
+  });
+  E.avail.addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>

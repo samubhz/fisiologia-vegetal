@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 08 — Luz e fotomorfogênese | Fisiologia Vegetal</title>
+<meta name="description" content="Fitocromo Pr/Pfr, criptocromos, fotoperiodismo e o controle da floração, com simulador de relógio de fotoperíodo e quebra de noite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>:root { --module: var(--c-violeta); }</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="../index.html#modulos">Módulos</a>
+      <a href="../glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Módulo 08 · Percepção e resposta</p>
+      <h1>Luz e fotomorfogênese</h1>
+      <p class="lead">A luz não é só energia para a fotossíntese &mdash; é informação. Fotorreceptores dizem à planta se está no claro ou no escuro, se há vizinhos sombreando e em que época do ano ela se encontra.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose">
+
+    <div class="objectives">
+      <h2>Neste módulo você vai conseguir</h2>
+      <ul>
+        <li>Descrever a fotoconversão do <span class="term" data-term="fitocromo">fitocromo</span> entre Pr e Pfr e o que significa uma razão Pfr/Ptotal alta ou baixa.</li>
+        <li>Explicar o <span class="term" data-term="fotoperiodismo">fotoperiodismo</span> como medida do <strong>comprimento da noite</strong>, não do dia.</li>
+        <li>Prever o efeito de uma <strong>quebra de noite</strong> com luz vermelha sobre a floração de plantas de dia curto e de dia longo.</li>
+      </ul>
+    </div>
+
+    <h2 id="ideia">A ideia central</h2>
+    <p>O fitocromo existe em duas formas interconversíveis: <strong>Pr</strong> absorve luz vermelha (~660&nbsp;nm) e, ao fazê-lo, converte-se em <strong>Pfr</strong>; <strong>Pfr</strong> absorve vermelho-distante (~730&nbsp;nm) e volta a Pr. Pfr é a forma fisiologicamente ativa. Sob luz solar (rica em vermelho), predomina Pfr. No escuro, Pfr decai lentamente de volta a Pr (reversão no escuro) e é degradado. Assim, a fração de Pfr ao amanhecer é um relógio químico que registra <em>quanto tempo</em> a planta ficou no escuro.</p>
+    <p>É por isso que o fotoperiodismo mede a <strong>noite</strong>. Uma planta de dia curto floresce quando a noite ininterrupta é <em>longa</em> o suficiente; um flash de luz no meio da noite (quebra de noite) reconverte Pr em Pfr, &ldquo;zera&rdquo; a contagem e impede a floração &mdash; mesmo que o total de horas de escuro seja o mesmo.</p>
+
+    <h2 id="instrumento">Instrumento &mdash; relógio de fotoperíodo</h2>
+    <p>Ajuste o comprimento da noite, escolha o tipo de planta e experimente uma quebra de noite. Observe a noite ininterrupta mais longa, a fração de Pfr ao amanhecer e se a planta floresce.</p>
+
+    <div class="lab" id="lab-luz">
+      <div class="lab-head">Instrumento · comprimento da noite, quebra de noite e floração</div>
+      <div class="lab-body">
+        <div class="lab-stage">
+          <svg viewBox="0 0 320 300" role="img" aria-label="Barra de 24 horas com parte clara (dia) e escura (noite); planta floresce ou não conforme o regime.">
+            <text x="20" y="30" class="barlbl" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">CICLO DE 24 h</text>
+            <rect x="20" y="40" width="280" height="34" rx="6" fill="var(--yellow)"/>
+            <rect id="nightRect" x="180" y="40" width="120" height="34" rx="0" fill="#1B2A55"/>
+            <line id="nb" x1="240" y1="36" x2="240" y2="78" stroke="#E5484D" stroke-width="4" opacity="0"/>
+            <text x="20" y="92" class="barlbl" font-family="var(--mono)" font-size="9" fill="var(--ink-faint)">0 h</text>
+            <text x="286" y="92" class="barlbl" font-family="var(--mono)" font-size="9" fill="var(--ink-faint)">24 h</text>
+
+            <!-- curva de Pfr -->
+            <text x="20" y="128" class="barlbl" font-family="var(--mono)" font-size="10" fill="var(--ink-soft)">Pfr / P total durante a noite</text>
+            <line x1="20" y1="220" x2="300" y2="220" stroke="var(--line-firm)"/>
+            <line x1="20" y1="140" x2="20" y2="220" stroke="var(--line-firm)"/>
+            <path id="pfrCurve" d="" fill="none" stroke="var(--c-violeta)" stroke-width="2.5"/>
+            <line id="critLine" x1="20" y1="185" x2="300" y2="185" stroke="var(--c-ambar)" stroke-dasharray="4 3" stroke-width="1.5"/>
+            <text x="304" y="188" class="barlbl" font-family="var(--mono)" font-size="8" fill="var(--c-ambar)">limiar</text>
+
+            <!-- planta -->
+            <line x1="160" y1="240" x2="160" y2="285" stroke="var(--c-verde)" stroke-width="5" stroke-linecap="round"/>
+            <path d="M160 262 q -20 -10 -30 -2 q 12 12 30 6 Z" fill="var(--c-verde)"/>
+            <path d="M160 254 q 20 -10 30 -2 q -12 12 -30 6 Z" fill="var(--c-verde)"/>
+            <g id="flower" opacity="0">
+              <circle cx="160" cy="238" r="7" fill="var(--yellow)"/>
+              <circle cx="150" cy="240" r="5" fill="var(--c-rosa)"/><circle cx="170" cy="240" r="5" fill="var(--c-rosa)"/>
+              <circle cx="160" cy="230" r="5" fill="var(--c-rosa)"/><circle cx="155" cy="246" r="5" fill="var(--c-rosa)"/><circle cx="165" cy="246" r="5" fill="var(--c-rosa)"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="lab-controls">
+          <div class="control">
+            <label for="night">Comprimento da noite <span class="val" id="nightV">10 h</span></label>
+            <input type="range" id="night" min="4" max="20" step="0.5" value="10">
+            <span class="hint">O dia é 24 h − noite. Noite crítica deste modelo: 11 h</span>
+          </div>
+          <div class="control">
+            <label>Tipo de planta</label>
+            <div class="seg" id="ptype" role="group" aria-label="Tipo fotoperiódico">
+              <button data-t="curto" aria-pressed="true">Dia curto</button>
+              <button data-t="longo" aria-pressed="false">Dia longo</button>
+              <button data-t="neutra" aria-pressed="false">Neutra</button>
+            </div>
+            <span class="hint" id="ptHint">Dia curto (noite longa): crisântemo, soja, morango, café.</span>
+          </div>
+          <div class="control">
+            <label>Quebra de noite (flash de vermelho)</label>
+            <div class="seg" id="nbtoggle" role="group" aria-label="Quebra de noite">
+              <button data-n="0" aria-pressed="true">Sem</button>
+              <button data-n="1" aria-pressed="false">No meio da noite</button>
+            </div>
+          </div>
+
+          <div class="readout" aria-live="polite">
+            <div class="row"><span class="k">Noite total</span><span class="v" id="oNight">10,0 h</span></div>
+            <div class="row"><span class="k">Noite ininterrupta mais longa</span><span class="v" id="oDark">10,0 h</span></div>
+            <div class="row"><span class="k">Pfr ao amanhecer</span><span class="v" id="oPfr">27 %</span></div>
+            <div class="row"><span class="k">Sinal para florescer</span><span class="v" id="oSig">não atingido</span></div>
+            <div class="row"><span class="k">Floração</span><span class="v" id="oFlo">vegetativa</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lab-note"><b>Leitura:</b> <span id="note">Numa planta de dia curto, a noite precisa passar de 11 h ininterruptas. Ative a quebra de noite: as duas metades ficam curtas demais e a floração é bloqueada, mesmo com o mesmo total de escuro.</span></div>
+    </div>
+
+    <details class="deepen">
+      <summary>Aprofunde · fotorreceptores e a base molecular do fotoperiodismo</summary>
+      <div class="deepen-body">
+        <p><strong>Fotorreceptores:</strong> os <strong>fitocromos</strong> (phyA&ndash;E) percebem vermelho/vermelho-distante e a razão V:VD (detecção de sombreamento por vizinhos &mdash; a <em>síndrome de evitação de sombra</em>: estiolamento, dominância apical reforçada, floração antecipada). Os <strong>criptocromos</strong> e as <strong>fototropinas</strong> percebem azul/UV-A (desestiolamento, movimento estomático, fototropismo, ajuste do relógio circadiano). O <strong>UVR8</strong> percebe UV-B.</p>
+        <p><strong>Coincidência externa:</strong> o relógio circadiano faz oscilar a expressão do gene <em>CONSTANS</em> (<em>CO</em>). A proteína CO só se acumula se houver luz no momento em que seu mRNA está alto &mdash; o que ocorre no fim da tarde apenas em dias longos. CO então induz o <em>FLOWERING LOCUS T</em> (<em>FT</em>), cujo produto (o &ldquo;florígeno&rdquo;) viaja da folha pelo floema até o meristema apical e dispara a transição floral. Em plantas de dia curto (ex.: arroz), o ortólogo Hd1 <em>reprime</em> FT sob dias longos.</p>
+        <p><strong>Modelo do instrumento:</strong> a fração de Pfr decai no escuro como Pfr = 100·e<sup>−t/6,5</sup>. Uma quebra de noite reconverte Pr→Pfr instantaneamente e reinicia a contagem. O &ldquo;sinal&rdquo; considera a maior noite ininterrupta versus a noite crítica (11 h): planta de dia curto floresce se ≥ crítica; de dia longo, se ≤ crítica; neutra sempre.</p>
+      </div>
+    </details>
+
+    <h2 id="mecanismo">Mecanismo</h2>
+
+    <h3>O fitocromo como interruptor reversível</h3>
+    <p>Sintetizado como Pr no escuro, o fitocromo migra ao núcleo na forma Pfr e regula a transcrição, promovendo o desestiolamento: inibição do alongamento do hipocótilo, abertura do gancho apical, expansão dos cotilédones, síntese de clorofila. A resposta é reversível pela ordem dos pulsos: um flash de vermelho ativa; um flash imediato de vermelho-distante cancela &mdash; a assinatura clássica da ação do fitocromo.</p>
+
+    <h3>Fotoperiodismo: medir a noite</h3>
+    <p>Plantas classificam-se por como o fotoperíodo controla sua floração: <strong>dia curto</strong> (florescem quando a noite excede um valor crítico &mdash; plantas de outono/inverno), <strong>dia longo</strong> (florescem quando a noite é menor que o crítico &mdash; plantas de primavera/verão) e <strong>neutras</strong> (independem do fotoperíodo). O experimento decisivo: interromper a noite com um breve pulso de luz inverte a resposta, enquanto interromper o dia com escuro não faz efeito &mdash; logo, o que é medido é a duração da escuridão contínua.</p>
+
+    <h3>A folha percebe, o meristema responde</h3>
+    <p>A percepção do fotoperíodo ocorre nas <strong>folhas</strong>. Um sinal transmissível &mdash; a proteína FT, o florígeno &mdash; é produzido na folha induzida e transportado pelo floema até o meristema apical, onde reprograma o desenvolvimento para a formação de flores. Basta uma folha exposta ao fotoperíodo indutivo para induzir a planta inteira.</p>
+
+    <div class="quiz" aria-label="Verifique seu entendimento">
+      <h3>Verifique</h3>
+
+      <div class="q">
+        <p class="stem">1. Uma planta de dia curto é mantida em noites de 14 h. Aplicando um flash de luz vermelha no meio de cada noite, o que se espera?</p>
+        <div class="opts">
+          <button data-correct="true">A floração é inibida: nenhuma metade da noite atinge o comprimento crítico.</button>
+          <button data-correct="false">A floração é acelerada, pois o total de escuro continua alto.</button>
+          <button data-correct="false">Nada muda, porque só a luz azul afeta o fotoperiodismo.</button>
+        </div>
+        <p class="fb">A quebra de noite reconverte Pr→Pfr e reinicia a medição. Duas noites de 7 h estão abaixo do crítico (11 h), então a planta de dia curto não floresce.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. O efeito de um flash de luz vermelha durante a noite pode ser cancelado por:</p>
+        <div class="opts">
+          <button data-correct="true">um flash imediato de luz vermelho-distante logo depois.</button>
+          <button data-correct="false">um flash de luz azul.</button>
+          <button data-correct="false">baixar a temperatura por alguns minutos.</button>
+        </div>
+        <p class="fb">Vermelho converte Pr→Pfr; vermelho-distante reverte Pfr→Pr. Se o VD segue imediatamente o V, o sistema volta ao estado anterior e a quebra de noite não tem efeito — reversibilidade V/VD.</p>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. Numa planta de dia longo em ambiente de dias curtos, uma quebra de noite tende a:</p>
+        <div class="opts">
+          <button data-correct="true">promover a floração, porque encurta a noite ininterrupta abaixo do crítico.</button>
+          <button data-correct="false">inibir a floração, como faz nas plantas de dia curto.</button>
+          <button data-correct="false">não ter efeito em plantas de dia longo.</button>
+        </div>
+        <p class="fb">Plantas de dia longo florescem quando a noite é <em>curta</em>. Partir a noite em duas com um flash simula noites curtas e favorece a floração — efeito oposto ao das plantas de dia curto.</p>
+      </div>
+    </div>
+
+    <div class="pager">
+      <a class="prev" href="07-hormonios.html"><span>Módulo anterior</span><strong>07 · Hormônios vegetais</strong></a>
+      <a class="next" href="09-tropismos.html"><span>Próximo módulo</span><strong>09 · Movimentos e tropismos</strong></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs">
+      <b>Referências</b>
+      Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed., cap. 16–20. · Garner &amp; Allard (1920), estudos clássicos de fotoperiodismo.
+    </div>
+    <div><a href="../index.html">Início</a> · <a href="../glossario.html">Glossário</a></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = FV.clamp;
+  var E = {
+    night: $("night"), nightV: $("nightV"), ptHint: $("ptHint"),
+    oNight: $("oNight"), oDark: $("oDark"), oPfr: $("oPfr"), oSig: $("oSig"), oFlo: $("oFlo"), note: $("note"),
+    nightRect: $("nightRect"), nb: $("nb"), pfrCurve: $("pfrCurve"), flower: $("flower")
+  };
+  var ptBtns = document.querySelectorAll("#ptype button");
+  var nbBtns = document.querySelectorAll("#nbtoggle button");
+  var TYPE = "curto", NB = 0;
+  var CRIT = 11;              // noite crítica (h)
+  var TAU = 6.5;              // constante de decaimento do Pfr no escuro (h)
+  function br(x, d) { return x.toFixed(d).replace(".", ","); }
+
+  function render() {
+    var night = +E.night.value;
+    var day = 24 - night;
+    E.nightV.textContent = br(night, 1) + " h";
+
+    var longestDark = NB ? night / 2 : night;
+    // Pfr ao amanhecer: decai desde o anoitecer; se houver quebra, reinicia
+    var pfrDawn = 100 * Math.exp(-longestDark / TAU);
+
+    var flowers, sig;
+    if (TYPE === "neutra") { flowers = true; sig = "independe do fotoperíodo"; }
+    else if (TYPE === "curto") { flowers = longestDark >= CRIT; sig = flowers ? "noite longa o suficiente" : "noite ininterrupta curta demais"; }
+    else { flowers = longestDark <= CRIT; sig = flowers ? "noite suficientemente curta" : "noite longa demais"; }
+
+    E.oNight.textContent = br(night, 1) + " h";
+    E.oDark.textContent = br(longestDark, 1) + " h";
+    E.oPfr.textContent = Math.round(pfrDawn) + " %";
+    E.oSig.textContent = sig;
+    E.oFlo.textContent = flowers ? "floração induzida" : "vegetativa";
+    E.oFlo.className = "v " + (flowers ? "good" : "warn");
+    E.oSig.className = "v " + (flowers ? "good" : "warn");
+
+    // barra 24h: 280 px = 24 h; noite encostada à direita
+    var pxPerH = 280 / 24;
+    var nightW = night * pxPerH;
+    E.nightRect.setAttribute("x", (300 - nightW).toFixed(1));
+    E.nightRect.setAttribute("width", nightW.toFixed(1));
+    if (NB) {
+      E.nb.setAttribute("opacity", "1");
+      var mid = 300 - nightW / 2;
+      E.nb.setAttribute("x1", mid.toFixed(1)); E.nb.setAttribute("x2", mid.toFixed(1));
+    } else E.nb.setAttribute("opacity", "0");
+
+    // curva de Pfr (x: 0..longestDark mapeado em 20..300; y: 140 (100%) .. 220 (0%))
+    var d = "", N = 40;
+    for (var i = 0; i <= N; i++) {
+      var t = longestDark * i / N;
+      var pfr = 100 * Math.exp(-t / TAU);
+      var x = 20 + (t / 20) * 280;
+      var y = 220 - pfr / 100 * 80;
+      d += (i === 0 ? "M" : "L") + clamp(x, 20, 300).toFixed(1) + " " + y.toFixed(1) + " ";
+    }
+    E.pfrCurve.setAttribute("d", d);
+
+    E.flower.setAttribute("opacity", flowers ? "1" : "0");
+
+    var note;
+    if (TYPE === "neutra") note = "Planta neutra: floresce por idade/tamanho, não pelo fotoperíodo. A quebra de noite não altera o resultado.";
+    else if (NB && TYPE === "curto") note = "Quebra de noite numa planta de dia curto: as metades (" + br(longestDark, 1) + " h) ficam abaixo da noite crítica — floração bloqueada mesmo com " + br(night, 1) + " h totais de escuro.";
+    else if (NB && TYPE === "longo") note = "Quebra de noite numa planta de dia longo: simula noites curtas e favorece a floração.";
+    else if (TYPE === "curto" && flowers) note = "Dia curto: a noite ininterrupta (" + br(longestDark, 1) + " h) passou de 11 h. Pfr caiu a " + Math.round(pfrDawn) + "% — sinal de noite longa, floração induzida.";
+    else if (TYPE === "curto") note = "Dia curto: noite de apenas " + br(longestDark, 1) + " h. Pfr ainda alto ao amanhecer — a planta 'lê' noite curta e continua vegetativa.";
+    else if (flowers) note = "Dia longo: noite curta (" + br(longestDark, 1) + " h), Pfr alto ao amanhecer — floração induzida.";
+    else note = "Dia longo: noite de " + br(longestDark, 1) + " h, acima do crítico — a planta permanece vegetativa.";
+    E.note.textContent = note;
+  }
+
+  ptBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      ptBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); TYPE = b.dataset.t;
+      E.ptHint.textContent = TYPE === "curto" ? "Dia curto (noite longa): crisântemo, soja, morango, café."
+        : TYPE === "longo" ? "Dia longo (noite curta): trigo, cevada, espinafre, alface."
+        : "Neutra: tomate, milho, feijão, pepino.";
+      render();
+    });
+  });
+  nbBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      nbBtns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); NB = +b.dataset.n; render();
+    });
+  });
+  E.night.addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>
