@@ -37,8 +37,11 @@
     /* ---------- Glossário: tooltips ---------- */
     initGlossary();
 
-    /* ---------- Quiz ---------- */
+    /* ---------- Quiz clássico inline (se existir) ---------- */
     document.querySelectorAll(".quiz .q").forEach(initQuestion);
+
+    /* ---------- Banco de exercícios (sorteia questões) ---------- */
+    document.querySelectorAll("section.exercicios[data-modulo]").forEach(initExercicios);
 
     /* ---------- Indicações de livros (Amazon) ---------- */
     initLivros();
@@ -159,6 +162,109 @@
     });
   }
 
+  /* ---------- Banco de exercícios sorteados ---------- */
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function initExercicios(sec) {
+    var slug = sec.getAttribute("data-modulo");
+    var bank = (window.EXERCICIOS && window.EXERCICIOS[slug]) || [];
+    var cfg = window.EXERCICIOS_CONFIG || {};
+    var N = Math.min(cfg.sortear || 6, bank.length);
+    if (!bank.length) { sec.hidden = true; return; }
+
+    function build() {
+      sec.innerHTML = "";
+      var head = document.createElement("div");
+      head.className = "quiz";
+      head.innerHTML = '<h3>Exercícios</h3>' +
+        '<p class="ex-intro">' + N + " questões sorteadas de um banco de " + bank.length +
+        '. Responda todas para ver o resultado — depois é só <em>Refazer</em> para um novo sorteio.</p>' +
+        '<div class="ex-body"></div>' +
+        '<div class="ex-result" hidden></div>';
+      sec.appendChild(head);
+      var body = head.querySelector(".ex-body");
+      var chosen = shuffle(bank).slice(0, N);
+      var answered = 0, correct = 0;
+
+      chosen.forEach(function (item, idx) {
+        var q = document.createElement("div");
+        q.className = "q";
+        var opts = item.t === "vf" ? item.o : shuffle(item.o);
+        var html = '<p class="stem"><span class="ex-n">' + (idx + 1) + "</span> " + item.q + "</p><div class='opts'>";
+        opts.forEach(function (o) {
+          html += '<button type="button" data-ok="' + (o[1] ? "1" : "0") + '">' + o[0] + "</button>";
+        });
+        html += "</div><p class='fb'>" + (item.fb || "") + "</p>";
+        q.innerHTML = html;
+        body.appendChild(q);
+
+        var btns = q.querySelectorAll(".opts button");
+        var locked = false;
+        btns.forEach(function (b) {
+          b.addEventListener("click", function () {
+            if (locked) return;
+            locked = true;
+            var ok = b.dataset.ok === "1";
+            b.classList.add(ok ? "correct" : "wrong");
+            if (!ok) btns.forEach(function (x) { if (x.dataset.ok === "1") x.classList.add("correct"); });
+            q.querySelector(".fb").classList.add("show");
+            answered++; if (ok) correct++;
+            if (answered === chosen.length) finish(head, correct, chosen.length);
+          });
+        });
+      });
+    }
+
+    function finish(head, correct, total) {
+      var box = head.querySelector(".ex-result");
+      var pct = correct / total;
+      var res = window.FVP ? window.FVP.recordModule(slug, correct, total) : { done: pct >= 0.7, best: correct };
+      var faixa = pct === 1 ? "Perfeito!" : pct >= 0.7 ? "Muito bem!" : pct >= 0.5 ? "Quase lá." : "Vale revisar o módulo.";
+      var html = '<div class="ex-score"><span class="ex-score-big">' + correct + "/" + total + "</span>" +
+        "<span>" + faixa + (res.done ? " Módulo concluído ✔" : "") +
+        (res.best > correct ? " · seu recorde: " + res.best + "/" + total : "") + "</span></div>";
+
+      // card de livro ligado ao desempenho
+      var livro = pickLivro(slug);
+      if (livro) {
+        var cap = (window.EXERCICIOS_CAP && window.EXERCICIOS_CAP[slug]) || "";
+        var lcfg = window.LIVROS_CONFIG || { amazonTag: "", marketplace: "https://www.amazon.com.br" };
+        var url = bookUrl(livro, lcfg);
+        var frase = pct >= 0.7
+          ? "Mandou bem. Para fixar de vez, veja " + (cap ? cap + " de " : "") + "<strong>" + esc(livro.titulo) + "</strong>."
+          : "Antes de refazer, vale ler " + (cap ? cap + " de " : "") + "<strong>" + esc(livro.titulo) + "</strong>.";
+        html += '<div class="ex-book"><p>' + frase + '</p>' +
+          '<a class="btn" href="' + esc(url) + '" target="_blank" rel="sponsored noopener noreferrer">Ver na Amazon <span class="ar">→</span></a>' +
+          '<span class="ex-book-disc">' + esc(lcfg.disclosure || "") + '</span></div>';
+      }
+
+      html += '<div class="ex-actions"><button type="button" class="btn btn--ghost ex-redo">Refazer com novas questões</button>' +
+        ' <a class="btn btn--ghost" href="' + (pageSlug() === "inicio" ? "" : "../") + 'progresso.html">Meu progresso</a></div>';
+
+      box.innerHTML = html;
+      box.hidden = false;
+      box.querySelector(".ex-redo").addEventListener("click", build);
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function pickLivro(slug) {
+      if (!window.LIVROS) return null;
+      var byModule = window.LIVROS.filter(function (b) { return (b.paginas || []).indexOf(slug) >= 0; });
+      if (byModule.length) return byModule[0];
+      var geral = window.LIVROS.filter(function (b) { var p = b.paginas || []; return p.indexOf("geral") >= 0 || p.indexOf("todas") >= 0; });
+      return geral[0] || null;
+    }
+
+    build();
+  }
+
   /* ---------- Indicações de livros ---------- */
   function pageSlug() {
     var f = (location.pathname.split("/").pop() || "index.html").toLowerCase();
@@ -236,7 +342,7 @@
     }
 
     /* Demais páginas: bloco "Livros recomendados" antes do rodapé / paginação */
-    if (slug === "livros" || slug === "glossario") return;
+    if (slug === "livros" || slug === "glossario" || slug === "progresso") return;
     var books = booksForSlug(slug);
     if (!books.length) return;
 
