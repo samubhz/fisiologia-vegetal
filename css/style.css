@@ -473,7 +473,97 @@ tbody tr:hover { background: var(--panel-2); }
 .admin-out { width: 100%; min-height: 240px; font-family: var(--mono); font-size: .8rem; padding: 14px; border-radius: var(--radius); border: 1.5px solid var(--line-firm); background: var(--panel-2); color: var(--ink); white-space: pre; overflow: auto; }
 @media (max-width: 640px) { .admin-grid { grid-template-columns: 1fr; } }
 
+/* ---------- Banco de exercícios ---------- */
+.exercicios { display: block; }
+.ex-intro { font-size: .9rem; color: var(--ink-soft); margin: -.2em 0 1.2em; }
+.ex-n {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; flex: none;
+  border-radius: 50%; background: var(--green-bright); color: #fff;
+  font-family: var(--mono); font-size: .78rem; margin-right: 4px; vertical-align: 1px;
+}
+.ex-result { margin-top: 22px; border-top: 1px dashed var(--line-firm); padding-top: 20px; }
+.ex-score { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ex-score-big {
+  font-family: var(--display); font-weight: 700; font-size: 1.8rem; color: var(--green);
+  background: var(--lime-soft); border-radius: var(--radius); padding: 4px 16px;
+}
+.ex-book {
+  margin-top: 18px; background: var(--lime-soft); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 18px 20px;
+}
+.ex-book p { margin: 0 0 12px; }
+.ex-book .btn { padding: 11px 22px; font-size: .92rem; }
+.ex-book-disc { display: block; margin-top: 10px; font-size: .76rem; color: var(--ink-faint); }
+.ex-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.ex-actions .btn { padding: 10px 20px; font-size: .9rem; }
+
+/* ---------- Pílula de progresso no cabeçalho ---------- */
+.progress-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 11px 5px 8px; border-radius: var(--pill);
+  background: var(--on-dark-line); text-decoration: none; flex: none;
+}
+.progress-pill:hover { background: color-mix(in srgb, var(--lime) 30%, transparent); }
+.progress-pill .pp-leaf { font-size: .9rem; line-height: 1; }
+.progress-pill .pp-bars { display: inline-flex; gap: 2px; }
+.progress-pill .pp-bars i { width: 4px; height: 12px; border-radius: 1px; background: var(--on-dark-line); display: block; }
+.progress-pill .pp-bars i.on { background: var(--lime); }
+.progress-pill .pp-num { font-family: var(--mono); font-size: .76rem; color: var(--on-dark); }
+@media (max-width: 620px) { .progress-pill .pp-bars { display: none; } }
+
+/* ---------- Toast de conquista ---------- */
+.fv-toast {
+  position: fixed; right: 18px; bottom: 18px; z-index: 90; max-width: 320px;
+  display: flex; align-items: center; gap: 12px;
+  background: var(--panel); border: 1px solid var(--line-firm); border-left: 4px solid var(--yellow);
+  border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow-lg);
+  transform: translateY(140%); opacity: 0; transition: transform .35s ease, opacity .35s ease;
+}
+.fv-toast.show { transform: translateY(0); opacity: 1; }
+.fv-toast-ic { font-size: 1.6rem; line-height: 1; }
+.fv-toast b { font-family: var(--display); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); }
+
+/* ---------- Página Meu Progresso ---------- */
+.prog-top { display: flex; align-items: center; gap: 26px; margin: 30px 0 10px; flex-wrap: wrap; }
+.prog-ring {
+  width: 92px; height: 92px; border-radius: 50%; flex: none; position: relative;
+  display: grid; place-items: center; background: var(--line);
+}
+.prog-ring::before { content: ""; position: absolute; width: 66px; height: 66px; border-radius: 50%; background: var(--bg); }
+.prog-ring span { position: relative; font-family: var(--display); font-weight: 700; color: var(--green); }
+.prog-count { margin: 0 0 8px; font-size: 1.15rem; }
+.prog-count strong { font-family: var(--display); font-size: 1.5rem; color: var(--green); }
+.prog-bar { height: 12px; border-radius: var(--pill); background: var(--line); overflow: hidden; max-width: 420px; }
+.prog-bar i { display: block; height: 100%; width: 0; background: var(--green-bright); border-radius: var(--pill); transition: width .5s ease; }
+.prog-hint { font-size: .82rem; color: var(--ink-faint); margin: 8px 0 0; }
+
+.prog-mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 14px 0 0; }
+.prog-mod { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 18px 20px; background: var(--panel); }
+.prog-mod.is-done { border-color: var(--green-bright); background: color-mix(in srgb, var(--green-bright) 7%, var(--panel)); }
+.prog-mod-h { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: .74rem; }
+.prog-mod-n { color: var(--ink-faint); letter-spacing: .1em; }
+.prog-mod-st { color: var(--green); }
+.prog-mod h3 { margin: .4em 0 .3em; font-size: 1.08rem; }
+.prog-mod h3 a { color: var(--ink); text-decoration: none; }
+.prog-mod h3 a:hover { color: var(--green-bright); }
+.prog-mod-meta { margin: 0; font-size: .82rem; color: var(--ink-soft); }
+.prog-mod-book { margin: 8px 0 0; font-size: .82rem; }
+.prog-mod-go { display: inline-block; margin-top: 12px; font-family: var(--mono); font-size: .8rem; text-decoration: none; color: var(--green); }
+.prog-mod-go:hover { color: var(--green-bright); }
+
+.badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 14px 0 0; }
+.badge { display: flex; gap: 12px; align-items: flex-start; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; background: var(--panel); }
+.badge.locked { opacity: .55; }
+.badge.earned { border-color: var(--yellow); background: color-mix(in srgb, var(--yellow) 8%, var(--panel)); }
+.badge-ic { font-size: 1.5rem; line-height: 1; flex: none; }
+.badge b { display: block; font-family: var(--display); font-size: .95rem; }
+.badge span { font-size: .8rem; color: var(--ink-soft); }
+
+.prog-reset { margin: 40px 0 0; padding-top: 22px; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.prog-reset span { font-size: .8rem; color: var(--ink-faint); }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   html { scroll-behavior: auto; }
+  .fv-toast { transition: none; }
 }
