@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu progresso | Fisiologia Vegetal</title>
+<meta name="description" content="Acompanhe os módulos concluídos, seu melhor desempenho em cada tema e as conquistas desbloqueadas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="index.html#modulos">Módulos</a>
+      <a href="livros.html">Livros</a>
+      <a href="glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Seu percurso</p>
+      <h1>Meu progresso</h1>
+      <p class="lead">O que você já dominou, seu melhor desempenho em cada tema e as conquistas desbloqueadas. Fica salvo só neste navegador.</p>
+    </div>
+  </section>
+
+  <div class="wrap prose" style="max-width:920px">
+
+    <div class="prog-top">
+      <div class="prog-ring" id="ring"></div>
+      <div>
+        <p class="prog-count"><strong id="pDone">0</strong> de 10 módulos concluídos</p>
+        <div class="prog-bar"><i id="pBar"></i></div>
+        <p class="prog-hint" id="pHint">Um módulo conta como concluído quando você acerta pelo menos 70% dos exercícios sorteados.</p>
+      </div>
+    </div>
+
+    <h2>Módulos</h2>
+    <div class="prog-mods" id="mods"></div>
+
+    <h2>Conquistas</h2>
+    <div class="badges" id="badges"></div>
+
+    <div class="prog-reset">
+      <button type="button" class="btn btn--ghost" id="reset">Recomeçar do zero</button>
+      <span>Apaga seu progresso e conquistas neste navegador.</span>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs"><b>Onde isto fica salvo</b> No armazenamento local do seu navegador. Trocar de aparelho, de navegador ou limpar os dados do site reinicia o progresso.</div>
+    <div><a href="index.html">Início</a> · <a href="index.html#modulos">Módulos</a></div>
+  </div>
+</footer>
+
+<script src="js/exercicios-data.js"></script>
+<script src="js/livros-data.js"></script>
+<script src="js/gamify.js"></script>
+<script src="js/main.js"></script>
+<script>
+(function () {
+  if (!window.FVP) return;
+  var s = FVP.summary();
+  var NOME = FVP.MODULOS_NOME;
+  var slugs = FVP.ALL10;
+
+  // topo
+  document.getElementById("pDone").textContent = s.modulesDone;
+  document.getElementById("pBar").style.width = (s.modulesDone / 10 * 100) + "%";
+  var pct = Math.round(s.modulesDone / 10 * 100);
+  document.getElementById("ring").style.background =
+    "conic-gradient(var(--green-bright) " + pct + "%, var(--line) 0)";
+  document.getElementById("ring").innerHTML = "<span>" + pct + "%</span>";
+  if (s.modulesDone === 10) document.getElementById("pHint").textContent = "Você concluiu todos os módulos. 🌳";
+
+  // livro por módulo (para sugerir nos não concluídos)
+  function livroDe(slug) {
+    if (!window.LIVROS) return null;
+    var m = window.LIVROS.filter(function (b) { return (b.paginas || []).indexOf(slug) >= 0; });
+    if (m.length) return m[0];
+    var g = window.LIVROS.filter(function (b) { var p = b.paginas || []; return p.indexOf("geral") >= 0; });
+    return g[0] || null;
+  }
+  function bookHref(b) {
+    var cfg = window.LIVROS_CONFIG || { amazonTag: "", marketplace: "https://www.amazon.com.br" };
+    var tag = encodeURIComponent(cfg.amazonTag || "");
+    if (b.link) return b.link + (b.link.indexOf("?") < 0 ? "?" : "&") + "tag=" + tag;
+    if (/^[A-Z0-9]{10}$/i.test((b.asin || "").trim())) return cfg.marketplace + "/dp/" + b.asin.trim() + "?tag=" + tag;
+    return cfg.marketplace + "/s?k=" + encodeURIComponent(b.titulo + " " + (b.autores || "")) + "&tag=" + tag;
+  }
+
+  var mods = document.getElementById("mods");
+  slugs.forEach(function (slug, i) {
+    var m = s.perModule[slug] || {};
+    var seen = s.seen && s.seen[slug];
+    var num = ("0" + (i + 1)).slice(-2);
+    var card = document.createElement("div");
+    card.className = "prog-mod" + (m.done ? " is-done" : "");
+    var score = m.total ? m.best + "/" + m.total : "—";
+    var extra = "";
+    if (!m.done) {
+      var lv = livroDe(slug);
+      if (lv) extra = '<p class="prog-mod-book">Próximo passo: <a href="' + bookHref(lv) + '" target="_blank" rel="sponsored noopener noreferrer">' + lv.titulo + '</a></p>';
+    }
+    card.innerHTML =
+      '<div class="prog-mod-h"><span class="prog-mod-n">' + num + '</span>' +
+      '<span class="prog-mod-st">' + (m.done ? "✔ concluído" : (m.attempts ? "em andamento" : "não iniciado")) + '</span></div>' +
+      '<h3><a href="modulos/' + slug + '.html">' + NOME[slug] + '</a></h3>' +
+      '<p class="prog-mod-meta">Melhor resultado: <b>' + score + '</b>' +
+      (m.attempts ? ' · ' + m.attempts + ' tentativa' + (m.attempts > 1 ? 's' : '') : '') +
+      ' · instrumento: ' + (seen ? 'explorado' : 'não aberto') + '</p>' +
+      extra +
+      '<a class="prog-mod-go" href="modulos/' + slug + '.html">' + (m.done ? 'Refazer' : 'Ir para o módulo') + ' →</a>';
+    mods.appendChild(card);
+  });
+
+  // conquistas
+  var bx = document.getElementById("badges");
+  s.badgesEarned.forEach(function (b) {
+    bx.innerHTML += '<div class="badge earned"><span class="badge-ic">' + b.icon + '</span><div><b>' + b.nome + '</b><span>' + b.desc + '</span></div></div>';
+  });
+  s.badgesLocked.forEach(function (b) {
+    bx.innerHTML += '<div class="badge locked"><span class="badge-ic">🔒</span><div><b>' + b.nome + '</b><span>' + b.desc + '</span></div></div>';
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    if (confirm("Apagar todo o seu progresso e conquistas neste navegador?")) {
+      FVP.reset();
+      location.reload();
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -27,13 +27,30 @@ modulos/
 ```
 
 Cada módulo segue a mesma estrutura: ideia central → instrumento → mecanismo
-(nível *Taiz & Zeiger*) → blocos "Aprofunde" → quiz de verificação → **livros recomendados**.
+(nível *Taiz & Zeiger*) → blocos "Aprofunde" → **banco de exercícios** → **livros recomendados**.
 
 ```
 livros.html             catálogo de indicações, agrupado por módulo
 admin-livros.html        ferramenta para cadastrar as indicações (uso interno)
 js/livros-data.js        os dados dos livros (edite aqui ou pela ferramenta)
+progresso.html           painel "Meu progresso" (módulos, conquistas)
+js/exercicios-data.js    banco de questões por módulo (12+ cada; o site sorteia 6)
+js/gamify.js             progresso e conquistas (localStorage, sem servidor)
 ```
+
+## Exercícios e progresso (gamificação)
+
+- **Banco de exercícios**: `js/exercicios-data.js` tem 12+ questões por módulo.
+  A cada tentativa o site sorteia 6; ao responder todas, aparece o resultado, o
+  registro no progresso e um **card do livro do tema** (link de afiliado).
+  Para adicionar questões, copie um bloco no arquivo — os campos estão comentados
+  no topo. `sortear` e `aprovacao` (fração para "concluir" o módulo) ficam em
+  `EXERCICIOS_CONFIG`.
+- **Progresso**: guardado no `localStorage` do navegador (sem login). Um módulo
+  fica "concluído" ao acertar ≥ 70% de uma tentativa. A página **Meu progresso**
+  (ícone no cabeçalho) mostra módulos concluídos, melhor resultado por tema,
+  instrumentos explorados e as conquistas. Editar `js/gamify.js` permite mudar
+  as medalhas (`BADGES`).
 
 ## Indicações de livros (monetização — Amazon Associates)
 
