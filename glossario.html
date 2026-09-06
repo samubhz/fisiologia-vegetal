@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossário | Fisiologia Vegetal</title>
+<meta name="description" content="Definições dos termos centrais de fisiologia vegetal usados no site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .gloss { display: grid; gap: 4px; margin: 8px 0 0; }
+  .gloss dt { font-family: var(--display); font-weight: 600; font-size: 1.1rem; margin-top: 20px; color: var(--ink); }
+  .gloss dd { margin: 3px 0 0; color: var(--ink-soft); }
+  .filter { width: 100%; max-width: 380px; font: inherit; padding: 12px 16px; border: 1.5px solid var(--line-firm); border-radius: var(--pill); background: var(--panel); color: var(--ink); margin: 24px 0 0; }
+  .gloss-body { max-width: 760px; margin-inline: auto; padding: clamp(40px,7vw,72px) clamp(20px,5vw,44px) 0; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 12-9 0 8-4 13-9 13Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+      Fisiologia Vegetal
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="index.html#modulos">Módulos</a>
+      <a href="glossario.html">Glossário</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 3.6 3.6M20.4 20.4 19 19M19 5l1.4-1.4M3.6 20.4 5 19"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="module-hero">
+    <div class="wrap">
+      <p class="kicker">Referência</p>
+      <h1>Glossário</h1>
+      <p class="lead">Os termos que aparecem sublinhados nos módulos, reunidos. Use o campo abaixo para filtrar.</p>
+    </div>
+  </section>
+
+  <div class="gloss-body">
+    <input class="filter" id="filter" type="search" placeholder="Filtrar termos…" aria-label="Filtrar termos do glossário">
+    <dl class="gloss" id="list"></dl>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="refs"><b>Referências</b> Taiz, Zeiger, Møller &amp; Murphy — <em>Fisiologia e Desenvolvimento Vegetal</em>, 6ª ed. · Kerbauy, <em>Fisiologia Vegetal</em>, 3ª ed.</div>
+    <div><a href="index.html">Início</a></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function () {
+  // Reaproveita o dicionário embutido em main.js recriando a mesma fonte de dados.
+  var GLOSS = {
+    "Potencial hídrico": "Energia potencial da água por unidade de volume relativa à água pura à pressão atmosférica (Ψw, em MPa). Determina a direção do fluxo: sempre do maior para o menor Ψw.",
+    "Potencial de soluto": "Componente osmótico do potencial hídrico (Ψs, sempre ≤ 0). Quanto mais solutos, mais negativo. Para soluções diluídas: Ψs = −R·T·cs.",
+    "Potencial de pressão": "Componente de pressão do potencial hídrico (Ψp). Positivo na turgência da célula viva; negativo (tensão) no xilema sob transpiração.",
+    "Turgor": "Pressão hidrostática do protoplasto contra a parede celular. Sustenta tecidos não lenhosos e move as células-guarda.",
+    "Plasmólise": "Retração do protoplasto para longe da parede quando a célula perde água em solução hipertônica.",
+    "Apoplasto": "Contínuo de paredes celulares e espaços intercelulares por onde a água se move sem cruzar membranas.",
+    "Simplasto": "Contínuo de citoplasmas conectados por plasmodesmos.",
+    "Estria de Caspary": "Faixa de suberina nas paredes radiais da endoderme que obriga água e solutos a cruzarem uma membrana antes de entrar no cilindro vascular.",
+    "Coesão-tensão": "Mecanismo do transporte no xilema: a transpiração gera tensão transmitida por colunas contínuas de água mantidas coesas por pontes de hidrogênio.",
+    "Transpiração": "Perda de vapor d'água pela planta, principalmente pelos estômatos. Motor do fluxo de massa no xilema.",
+    "Condutância estomática": "Facilidade com que vapor d'água e CO₂ atravessam os estômatos; proporcional à abertura e à densidade estomática (gs, em mol m⁻² s⁻¹).",
+    "Células-guarda": "Par de células epidérmicas que delimitam o poro estomático; mudam de volume por fluxo de K⁺, Cl⁻, malato e água.",
+    "ABA": "Ácido abscísico — hormônio do estresse hídrico; sinaliza fechamento estomático, dormência de sementes e gemas, e senescência.",
+    "Ponto de compensação de luz": "Irradiância em que a fotossíntese bruta iguala a respiração; a troca líquida de CO₂ é zero.",
+    "Ponto de compensação de CO₂": "Concentração de CO₂ em que a assimilação líquida é zero. Alto em C3 (40–70 ppm), quase nulo em C4.",
+    "Fotorrespiração": "Via iniciada pela oxigenação da RuBP pela rubisco; consome O₂ e ATP e libera CO₂ já fixado. Agrava-se com calor, seca e luz alta.",
+    "Rubisco": "Ribulose-1,5-bisfosfato carboxilase/oxigenase — fixa CO₂ no ciclo de Calvin e também catalisa a oxigenação (fotorrespiração).",
+    "Ciclo de Calvin": "Fase de fixação de carbono no estroma: carboxilação, redução e regeneração da RuBP; produz triose-fosfato.",
+    "C4": "Via em que o CO₂ é pré-fixado em ácidos de 4 carbonos no mesofilo e concentrado na bainha vascular, suprimindo a fotorrespiração.",
+    "CAM": "Metabolismo ácido das crassuláceas: fixação de CO₂ à noite (estômatos abertos) e descarboxilação de dia (estômatos fechados).",
+    "PEP-carboxilase": "Fixa HCO₃⁻ em oxaloacetato; não reage com O₂ — base da concentração de carbono em C4 e CAM.",
+    "Fitocromo": "Fotorreceptor que alterna entre Pr (absorve vermelho) e Pfr (absorve vermelho-distante); regula germinação, desestiolamento e floração.",
+    "Fotoperiodismo": "Resposta do desenvolvimento ao comprimento do dia/noite; controla a floração em muitas espécies.",
+    "Auxina": "Hormônio (AIA) do alongamento celular, dominância apical e tropismos; transporte polar pelas proteínas PIN.",
+    "Gravitropismo": "Crescimento orientado pela gravidade, mediado pela sedimentação de amiloplastos (estatólitos) e redistribuição de auxina.",
+    "Macronutriente": "Elemento essencial exigido em grande quantidade: N, P, K, Ca, Mg, S.",
+    "Micronutriente": "Elemento essencial exigido em pequena quantidade: Fe, Mn, Zn, Cu, B, Mo, Cl, Ni.",
+    "Clorose": "Amarelecimento do tecido foliar por perda ou não formação de clorofila; pode ser uniforme ou internerval.",
+    "Fonte (floema)": "Órgão que exporta carbono pelo floema: folha madura ativa, órgão de reserva em mobilização.",
+    "Dreno (floema)": "Órgão que importa carbono pelo floema: raiz, fruto, semente, folha jovem, meristema.",
+    "Fluxo de pressão": "Hipótese de Münch: carregar açúcar na fonte e descarregá-lo no dreno cria um gradiente de potencial de pressão que move a seiva do floema por fluxo de massa.",
+    "Célula companheira": "Célula viva adjacente ao elemento de tubo crivado; faz o carregamento e mantém o tubo, que é anucleado.",
+    "Translocação": "Transporte de fotoassimilados e outros solutos a longa distância pelo floema.",
+    "Glicólise": "Via citosólica que cliva a glicose em dois piruvatos, com saldo líquido de 2 ATP e 2 NADH.",
+    "Ciclo do ácido cítrico": "Ciclo mitocondrial (de Krebs) que oxida o acetil-CoA a CO₂, gerando NADH, FADH₂ e GTP.",
+    "Fosforilação oxidativa": "Síntese de ATP acoplada ao transporte de elétrons de NADH/FADH₂ até o O₂ na membrana mitocondrial interna.",
+    "Fermentação": "Regeneração de NAD⁺ sem O₂, reduzindo o piruvato a lactato ou a etanol + CO₂; rende só os 2 ATP da glicólise.",
+    "Quociente respiratório (QR)": "Razão CO₂ liberado / O₂ consumido. ≈ 1,0 para carboidratos, ≈ 0,7 para lipídios, > 1 para ácidos orgânicos.",
+    "Oxidase alternativa (AOX)": "Enzima vegetal que transfere elétrons ao O₂ sem bombear H⁺; dissipa energia como calor e alivia o estresse oxidativo.",
+    "Giberelina (GA)": "Hormônio do alongamento de entrenós, germinação e indução da floração; antagoniza o ABA na dormência.",
+    "Citocinina": "Hormônio da divisão celular e da formação de parte aérea; retarda a senescência e quebra a dominância apical.",
+    "Etileno": "Hormônio gasoso do amadurecimento de frutos, senescência, abscisão e respostas a estresse e alagamento.",
+    "Dominância apical": "Inibição do brotamento das gemas laterais pela auxina da gema apical transportada basipetamente.",
+    "Criptocromo": "Fotorreceptor de luz azul/UV-A envolvido no desestiolamento, no movimento estomático e no relógio circadiano.",
+    "Florígeno (FT)": "Sinal móvel da floração; a proteína FT, produzida na folha sob fotoperíodo indutivo, viaja pelo floema até o meristema apical.",
+    "Quebra de noite": "Pulso breve de luz vermelha no meio da noite que reconverte Pr em Pfr e reinicia a contagem do comprimento da noite.",
+    "Tropismo": "Crescimento com direção determinada por um estímulo vetorial (luz, gravidade, contato).",
+    "Nastismo": "Movimento cuja direção independe da direção do estímulo, geralmente por variação de turgor e reversível.",
+    "Estatólito": "Amiloplasto denso que sedimenta nos estatócitos conforme a orientação do órgão, iniciando a resposta gravitrópica.",
+    "Pulvino": "Articulação na base do pecíolo/folíolo com células-motoras que movem a folha por variação de turgor.",
+    "Tigmotropismo": "Crescimento orientado pelo contato, como o enrolamento de gavinhas em um suporte.",
+    "Aclimatação": "Ganho de tolerância a um estresse após exposição prévia, moderada e reversível, com reprogramação gênica.",
+    "Ajuste osmótico": "Acúmulo ativo de solutos compatíveis que baixa o potencial hídrico e mantém o turgor sob estresse.",
+    "Espécies reativas de oxigênio (ROS)": "Moléculas oxidantes (O₂•⁻, H₂O₂, ¹O₂) que danificam células em excesso, mas em baixa dose sinalizam defesa.",
+    "Proteína de choque térmico (HSP)": "Chaperona induzida pelo calor e outros estresses que renatura ou degrada proteínas desdobradas.",
+    "Aerênquima": "Tecido com grandes espaços de ar, formado sob alagamento, que conduz O₂ da parte aérea às raízes hipóxicas."
+  };
+  var list = document.getElementById("list");
+  var keys = Object.keys(GLOSS).sort(function (a, b) { return a.localeCompare(b, "pt-BR"); });
+  function paint(q) {
+    list.innerHTML = "";
+    keys.forEach(function (k) {
+      if (q && (k + " " + GLOSS[k]).toLowerCase().indexOf(q.toLowerCase()) < 0) return;
+      var dt = document.createElement("dt"); dt.textContent = k;
+      var dd = document.createElement("dd"); dd.textContent = GLOSS[k];
+      list.appendChild(dt); list.appendChild(dd);
+    });
+  }
+  paint("");
+  document.getElementById("filter").addEventListener("input", function (e) { paint(e.target.value.trim()); });
+})();
+</script>
+</body>
+</html>
