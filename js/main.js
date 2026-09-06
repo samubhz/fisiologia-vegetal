@@ -39,6 +39,9 @@
 
     /* ---------- Quiz ---------- */
     document.querySelectorAll(".quiz .q").forEach(initQuestion);
+
+    /* ---------- Indicações de livros (Amazon) ---------- */
+    initLivros();
   });
 
   /* ---------- Glossário ---------- */
@@ -154,6 +157,147 @@
         if (fb) fb.classList.add("show");
       });
     });
+  }
+
+  /* ---------- Indicações de livros ---------- */
+  function pageSlug() {
+    var f = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    if (f === "" || f === "index.html") return "inicio";
+    if (f === "livros.html") return "livros";
+    if (f === "glossario.html") return "glossario";
+    return f.replace(/\.html$/, "");           // ex.: "05-fotossintese"
+  }
+
+  function bookUrl(b, cfg) {
+    var tag = encodeURIComponent(cfg.amazonTag || "");
+    if (b.link) return b.link + (b.link.indexOf("?") < 0 ? "?" : "&") + "tag=" + tag;
+    var asin = (b.asin || "").trim();
+    if (/^[A-Z0-9]{10}$/i.test(asin)) return cfg.marketplace + "/dp/" + asin + "?tag=" + tag;
+    // sem ASIN válido: cai numa busca na Amazon, já com o tag de associado
+    return cfg.marketplace + "/s?k=" + encodeURIComponent(b.titulo + " " + (b.autores || "")) + "&tag=" + tag;
+  }
+
+  function bookCover(b) {
+    if (b.capa) return b.capa;
+    var asin = (b.asin || "").trim();
+    if (/^[A-Z0-9]{10}$/i.test(asin))
+      return "https://images-na.ssl-images-amazon.com/images/P/" + asin + ".01._SCLZZZZZZZ_.jpg";
+    return "";
+  }
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+  }); }
+
+  function bookCard(b, cfg) {
+    var url = bookUrl(b, cfg), cov = bookCover(b);
+    var el = document.createElement("article");
+    el.className = "book-card";
+    el.innerHTML =
+      '<a class="book-cover" href="' + esc(url) + '" target="_blank" rel="sponsored noopener noreferrer" aria-hidden="true" tabindex="-1">' +
+        (cov ? '<img loading="lazy" alt="" src="' + esc(cov) + '" onerror="this.remove()">' : '') +
+        '<span class="book-cover-fallback">' + esc(b.titulo) + '</span>' +
+      '</a>' +
+      '<div class="book-meta">' +
+        '<h3><a href="' + esc(url) + '" target="_blank" rel="sponsored noopener noreferrer">' + esc(b.titulo) + '</a></h3>' +
+        '<p class="book-by">' + esc(b.autores || "") + (b.edicao ? ' &middot; ' + esc(b.edicao) : '') + '</p>' +
+        (b.nota ? '<p class="book-note">' + esc(b.nota) + '</p>' : '') +
+        '<a class="btn book-btn" href="' + esc(url) + '" target="_blank" rel="sponsored noopener noreferrer">Ver na Amazon <span class="ar">→</span></a>' +
+      '</div>';
+    return el;
+  }
+
+  function booksForSlug(slug) {
+    if (!window.LIVROS) return [];
+    return window.LIVROS.filter(function (b) {
+      var p = b.paginas || [];
+      return p.indexOf("geral") >= 0 || p.indexOf("todas") >= 0 || p.indexOf(slug) >= 0;
+    });
+  }
+
+  function disclosureEl(cfg) {
+    var p = document.createElement("p");
+    p.className = "book-disclosure";
+    p.textContent = cfg.disclosure || "Como Associado da Amazon, este site recebe por compras qualificadas.";
+    return p;
+  }
+
+  function initLivros() {
+    var cfg = window.LIVROS_CONFIG || { amazonTag: "", marketplace: "https://www.amazon.com.br" };
+    var slug = pageSlug();
+
+    /* Página dedicada: catálogo completo agrupado por módulo */
+    var full = document.getElementById("livros-catalogo");
+    if (full && window.LIVROS) {
+      renderCatalogo(full, cfg);
+      var disc = document.getElementById("livros-disclosure");
+      if (disc) disc.textContent = cfg.disclosure || "";
+      return;
+    }
+
+    /* Demais páginas: bloco "Livros recomendados" antes do rodapé / paginação */
+    if (slug === "livros" || slug === "glossario") return;
+    var books = booksForSlug(slug);
+    if (!books.length) return;
+
+    var sec = document.createElement("section");
+    sec.className = "book-rack-wrap";
+    sec.setAttribute("aria-label", "Livros recomendados");
+    var inner = '<div class="wrap"><div class="book-rack-head">' +
+      '<h2>Livros sobre este tema</h2>' +
+      '<a class="book-rack-all" href="' + (slug === "inicio" ? "" : "../") + 'livros.html">Ver todas as indicações →</a>' +
+      '</div><div class="book-rack"></div></div>';
+    sec.innerHTML = inner;
+    var rack = sec.querySelector(".book-rack");
+    books.slice(0, 3).forEach(function (b) { rack.appendChild(bookCard(b, cfg)); });
+    sec.querySelector(".wrap").appendChild(disclosureEl(cfg));
+
+    var pager = document.querySelector(".pager");
+    if (pager && pager.parentNode) {
+      pager.parentNode.insertBefore(sec, pager);
+    } else {
+      var footer = document.querySelector(".site-footer");
+      if (footer && footer.parentNode) footer.parentNode.insertBefore(sec, footer);
+      else document.body.appendChild(sec);
+    }
+  }
+
+  function renderCatalogo(mount, cfg) {
+    var ORDER = [
+      ["geral", "Para toda a disciplina"],
+      ["inicio", "Visão geral"],
+      ["01-agua", "01 · Água e relações hídricas"],
+      ["02-estomatos", "02 · Estômatos e transpiração"],
+      ["03-nutricao", "03 · Nutrição mineral"],
+      ["04-floema", "04 · Transporte no floema"],
+      ["05-fotossintese", "05 · Fotossíntese"],
+      ["06-respiracao", "06 · Respiração e metabolismo"],
+      ["07-hormonios", "07 · Hormônios vegetais"],
+      ["08-luz", "08 · Luz e fotomorfogênese"],
+      ["09-tropismos", "09 · Movimentos e tropismos"],
+      ["10-estresse", "10 · Fisiologia do estresse"]
+    ];
+    var shown = {};
+    ORDER.forEach(function (pair) {
+      var key = pair[0];
+      var list = window.LIVROS.filter(function (b) {
+        var p = b.paginas || [];
+        if (key === "geral") return p.indexOf("geral") >= 0 || p.indexOf("todas") >= 0;
+        return p.indexOf(key) >= 0 && p.indexOf("geral") < 0 && p.indexOf("todas") < 0;
+      });
+      if (!list.length) return;
+      var h = document.createElement("h2");
+      h.className = "catalogo-h";
+      h.textContent = pair[1];
+      mount.appendChild(h);
+      var grid = document.createElement("div");
+      grid.className = "book-rack";
+      list.forEach(function (b) { shown[b.id] = 1; grid.appendChild(bookCard(b, cfg)); });
+      mount.appendChild(grid);
+    });
+    if (!mount.children.length) {
+      mount.innerHTML = '<p>Nenhuma indicação cadastrada ainda. Edite <code>js/livros-data.js</code> ou use <a href="admin-livros.html">admin-livros.html</a>.</p>';
+    }
   }
 
   /* ---------- Helper exposto p/ instrumentos ---------- */
