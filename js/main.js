@@ -201,7 +201,7 @@
         opts.forEach(function (o) {
           html += '<button type="button" data-ok="' + (o[1] ? "1" : "0") + '">' + o[0] + "</button>";
         });
-        html += "</div><p class='fb'>" + (item.fb || "") + "</p>";
+        html += "</div>";
         q.innerHTML = html;
         body.appendChild(q);
 
@@ -212,9 +212,7 @@
             if (locked) return;
             locked = true;
             var ok = b.dataset.ok === "1";
-            b.classList.add(ok ? "correct" : "wrong");
-            if (!ok) btns.forEach(function (x) { if (x.dataset.ok === "1") x.classList.add("correct"); });
-            q.querySelector(".fb").classList.add("show");
+            b.classList.add(ok ? "chosen-ok" : "chosen-x");
             answered++; if (ok) correct++;
             if (answered === chosen.length) finish(head, correct, chosen.length);
           });
