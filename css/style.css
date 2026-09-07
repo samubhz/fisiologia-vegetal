@@ -386,10 +386,11 @@ tbody tr:hover { background: var(--panel-2); }
   border-radius: var(--radius); transition: background .12s, border-color .12s;
 }
 .quiz .opts button:hover { background: var(--lime-soft); border-color: var(--lime-deep); }
-.quiz .opts button.correct { border-color: var(--green-bright); background: color-mix(in srgb, var(--green-bright) 16%, var(--panel)); }
-.quiz .opts button.wrong { border-color: var(--c-rosa); background: color-mix(in srgb, var(--c-rosa) 14%, var(--panel)); }
-.quiz .fb { display: none; font-size: .88rem; margin-top: 11px; color: var(--ink-soft); padding-left: 14px; border-left: 3px solid var(--line-firm); }
-.quiz .fb.show { display: block; border-color: var(--green-bright); }
+.quiz .opts button.correct,
+.quiz .opts button.chosen-ok { border-color: var(--green-bright); background: color-mix(in srgb, var(--green-bright) 16%, var(--panel)); }
+.quiz .opts button.wrong,
+.quiz .opts button.chosen-x { border-color: var(--c-rosa); background: color-mix(in srgb, var(--c-rosa) 14%, var(--panel)); }
+.quiz .fb { display: none; }
 
 /* ---------- Navegação prev/next ---------- */
 .pager { display: flex; justify-content: space-between; gap: 16px; margin: 60px 0 0; border-top: 1px solid var(--line); padding-top: 26px; }
